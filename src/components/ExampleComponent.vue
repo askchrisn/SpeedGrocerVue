@@ -19,6 +19,7 @@ const functionNameHere = () => {
   counterStore.increment();
 }
 
+// Another way to write a function
 function anotherFunction () {
   counterStore.increment();
 }
