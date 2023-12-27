@@ -1,7 +1,5 @@
 <template>
-  <label>hello</label>
-  <button>hello</button>
-  <q-btn color="primary">hello</q-btn>
+  <label>IndexPage.vue</label>
   <example-component/>
   <example-component/>
 </template>
