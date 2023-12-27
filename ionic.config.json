@@ -1,0 +1,7 @@
+{
+  "name": "speedgrocervue",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
