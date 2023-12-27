@@ -1,8 +1,8 @@
 <template>
   <div>
     <label>Count:</label>
-    <label>{{ counter.count }}</label>
-    <button @click="counter.increment()">Increment</button>
+    <label>{{ counterStore.count }}</label>
+    <button @click="counterStore.increment()">Increment</button>
   </div>
 </template>
 
@@ -10,8 +10,7 @@
 import { computed, ref } from 'vue';
 import { Todo, Meta } from './models';
 import { useCounterStore } from '../stores/example-store';
-import useStore from 'pinia';
 
-const counter = useCounterStore();
+const counterStore = useCounterStore();
 
 </script>
