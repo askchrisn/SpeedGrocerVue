@@ -1,12 +1,15 @@
 <template>
   <label>HomePage.vue</label>
-  <div class="test">
-    <q-btn color="primary" to="/login">Login</q-btn>
-  </div>
+  <label>{{ authStore.isAuthenticated }}</label>
+  <q-btn class="primary" to="/login" @click="authStore.logout()">Logout</q-btn>
+  <example-component/>
 </template>
 
 <script setup lang="ts">
+  import ExampleComponent from 'src/components/ExampleComponent.vue';
+  import { useAuthStore } from 'src/stores/authStore';
 
+  const authStore = useAuthStore();
 </script>
 
 <style scoped>

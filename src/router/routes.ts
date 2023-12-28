@@ -8,21 +8,12 @@ const routes: RouteRecordRaw[] = [
   { 
     path: '/', 
     component: HomePage, 
-    meta: { }
+    meta: { requiresAuth: true }
   },
   { 
     path: '/login', 
     component: LoginPage, 
     meta: { }
-  },
-  { 
-    path: '/signup', 
-    component: SignUpPage, 
-    meta: { }
-  },
-  { 
-    path: '/:catchAll(.*)*', 
-    component: ZNotFoundPage,
   },
 ];
 
