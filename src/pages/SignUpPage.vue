@@ -1,5 +1,4 @@
 <template>
-    <label>SignUpPage.vue</label>
     <div class="test">
         <q-input class="input" filled v-model="email" label="Email" stack-label dense></q-input>
         <q-input class="input" filled v-model="name" label="Name" stack-label dense></q-input>

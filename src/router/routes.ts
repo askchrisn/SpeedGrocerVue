@@ -15,6 +15,11 @@ const routes: RouteRecordRaw[] = [
     component: LoginPage, 
     meta: { }
   },
+  { 
+    path: '/signup', 
+    component: SignUpPage, 
+    meta: { }
+  },
 ];
 
 export default routes;

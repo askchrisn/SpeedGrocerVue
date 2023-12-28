@@ -1,6 +1,5 @@
 <template>
     <div>
-        <label>LoginPage.vue</label>
         <label>Logged In: {{ authStore.isAuthenticated }}</label>
         <q-input class="input" filled v-model="email" label="Email" stack-label dense></q-input>
         <q-input class="input" filled v-model="password" label="Password" stack-label dense></q-input>
@@ -24,7 +23,7 @@
     div {
         display: flex;
         flex-direction: column;
-        margin: 15rem;
+        margin: 2rem;
     }
     .input {
         margin-bottom: 2rem;
