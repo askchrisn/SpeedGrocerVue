@@ -22,14 +22,6 @@ const auth = getAuth()
 
 export { app, auth }
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-   LocalStorage.set('user', user)
-  } else {
-   LocalStorage.remove('user')
-  }
- });
-
 const db = getDatabase(app);
 
 export function attachEvent(key: string, handler: (a: any) => void) {
