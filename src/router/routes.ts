@@ -14,10 +14,6 @@ const routes: RouteRecordRaw[] = [
     component: LoginPage, 
     meta: { }
   },
-  { 
-    path: '/:catchAll(.*)*', 
-    component: ZNotFoundPage,
-  },
 ];
 
 export default routes;
