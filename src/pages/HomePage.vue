@@ -1,6 +1,5 @@
 <template>
-  <label>IndexPage.vue</label>
-  <example-component/>
+  <label>HomePage.vue</label>
   <example-component/>
 </template>
 
