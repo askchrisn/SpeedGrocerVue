@@ -2,7 +2,15 @@
     <div>
         <label>Logged In: {{ authStore.isAuthenticated }}</label>
         <q-input class="input" filled v-model="email" label="Email" stack-label dense></q-input>
-        <q-input class="input" filled v-model="password" label="Password" stack-label dense></q-input>
+        <q-input class="input" v-model="password" filled :type="isPasswordHidden ? 'password' : 'text'" stack-label label="Password">
+        <template v-slot:append>
+          <q-icon
+            :name="isPasswordHidden ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPasswordHidden = !isPasswordHidden"
+          ></q-icon>
+        </template>
+      </q-input>
         <q-btn class="primary" @click="authStore.loginlogout()">Login/Logout</q-btn>
         <q-btn color="primary" to="/">Go</q-btn>
 
@@ -17,6 +25,7 @@
 
     const email = ref('');
     const password = ref('');
+    const isPasswordHidden = ref(true)
 </script>
 
 <style scoped>
