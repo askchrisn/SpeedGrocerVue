@@ -30,9 +30,9 @@ onAuthStateChanged(auth, (user) => {
   }
  });
 
- const db = getDatabase(app);
- 
- export function attachEvent(key: string, handler: (a: any) => void) {
+const db = getDatabase(app);
+
+export function attachEvent(key: string, handler: (a: any) => void) {
   var dbRef = ref(db, key);
   return onValue(dbRef, (snapshot) => {
       if (snapshot.exists()) {

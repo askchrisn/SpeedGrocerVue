@@ -31,7 +31,7 @@
     async function login() {
         try {
             await authStore.signIn(email.value, password.value);
-            router.push({name: 'home'});
+            router.push('/');
         } catch (error: any) {
             Notify.create({ type: 'negative', message: error.message })
         }
