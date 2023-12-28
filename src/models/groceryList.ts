@@ -1,41 +1,33 @@
 import Item from './item'
 
-class GroceryList {
-    name: string;
-    items: Item[];
-    users: string[];
-
-    constructor(name: string, items: Item[] = [], users: string[] = []) {
-        this.name = name;
-        this.items = items;
-        this.users = users;
-    }
+export default class GroceryList {
+    Name: string = "";
+    Items: Item[] = [];
+    Users: string[] = [];
 
     addItem(item: Item) {
-        this.items.push(item);
+        this.Items.push(item);
     }
 
     addItems(items: Item[]) {
-        this.items = this.items.concat(items);
+        this.Items = this.Items.concat(items);
     }
 
     removeItem(itemName: string) {
-        const index = this.items.map(function(item) { return item.name; }).indexOf(itemName);
+        const index = this.Items.map(function(item) { return item.ItemName; }).indexOf(itemName);
         if (index !== -1) {
-        this.items.splice(index, 1);
+        this.Items.splice(index, 1);
         }
     }
 
     addUser(user: string) {
-        this.users.push(user);
+        this.Users.push(user);
     }
 
     removeUser(user: string) {
-        const index = this.users.indexOf(user);
+        const index = this.Users.indexOf(user);
         if (index !== -1) {
-        this.users.splice(index, 1);
+            this.Users.splice(index, 1);
         }
     }
 }
-
-export default GroceryList;

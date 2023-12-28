@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getDatabase, ref, onValue } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { LocalStorage } from 'quasar'
 
@@ -28,3 +29,14 @@ onAuthStateChanged(auth, (user) => {
    LocalStorage.remove('user')
   }
  });
+
+ const db = getDatabase(app);
+ 
+ export function attachEvent(key: string, handler: (a: any) => void) {
+  var dbRef = ref(db, key);
+  return onValue(dbRef, (snapshot) => {
+      if (snapshot.exists()) {
+          handler(snapshot.val());
+      }
+  });
+}

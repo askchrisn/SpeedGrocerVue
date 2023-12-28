@@ -1,11 +1,6 @@
 class Item {
-    name: string;
-    addedBy: string;
-
-    constructor(name: string, addedBy: string) {
-        this.name = name;
-        this.addedBy = addedBy;
-    }
+    ItemName: string = "";
+    AdderName: string = "";
 }
 
 export default Item
