@@ -1,7 +1,7 @@
 <template>
   <label>HomePage.vue</label>
-  <label>{{ authStore.isAuthenticated }}</label>
-  <q-btn class="primary" to="/login" @click="authStore.logout()">Logout</q-btn>
+  <label>{{ authStore.user?.uid }}</label>
+  <q-btn class="primary" to="/login" @click="authStore.signOut()">Logout</q-btn>
   <example-component/>
 </template>
 
