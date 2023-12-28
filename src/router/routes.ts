@@ -7,7 +7,7 @@ const routes: RouteRecordRaw[] = [
   { 
     path: '/', 
     component: HomePage, 
-    meta: { }
+    meta: { requiresAuth: true }
   },
   { 
     path: '/login', 

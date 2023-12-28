@@ -1,9 +1,9 @@
 <template>
   <div class="test">
-    <!-- <div>
+    <div>
       <label>Displaying a stores property:</label>
       <label>{{ exampleStore.count }}</label>
-    </div> -->
+    </div>
     <q-btn color="primary" @click="exampleStore.increment()">InlineFunction</q-btn>
     <q-btn push color="primary" @click="functionNameHere()">Calling store function from a defined function</q-btn>
     <q-btn color="primary" @click="anotherFunction()">Calling store function from a defined function alternative syntax</q-btn>
