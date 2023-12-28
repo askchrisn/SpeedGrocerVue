@@ -9,37 +9,47 @@ import {
 } from 'vue-router';
 import { useAuthStore } from '../stores/authStore';
 import routes from './routes';
-import { UserCredential, onAuthStateChanged } from 'firebase/auth';
+import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'src/firebaseConfig';
+import { LocalStorage } from 'quasar';
 
-export default route(function (/* { store, ssrContext } */) {
+export default route(function () {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
+    : process.env.VUE_ROUTER_MODE === 'history'
+    ? createWebHistory
+    : createWebHashHistory;
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
-
-    // Leave this as is and make changes in quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
+  let initialized = false;
+  const wasPreviouslyLoggedIn = LocalStorage.getItem('user') as User | null;
+
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      Router.beforeEach((to, from, next) => {
-        const authStore = useAuthStore();
-    
-        if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-          next('/login')
-        }
-        else {
-          next()
-        }
-      })
-    } 
+    initialized = true;
+    const authStore = useAuthStore();
+    authStore.setUser(user);
+    if (authStore.isAuthenticated) {
+      Router.push('/');
+    }
+  });
+
+  Router.beforeEach((to, from, next) => {
+    const authStore = useAuthStore();
+
+    if (!initialized && !!wasPreviouslyLoggedIn) {
+      next();
+    }
+
+    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+      next('/login');
+    } else {
+      next();
+    }
   });
 
   return Router;

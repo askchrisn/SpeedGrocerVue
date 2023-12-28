@@ -1,21 +1,22 @@
-import { UserCredential, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { defineStore } from 'pinia';
 import { auth } from '../firebaseConfig';
+import { LocalStorage } from 'quasar';
 
 export const useAuthStore = defineStore('AuthStore', 
 {
   state: () => ({
-    userCreds: null as UserCredential | null,
+    user: null as User | null,
   }),
   getters: {
-    user: (state) => state.userCreds?.user,
     isAuthenticated(): boolean { return !!this.user; },
+    userEmail(): string { return this.user?.email || ''; }
   },
   actions: {
     async signIn(email: string, password: string): Promise<void> {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
-        this.setUser(result);
+        this.setUser(result.user);
       } catch (error) {
         throw error;
       }
@@ -23,25 +24,22 @@ export const useAuthStore = defineStore('AuthStore',
     async signUp(email: string, password: string): Promise<void> {
       try {
         const result = await createUserWithEmailAndPassword(auth, email, password);
-        this.setUser(result);
+        this.setUser(result.user);
       } catch (error) {
-        console.error('Sign-up error:', error);
         throw error;
       }
     },
-
     async signOut(): Promise<void> {
       try {
         await signOut(auth);
         this.setUser(null);
       } catch (error) {
-        console.error('Sign out error:', error);
         throw error;
       }
     },
-
-    setUser(user: UserCredential | null): void {
-      this.userCreds = user;
+    setUser(user: User | null): void {
+      this.user = user;
+      LocalStorage.set('user', user);
     },
   },
 })
