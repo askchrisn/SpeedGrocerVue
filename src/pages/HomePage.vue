@@ -10,7 +10,7 @@
           </q-item-section>
 
           <q-item-section side>
-            <q-item-label caption lines="1">{{ groceryList.Items?.length }}</q-item-label>
+            <q-item-label caption lines="1">{{ groceryList.Items.length }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -28,21 +28,13 @@
 
   const authStore = useAuthStore()
   const groceryLists = ref<Array<GroceryList>>([])
-  //   new GroceryList('Home', [new Item('butter', 'Connor'), new Item('milk', 'Connor'), new Item('eggs', 'Chris')], ['conno1234@gmail.com']),
-  //   new GroceryList('Work', [new Item('paper', 'Connor'), new Item('staples', 'Chris')], ['conno1234@gmail.com']),
-  //   new GroceryList('Other', [new Item('butter', 'Chris')], ['conno1234@gmail.com']),
-  // ]
-  console.log("attaching...")
   attachEvent("GroceryLists", (snapshot) => {
-    console.log("response!")
-    console.log(snapshot)
     var updatedGroceryLists = []
     for(let key in snapshot) {
-      console.log(snapshot[key])
-      updatedGroceryLists.push(snapshot[key] as GroceryList)
+      var gl = GroceryList.fromObject(snapshot[key])
+      updatedGroceryLists.push(gl)
     }
 
-    console.log(updatedGroceryLists)
     groceryLists.value = updatedGroceryLists
   });
 

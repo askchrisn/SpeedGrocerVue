@@ -30,4 +30,13 @@ export default class GroceryList {
             this.Users.splice(index, 1);
         }
     }
+
+    static fromObject(obj: any) {
+        var gl = obj as GroceryList
+        if (gl.Items == null) {
+            gl.Items = []
+        }
+
+        return gl
+    }
 }
