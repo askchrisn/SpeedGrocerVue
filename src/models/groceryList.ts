@@ -1,24 +1,26 @@
+import Item from './item'
+
 class GroceryList {
     name: string;
-    items: string[];
+    items: Item[];
     users: string[];
 
-    constructor(name: string, items: string[] = [], users: string[] = []) {
+    constructor(name: string, items: Item[] = [], users: string[] = []) {
         this.name = name;
         this.items = items;
         this.users = users;
     }
 
-    addItem(item: string) {
+    addItem(item: Item) {
         this.items.push(item);
     }
 
-    addItems(items: string[]) {
+    addItems(items: Item[]) {
         this.items = this.items.concat(items);
     }
 
-    removeItem(item: string) {
-        const index = this.items.indexOf(item);
+    removeItem(itemName: string) {
+        const index = this.items.map(function(item) { return item.name; }).indexOf(itemName);
         if (index !== -1) {
         this.items.splice(index, 1);
         }
