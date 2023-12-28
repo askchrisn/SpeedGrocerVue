@@ -41,9 +41,7 @@ export default route(function () {
   Router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
 
-    if (!initialized && !!wasPreviouslyLoggedIn) {
-      next();
-    }
+    if (!initialized) return;
 
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
       next('/login');
