@@ -7,7 +7,6 @@ import ZNotFoundPage from '../pages/ZNotFoundPage.vue';
 const routes: RouteRecordRaw[] = [
   { 
     path: '/', 
-    name: 'home',
     component: HomePage, 
     meta: { requiresAuth: true }
   },
