@@ -28,7 +28,7 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
 
-    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    if (to.meta.requiresAuth && !authStore.user) {
       next('/login')
     }
     else {

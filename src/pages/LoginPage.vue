@@ -1,6 +1,5 @@
 <template>
     <div>
-        <label>Logged In: {{ authStore.isAuthenticated }}</label>
         <q-input class="input" filled v-model="email" label="Email" stack-label dense></q-input>
         <q-input class="input" v-model="password" filled :type="isPasswordHidden ? 'password' : 'text'" stack-label label="Password">
         <template v-slot:append>
@@ -11,21 +10,32 @@
           ></q-icon>
         </template>
       </q-input>
-        <q-btn class="primary" @click="authStore.loginlogout()">Login/Logout</q-btn>
-        <q-btn color="primary" to="/">Go</q-btn>
-
+        <q-btn color="primary" @click="login">Login</q-btn>
         <q-btn color="primary" to="/signup">Sign Up</q-btn>
     </div>
 </template>
 
 <script setup lang="ts">
     import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
     import { useAuthStore } from 'src/stores/authStore';
+    import { Notify } from 'quasar'
+    
+    const router = useRouter();
     const authStore = useAuthStore();
 
     const email = ref('');
     const password = ref('');
     const isPasswordHidden = ref(true)
+
+    async function login() {
+        try {
+            await authStore.signIn(email.value, password.value);
+            router.push({name: 'home'});
+        } catch (error: any) {
+            Notify.create({ type: 'negative', message: error.message })
+        }
+    };
 </script>
 
 <style scoped>

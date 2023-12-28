@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <label>HomePage.vue</label>
-    <label>{{ authStore.isAuthenticated }}</label>
-    <q-btn class="primary" to="/login" @click="authStore.logout()">Logout</q-btn>
+  <label>{{ authStore.user?.uid }}</label>
+    <q-btn class="primary" to="/login" @click="authStore.signOut()">Logout</q-btn>
     <q-list bordered>
         <q-item v-for="groceryList in groceryLists" :key="groceryList.id" class="q-my-sm" clickable v-ripple>
           <q-item-section>
