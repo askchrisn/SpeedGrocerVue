@@ -1,8 +1,7 @@
 <template>
-    <label>LoginPage.vue</label>
+    <label>SignUpPage.vue</label>
     <div class="test">
-      <q-btn color="primary">Login</q-btn>
-      <q-btn color="primary" to="/signup">Sign Up</q-btn>
+      <q-btn color="primary">Create Account</q-btn>
     </div>
 </template>
   
