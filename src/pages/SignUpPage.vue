@@ -21,7 +21,7 @@ const passwordConfirmed = ref('')
   
 <style scoped>
     div {
-        margin: 6rem 2rem;
+        margin: 2rem;
     }
 
     .test {
