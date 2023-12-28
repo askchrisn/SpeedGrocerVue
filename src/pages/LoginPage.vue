@@ -10,17 +10,17 @@
 </template>
 
 <script setup lang="ts">
+    import store from '../stores/index';
     import { ref } from 'vue';
     import { useAuthStore } from 'src/stores/authStore';
 
-    const authStore = useAuthStore();
+    const authStore = useAuthStore(store());
     const username = ref('');
     const password = ref('');
 
     function login() {
         authStore.login();
     }
-
 </script>
 
 <style scoped>
