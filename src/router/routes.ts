@@ -13,12 +13,14 @@ const routes: RouteRecordRaw[] = [
   { 
     path: '/login', 
     component: LoginPage, 
-    meta: { }
   },
   { 
     path: '/signup', 
     component: SignUpPage, 
-    meta: { }
+  },
+  { 
+    path: '/:catchAll(.*)*', 
+    component: ZNotFoundPage, 
   },
 ];
 
