@@ -19,6 +19,7 @@
     import { ref } from 'vue';
     import { useRouter } from 'vue-router';
     import { useAuthStore } from 'src/stores/authStore';
+    import { Notify } from 'quasar'
     
     const router = useRouter();
     const authStore = useAuthStore();
@@ -31,8 +32,8 @@
         try {
             await authStore.signIn(email.value, password.value);
             router.push({name: 'home'});
-        } catch (error) {
-            console.error('Login error:', error);
+        } catch (error: any) {
+            Notify.create({ type: 'negative', message: error.message })
         }
     };
 </script>
