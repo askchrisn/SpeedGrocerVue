@@ -1,10 +1,11 @@
 <template>
     <div class="test">
+        <q-btn color="primary" to="login">Back</q-btn>
         <q-input class="input" filled v-model="email" label="Email" stack-label dense></q-input>
         <q-input class="input" filled v-model="name" label="Name" stack-label dense></q-input>
         <q-input class="input" filled v-model="password" label="Password" stack-label dense></q-input>
         <q-input class="input" filled v-model="passwordConfirmed" label="Confirm Password" stack-label dense></q-input>
-      <q-btn color="primary">Create Account</q-btn>
+        <q-btn color="primary">Create Account</q-btn>
     </div>
 </template>
   
