@@ -1,7 +1,7 @@
 <template>
   <label>HomePage.vue</label>
   <label>{{ authStore.isAuthenticated }}</label>
-  <q-btn class="primary" to="/login" @click="logout()">Logout</q-btn>
+  <q-btn class="primary" to="/login" @click="authStore.logout()">Logout</q-btn>
   <example-component/>
 </template>
 
@@ -10,8 +10,18 @@
   import { useAuthStore } from 'src/stores/authStore';
 
   const authStore = useAuthStore();
-
-  function logout() {
-    authStore.logout();
-  }
 </script>
+
+<style scoped>
+  div {
+    margin: 6rem 2rem;
+  }
+
+  .test {
+    display: flex;
+    flex-direction: column;
+  }
+  .q-btn {
+    margin: 1rem;
+  }
+</style>

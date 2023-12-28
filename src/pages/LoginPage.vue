@@ -6,6 +6,8 @@
         <input type="text" v-model="password" placeholder="Password" />
         <q-btn class="primary" @click="authStore.loginlogout()">Login/Logout</q-btn>
         <q-btn color="primary" to="/">Go</q-btn>
+
+        <q-btn color="primary" to="/signup">Sign Up</q-btn>
     </div>   
 </template>
 
