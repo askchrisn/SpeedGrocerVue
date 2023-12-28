@@ -15,6 +15,7 @@ import { useCounterStore } from '../stores/example-store';
 
 const counterStore = useCounterStore();
 
+// Inline function
 const functionNameHere = () => {
   counterStore.increment();
 }
@@ -30,5 +31,4 @@ function anotherFunction () {
   div {
     margin: 3rem;
   }
-
 </style>
