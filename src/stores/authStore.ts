@@ -9,6 +9,7 @@ export const useAuthStore = defineStore('AuthStore',
   }),
   getters: {
     user: (state) => state.userCreds?.user,
+    isAuthenticated(): boolean { return !!this.user; },
   },
   actions: {
     async signIn(email: string, password: string): Promise<void> {
@@ -16,11 +17,9 @@ export const useAuthStore = defineStore('AuthStore',
         const result = await signInWithEmailAndPassword(auth, email, password);
         this.setUser(result);
       } catch (error) {
-        console.error('Authentication error:', error);
         throw error;
       }
     },
-
     async signUp(email: string, password: string): Promise<void> {
       try {
         const result = await createUserWithEmailAndPassword(auth, email, password);

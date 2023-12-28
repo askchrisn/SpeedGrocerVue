@@ -9,6 +9,8 @@ import {
 } from 'vue-router';
 import { useAuthStore } from '../stores/authStore';
 import routes from './routes';
+import { UserCredential, onAuthStateChanged } from 'firebase/auth';
+import { auth } from 'src/firebaseConfig';
 
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
@@ -25,16 +27,20 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  Router.beforeEach((to, from, next) => {
-    const authStore = useAuthStore();
-
-    if (to.meta.requiresAuth && !authStore.user) {
-      next('/login')
-    }
-    else {
-      next()
-    }
-  })
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      Router.beforeEach((to, from, next) => {
+        const authStore = useAuthStore();
+    
+        if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+          next('/login')
+        }
+        else {
+          next()
+        }
+      })
+    } 
+  });
 
   return Router;
 });
