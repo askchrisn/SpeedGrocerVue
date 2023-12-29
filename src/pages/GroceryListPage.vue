@@ -15,7 +15,7 @@
             >
             <q-item class="q-my-sm" clickable v-ripple @click="tryDeleteItem(item.ItemName)">
                 <q-item-section>
-                    <q-item-label>{{ item.ItemName }}</q-item-label>
+                    <q-item-label>{{ item.ItemName + (item.Quantity > 1 ? " x " + item.Quantity : "") }}</q-item-label>
                 </q-item-section>
 
                 <q-item-section side>
@@ -48,7 +48,21 @@ const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapsho
 function createNewItem() {
     var itemName = newItemName.value.trim()
     if (itemName.length > 0) {
-        groceryList.value.addItem(new Item(itemName, authStore.userName))
+        const spaceIndex: number = itemName.indexOf(' ');
+
+        var quantity = 1
+
+        if (spaceIndex !== -1) {
+            const quantityString: string = itemName.substring(0, spaceIndex);
+
+            const remainingString: string = itemName.substring(spaceIndex + 1);
+            if (!isNaN(Number(quantityString.trim()))) {
+                quantity = parseInt(quantityString, 10);
+                itemName = remainingString.trim();
+            }
+        }
+
+        groceryList.value.addItem(new Item(itemName, authStore.userName, quantity))
         newItemName.value = ""
         saveGroceryList()
     }
