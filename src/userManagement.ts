@@ -16,7 +16,7 @@ export function updateUser() {
     if (authStore.isAuthenticated && !userStore.exists) {
         var emailKey = adjustEmailKey(authStore.user?.email ?? "")
         if (emailKey in userMap) {
-            userStore.setUser(userMap[emailKey] as User)
+            userStore.setUserData(userMap[emailKey] as User)
         }
     }
 }

@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user',
     exists(): boolean { return this.user.Email != "" },
   },
   actions: {
-    setUser(user: User) {
+    setUserData(user: User) {
       this.user = user
     },
     clearUser() {

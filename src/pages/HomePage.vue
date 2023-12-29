@@ -2,7 +2,7 @@
   <div class="q-pa-lg">
     <label>HomePage.vue</label>
     <label>{{ authStore.user?.uid }}</label>
-    <q-btn to="/login" @click="authStore.signOut()">Logout</q-btn>
+    <q-btn to="/login" @click="logout()">Logout</q-btn>
     <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense></q-input>
     <q-btn class="primary" @click="createNewList()">+</q-btn>
     <q-list bordered>
@@ -26,8 +26,10 @@ import { useAuthStore } from 'src/stores/authStore';
 import GroceryList from 'src/models/groceryList';
 import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
+import { useUserStore } from 'src/stores/userStore';
 
 const authStore = useAuthStore()
+const userStore = useUserStore()
 const groceryLists = ref<Array<GroceryList>>([])
 const newListName = ref("")
 attachEvent("GroceryLists", (snapshot) => {
@@ -45,6 +47,11 @@ function test() {
   gl.Name = "MyFirstList";
 
   updateDb('/GroceryLists', gl);
+}
+
+function logout() {
+  authStore.signOut()
+  userStore.clearUser()
 }
 
 function createNewList() {
