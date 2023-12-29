@@ -1,24 +1,23 @@
 <template>
     <div class="main">
-        <q-btn to="/users">Manage Users</q-btn>
         <div class="input-container">
-            <q-input class="input" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
-            <q-btn class="primary" @click="createNewItem()">+</q-btn>
+            <q-input class="input" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input>
+            <q-btn class="primary" @click="addUser()">+</q-btn>
         </div>
       
         <q-virtual-scroll
             class="dynamic-max-height"
-            :items="groceryList.Items"
+            :items="users"
             separator
             v-slot="{ item, index }"
             >
-            <q-item class="q-my-sm" clickable v-ripple @click="tryDeleteItem(item.ItemName)">
+            <q-item class="q-my-sm" clickable v-ripple>
                 <q-item-section>
-                    <q-item-label>{{ item.ItemName }}</q-item-label>
+                    <q-item-label>{{ item.Nickname }}</q-item-label>
                 </q-item-section>
 
                 <q-item-section side>
-                    <q-item-label caption lines="1">{{ item.AdderName }}</q-item-label>
+                    <q-item-label caption lines="1">{{ item.Email }}</q-item-label>
                 </q-item-section>
             </q-item>
         </q-virtual-scroll>
@@ -27,43 +26,51 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import GroceryList from 'src/models/groceryList';
 import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useQuasar } from 'quasar'
+import GroceryList from 'src/models/groceryList';
+import UserInfo from 'src/models/userInfo';
+import { getUserInfo } from 'src/userManagement';
 
 const authStore = useAuthStore()
 const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
-const groceryList = ref<GroceryList>(new GroceryList())
-const newItemName = ref("")
+const newUserEmail = ref("")
+const users = ref<Array<UserInfo>>([])
+var groceryList = new GroceryList()
 
 const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
-    groceryList.value = GroceryList.fromObject(snapshot)
+    groceryList = GroceryList.fromObject(snapshot)
+    var tempUsers: Array<UserInfo> = []
+    
+    for (var email of groceryList.Users) {
+        var userInfo = getUserInfo(email) ?? new UserInfo("", email)
+        tempUsers.push(userInfo)
+    }
+
+    users.value = tempUsers
 });
   
-function createNewItem() {
-    var itemName = newItemName.value.trim()
-    if (itemName.length > 0) {
-        groceryList.value.addItem(new Item(itemName, authStore.userName))
-        newItemName.value = ""
+function addUser() {
+    var email = newUserEmail.value.trim()
+    if (email.length > 0) {
+        var userInfo = getUserInfo(email)
+        if (userInfo == null) {
+            quasar.notify({color: 'red', position: 'center', message: "No user found with email '" + email + "'!"})
+            return
+        }
+
+        groceryList.addUser(email)
+        newUserEmail.value = ""
         saveGroceryList()
     }
 }
 
-function tryDeleteItem(itemName: string) {
-    quasar.notify({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]})
-}
-
-function deleteItem(itemName: string) {
-    groceryList.value.removeItem(itemName)
-    saveGroceryList()
-}
-
 function saveGroceryList() {
-    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
+    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList)
 }
 
 </script>
