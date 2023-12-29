@@ -1,5 +1,6 @@
 <template>
     <div class="main">
+        <q-btn @click="tryLeaveList()">Leave List</q-btn>
         <div class="input-container">
             <q-input class="input" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input>
             <q-btn class="primary" @click="addUser()">+</q-btn>
@@ -27,14 +28,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Item from 'src/models/item';
-import { attachEvent, updateDb } from 'src/firebaseConfig'
+import { attachEvent, updateDb, setDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useQuasar } from 'quasar'
 import GroceryList from 'src/models/groceryList';
 import UserInfo from 'src/models/userInfo';
 import { getUserInfo } from 'src/userManagement';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const authStore = useAuthStore()
 const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
@@ -67,6 +70,23 @@ function addUser() {
         newUserEmail.value = ""
         saveGroceryList()
     }
+}
+
+function tryLeaveList() {
+    quasar.notify({color: 'red', position: 'center', message: "Are you sure you want to leave the list '" + groceryList.Name + "'?", actions: [{label: 'Yes', color: 'white', handler: () => { leaveList() }}, {label: 'No', color: 'white'}]})
+}
+
+function leaveList() {
+    groceryList.removeUser(authStore.userEmail)
+    if (groceryList.Users.length > 0) {
+        saveGroceryList()
+    }
+    else {
+        setDb("GroceryLists/" + groceryListKeyStore.key, null)
+    }
+
+    groceryListKeyStore.clearKey()
+    router.replace('/')
 }
 
 function saveGroceryList() {

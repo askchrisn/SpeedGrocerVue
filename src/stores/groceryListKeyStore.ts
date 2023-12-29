@@ -8,6 +8,9 @@ export const useGroceryListKeyStore = defineStore('groceryListKey',
   actions: {
     setKey(key: string) {
       this.key = key
+    },
+    clearKey() {
+        this.key = ""
     }
   },
 })
