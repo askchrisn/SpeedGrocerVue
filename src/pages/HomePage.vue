@@ -28,7 +28,7 @@
 import { ref } from 'vue';
 import { useAuthStore } from 'src/stores/authStore';
 import GroceryList from 'src/models/groceryList';
-import { attachEvent, updateDb } from 'src/firebaseConfig'
+import { attachEvent, pushDb } from 'src/firebaseConfig'
 import { useUserStore } from 'src/stores/userStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 
@@ -63,7 +63,7 @@ function createNewList() {
     gl.Name = name;
     gl.Users = [ userStore.user.Email ]
 
-    updateDb('/GroceryLists', gl);
+    pushDb('/GroceryLists', gl);
     newListName.value = ""
   }
 }

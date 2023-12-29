@@ -46,7 +46,7 @@ function createNewItem() {
     if (itemName.length > 0) {
         groceryList.value.addItem(new Item(itemName, userStore.user.Nickname))
         newItemName.value = ""
-        // TODO save grocery list
+        updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
     }
 }
 

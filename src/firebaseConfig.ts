@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set, push } from 'firebase/database';
+import { getDatabase, ref, onValue, set, push, update } from 'firebase/database';
 import { getAuth } from 'firebase/auth'
+import GroceryList from "./models/groceryList";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA6UJqm3877FgHO2QwQavlZN03Z-pE42As",
@@ -26,7 +27,12 @@ export function attachEvent(key: string, handler: (a: any) => void) {
   });
 }
 
-export function updateDb(refUrl: string, obj: any) {
+export function pushDb(refUrl: string, obj: any) {
   const dbRef = push(ref(db, refUrl)); // reference to push to
   set(dbRef, obj);                     // push to database
+}
+
+export function updateDb(key: string, obj: any) {
+  var dbRef = ref(db, key);
+  update(dbRef, obj)
 }
