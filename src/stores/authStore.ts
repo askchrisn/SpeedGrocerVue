@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { auth } from '../firebaseConfig';
 import { LocalStorage } from 'quasar';
 import UserInfo from '../models/userInfo';
-import { getUserInfo } from '../userManagement';
+import { getUserInfo, saveUserInfo } from '../userManagement';
 
 export const useAuthStore = defineStore('AuthStore', 
 {
@@ -26,9 +26,10 @@ export const useAuthStore = defineStore('AuthStore',
         throw error;
       }
     },
-    async signUp(email: string, password: string): Promise<void> {
+    async signUp(email: string, name: string, password: string): Promise<void> {
       try {
         const result = await createUserWithEmailAndPassword(auth, email, password);
+        saveUserInfo(new UserInfo(name, email))
         this.setUser(result.user);
       } catch (error) {
         throw error;

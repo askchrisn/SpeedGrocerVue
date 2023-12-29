@@ -1,11 +1,11 @@
-import { attachEvent } from "./firebaseConfig"
+import { attachEvent, setDb } from "./firebaseConfig"
 import { adjustEmail } from "./utils/helpers"
 import { useAuthStore } from "./stores/authStore";
 import UserInfo from "./models/userInfo";
 
 let allUsers: {[email: string] : UserInfo} = {}
 
-attachEvent("Users", (snapshot) => {
+const listener = attachEvent("Users", (snapshot) => {
     allUsers = snapshot
 
     const authStore = useAuthStore() 
@@ -20,4 +20,9 @@ export function getUserInfo(email: string): UserInfo | null {
     }
 
     return null;
+}
+
+export function saveUserInfo(userInfo: UserInfo) {
+    var emailKey = adjustEmail(userInfo.Email)
+    setDb("Users/" + emailKey, userInfo)
 }

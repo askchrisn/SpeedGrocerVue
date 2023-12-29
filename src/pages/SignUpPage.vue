@@ -26,7 +26,7 @@ const authStore = useAuthStore();
 
 async function createAccount() {
     try {
-        await authStore.signUp(email.value, password.value);
+        await authStore.signUp(email.value, name.value, password.value);
         await authStore.signIn(email.value, password.value);
         router.push('/');
     } catch (error: any) {

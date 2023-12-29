@@ -36,3 +36,8 @@ export function updateDb(key: string, obj: any) {
   var dbRef = ref(db, key);
   update(dbRef, obj)
 }
+
+export function setDb(key: string, obj: any) {
+  var dbRef = ref(db, key);
+  set(dbRef, obj)
+}
