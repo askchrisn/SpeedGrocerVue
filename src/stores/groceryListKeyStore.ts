@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import User from '../models/user'
 
 export const useGroceryListKeyStore = defineStore('groceryListKey', 
 {
