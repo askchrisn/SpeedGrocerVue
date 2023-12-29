@@ -27,15 +27,15 @@ import GroceryList from 'src/models/groceryList';
 import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 
-  const authStore = useAuthStore()
-  const groceryLists = ref<Array<GroceryList>>([])
-  const newListName = ref("")
-  attachEvent("GroceryLists", (snapshot) => {
-    var updatedGroceryLists = []
-    for (let key in snapshot) {
-      var gl = GroceryList.fromObject(snapshot[key])
-      updatedGroceryLists.push(gl)
-    }
+const authStore = useAuthStore()
+const groceryLists = ref<Array<GroceryList>>([])
+const newListName = ref("")
+attachEvent("GroceryLists", (snapshot) => {
+  var updatedGroceryLists = []
+  for (let key in snapshot) {
+    var gl = GroceryList.fromObject(snapshot[key])
+    updatedGroceryLists.push(gl)
+  }
 
   groceryLists.value = updatedGroceryLists
 });
