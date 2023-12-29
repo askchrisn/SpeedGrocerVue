@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user',
     user: new User("","")
   }),
   getters: {
-    exists(): boolean { return this.user.Email != "" },
+    exists: (state) => !!state.user.Email,
   },
   actions: {
     setUserData(user: User) {
