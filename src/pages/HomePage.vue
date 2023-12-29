@@ -3,6 +3,8 @@
     <label>HomePage.vue</label>
     <label>{{ authStore.user?.uid }}</label>
     <q-btn class="primary" to="/login" @click="authStore.signOut()">Logout</q-btn>
+    <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense></q-input>
+    <q-btn class="primary" @click="createNewList()">+</q-btn>
     <q-list bordered>
         <q-item v-for="groceryList in groceryLists" class="q-my-sm" clickable v-ripple>
           <q-item-section>
@@ -28,15 +30,20 @@
 
   const authStore = useAuthStore()
   const groceryLists = ref<Array<GroceryList>>([])
+  const newListName = ref("")
   attachEvent("GroceryLists", (snapshot) => {
     var updatedGroceryLists = []
-    for(let key in snapshot) {
+    for (let key in snapshot) {
       var gl = GroceryList.fromObject(snapshot[key])
       updatedGroceryLists.push(gl)
     }
 
     groceryLists.value = updatedGroceryLists
   });
+
+  function createNewList() {
+
+  }
 
 </script>
 
