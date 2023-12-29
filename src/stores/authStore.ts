@@ -2,15 +2,21 @@ import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChange
 import { defineStore } from 'pinia';
 import { auth } from '../firebaseConfig';
 import { LocalStorage } from 'quasar';
+import UserInfo from '../models/userInfo';
+import { getUserInfo } from '../userManagement';
+import { adjustEmail } from 'src/utils/helpers';
 
 export const useAuthStore = defineStore('AuthStore', 
 {
   state: () => ({
-    user: null as User | null,
+    auth: null as User | null,
+    userInfo: null as UserInfo | null,
   }),
   getters: {
-    isAuthenticated: (state) => !!state.user,
-    userEmail: (state) => state.user?.email,
+    isAuthenticated: (state) => !!state.auth,
+    userDataLoaded: (state) => !!state.userInfo?.Email,
+    userEmail: (state) => adjustEmail(state.auth?.email ?? ''),
+    userName: (state) => state.userInfo?.Nickname ?? '',
   },
   actions: {
     async signIn(email: string, password: string): Promise<void> {
@@ -38,8 +44,16 @@ export const useAuthStore = defineStore('AuthStore',
       }
     },
     setUser(user: User | null): void {
-      this.user = user;
-      LocalStorage.set('user', user);
+      if(user == null) {
+        this.auth = null;
+        this.userInfo = null;
+        LocalStorage.remove('user');
+      }
+      else {
+        this.auth = user;
+        this.userInfo = getUserInfo(user?.email ?? '');
+        LocalStorage.set('user', user);
+      }
     },
   },
 })

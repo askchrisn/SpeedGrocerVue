@@ -12,7 +12,6 @@ import routes from './routes';
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'src/firebaseConfig';
 import { LocalStorage } from 'quasar';
-import { updateUser } from '../userManagement'
 
 export default route(function () {
   const createHistory = process.env.SERVER
@@ -28,13 +27,12 @@ export default route(function () {
   });
 
   let initialized = false;
-  const wasPreviouslyLoggedIn = LocalStorage.getItem('user') as User | null;
+  const wasPreviouslyLoggedIn = LocalStorage.getItem('user') as User != null;
 
   onAuthStateChanged(auth, (user) => {
     initialized = true;
     const authStore = useAuthStore();
     authStore.setUser(user);
-    updateUser();
     if (authStore.isAuthenticated) {
       Router.push('/');
     }
@@ -43,7 +41,7 @@ export default route(function () {
   Router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
 
-    if (!initialized && !!wasPreviouslyLoggedIn) {
+    if (!initialized && wasPreviouslyLoggedIn) {
       next();
     }
 

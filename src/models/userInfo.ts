@@ -1,4 +1,4 @@
-class User {
+export default class UserInfo {
     Nickname: string = "";
     Email: string = "";
 
@@ -7,5 +7,3 @@ class User {
         this.Email = email;
     }
 }
-
-export default User

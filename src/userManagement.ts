@@ -1,28 +1,23 @@
-import { useAuthStore } from "./stores/authStore";
-import { useUserStore } from "./stores/userStore";
 import { attachEvent } from "./firebaseConfig"
-import User from "./models/user"
+import { adjustEmail } from "./utils/helpers"
+import { useAuthStore } from "./stores/authStore";
+import UserInfo from "./models/userInfo";
 
-var userMap: {[email: string] : User} = {}
+let allUsers: {[email: string] : UserInfo} = {}
 
 attachEvent("Users", (snapshot) => {
-    userMap = snapshot
-    updateUser()
-  });
+    allUsers = snapshot
 
-export function updateUser() {
-    const authStore = useAuthStore()
-    const userStore = useUserStore()
-    if (authStore.isAuthenticated && !userStore.exists) {
-        var emailKey = adjustEmailKey(authStore.user?.email ?? "")
-        if (emailKey in userMap) {
-            userStore.setUserData(userMap[emailKey] as User)
-        }
+    const authStore = useAuthStore() 
+    authStore.setUser(authStore.auth);
+});
+
+export function getUserInfo(email: string): UserInfo | null {
+    var emailKey = adjustEmail(email);
+
+    if (emailKey in allUsers) {
+        return allUsers[emailKey] as UserInfo;
     }
-}
 
-function adjustEmailKey(email: string) {
-    email = email.replace(/\./gi, "D")
-    email = email.replace(/@/gi, "A")
-    return email
+    return null;
 }

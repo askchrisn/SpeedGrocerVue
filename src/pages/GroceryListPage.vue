@@ -29,11 +29,11 @@ import { ref } from 'vue';
 import GroceryList from 'src/models/groceryList';
 import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
-import { useUserStore } from 'src/stores/userStore';
+import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useQuasar } from 'quasar'
 
-const userStore = useUserStore()
+const authStore = useAuthStore()
 const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
@@ -46,7 +46,7 @@ const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapsho
 function createNewItem() {
     var itemName = newItemName.value.trim()
     if (itemName.length > 0) {
-        groceryList.value.addItem(new Item(itemName, userStore.user.Nickname))
+        groceryList.value.addItem(new Item(itemName, authStore.userName))
         newItemName.value = ""
         updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
     }

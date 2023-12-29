@@ -29,11 +29,9 @@ import { ref } from 'vue';
 import { useAuthStore } from 'src/stores/authStore';
 import GroceryList from 'src/models/groceryList';
 import { attachEvent, pushDb } from 'src/firebaseConfig'
-import { useUserStore } from 'src/stores/userStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 
 const authStore = useAuthStore()
-const userStore = useUserStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 
 const groceryLists = ref<Array<[string, GroceryList]>>([])
@@ -43,7 +41,7 @@ attachEvent("GroceryLists", (snapshot) => {
   var updatedGroceryLists: Array<[string, GroceryList]> = []
   for (let key in snapshot) {
     var gl = GroceryList.fromObject(snapshot[key])
-    if (gl.containsUser(userStore.user.Email)) {
+    if (gl.containsUser(authStore.userEmail)) {
       updatedGroceryLists.push([key, gl])
     }
   }
@@ -53,7 +51,6 @@ attachEvent("GroceryLists", (snapshot) => {
 
 function logout() {
   authStore.signOut()
-  userStore.clearUser()
 }
 
 function createNewList() {
@@ -61,7 +58,7 @@ function createNewList() {
   if (name.length > 0) {
     var gl = new GroceryList();
     gl.Name = name;
-    gl.Users = [ userStore.user.Email ]
+    gl.Users = [ authStore.userEmail ]
 
     pushDb('/GroceryLists', gl);
     newListName.value = ""
