@@ -1,21 +1,26 @@
 <template>
-  <div class="q-pa-lg">
+  <div class="main">
     <q-btn to="/login" @click="logout()">Logout</q-btn>
     <div class="input-container">
       <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense></q-input>
       <q-btn class="primary" @click="createNewList()">+</q-btn>
     </div>
-    <q-list bordered>
-      <q-item v-for="groceryList in groceryLists" class="q-my-sm" clickable v-ripple to="/list">
-        <q-item-section>
-          <q-item-label>{{ groceryList.Name }}</q-item-label>
-        </q-item-section>
+    <q-virtual-scroll
+      class="dynamic-max-height"
+      :items="groceryLists"
+      separator
+      v-slot="{ item, index }"
+      >
+        <q-item class="q-my-sm" clickable v-ripple to="/list">
+          <q-item-section>
+            <q-item-label>{{ item.Name }}</q-item-label>
+          </q-item-section>
 
-        <q-item-section side>
-          <q-item-label caption lines="1">{{ groceryList.Items.length }}</q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-list>
+          <q-item-section side>
+            <q-item-label caption lines="1">{{ item.Items.length }}</q-item-label>
+          </q-item-section>
+        </q-item>
+    </q-virtual-scroll>
   </div>
 </template>
 
@@ -63,9 +68,14 @@ function createNewList() {
 </script>
 
 <style scoped>
+
 .main {
-  margin: 2rem;
-}  
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 2rem;
+}
+
 .input-container {
   display: flex;
   align-items: center;
@@ -83,5 +93,9 @@ function createNewList() {
 
 .q-btn {
   margin: 1rem;
+}
+.dynamic-max-height {
+  flex: 1;
+  overflow-y: auto; /* Add scroll bar if the content exceeds the max height */
 }
 </style>
