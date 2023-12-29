@@ -6,7 +6,7 @@
     <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense></q-input>
     <q-btn class="primary" @click="createNewList()">+</q-btn>
     <q-list bordered>
-      <q-item v-for="groceryList in groceryLists" class="q-my-sm" clickable v-ripple>
+      <q-item v-for="groceryList in groceryLists" class="q-my-sm" clickable v-ripple to="/list">
         <q-item-section>
           <q-item-label>{{ groceryList.Name }}</q-item-label>
         </q-item-section>

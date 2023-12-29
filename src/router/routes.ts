@@ -3,6 +3,7 @@ import HomePage from '../pages/HomePage.vue';
 import LoginPage from '../pages/LoginPage.vue';
 import SignUpPage from 'src/pages/SignUpPage.vue';
 import ZNotFoundPage from '../pages/ZNotFoundPage.vue';
+import GroceryListPage from '../pages/GroceryListPage.vue';
 
 const routes: RouteRecordRaw[] = [
   { 
@@ -17,6 +18,10 @@ const routes: RouteRecordRaw[] = [
   { 
     path: '/signup', 
     component: SignUpPage, 
+  },
+  { 
+    path: '/list', 
+    component: GroceryListPage, 
   },
   { 
     path: '/:catchAll(.*)*', 
