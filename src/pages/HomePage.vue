@@ -16,7 +16,6 @@
         </q-item-section>
       </q-item>
     </q-list>
-    <q-btn color="primary" @click="test()">Add To Database Test</q-btn>
   </div>
 </template>
 
@@ -44,20 +43,21 @@ attachEvent("GroceryLists", (snapshot) => {
   groceryLists.value = updatedGroceryLists
 });
 
-function test() {
-  var gl = new GroceryList();
-  gl.Name = "MyFirstList";
-
-  updateDb('/GroceryLists', gl);
-}
-
 function logout() {
   authStore.signOut()
   userStore.clearUser()
 }
 
 function createNewList() {
+  var name = newListName.value.trim()
+  if (name.length > 0) {
+    var gl = new GroceryList();
+    gl.Name = name;
+    gl.Users = [ userStore.user.Email ]
 
+    updateDb('/GroceryLists', gl);
+    newListName.value = ""
+  }
 }
 
 </script>
