@@ -1,10 +1,10 @@
 class User {
-    name: string;
-    email: string;
+    Nickname: string = "";
+    Email: string = "";
 
     constructor(name: string, email: string) {
-        this.name = name;
-        this.email = email;
+        this.Nickname = name;
+        this.Email = email;
     }
 }
 
