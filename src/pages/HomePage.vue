@@ -2,7 +2,7 @@
   <div class="main">
     <q-btn to="/login" @click="logout()">Logout</q-btn>
     <div class="input-container">
-      <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense></q-input>
+      <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense @keydown.enter.prvent="createNewList()"></q-input>
       <q-btn class="primary" @click="createNewList()">+</q-btn>
     </div>
     <q-virtual-scroll
