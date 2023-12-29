@@ -47,9 +47,9 @@ function test() {
   updateDb('/GroceryLists', gl);
 }
 
-  function createNewList() {
+function createNewList() {
 
-  }
+}
 
 </script>
 
