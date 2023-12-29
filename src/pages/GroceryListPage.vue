@@ -11,7 +11,7 @@
             separator
             v-slot="{ item, index }"
             >
-            <q-item class="q-my-sm" clickable v-ripple @click="deleteItem(item.ItemName)">
+            <q-item class="q-my-sm" clickable v-ripple @click="tryDeleteItem(item.ItemName)">
                 <q-item-section>
                     <q-item-label>{{ item.ItemName }}</q-item-label>
                 </q-item-section>
@@ -22,8 +22,8 @@
             </q-item>
         </q-virtual-scroll>
     </div>
-  </template>
-  
+</template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import GroceryList from 'src/models/groceryList';
@@ -48,12 +48,21 @@ function createNewItem() {
     if (itemName.length > 0) {
         groceryList.value.addItem(new Item(itemName, authStore.userName))
         newItemName.value = ""
-        updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
+        saveGroceryList()
     }
 }
 
+function tryDeleteItem(itemName: string) {
+    quasar.notify({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]})
+}
+
 function deleteItem(itemName: string) {
-    quasar.notify({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { groceryList.value.removeItem(itemName) }}, {label: 'No', color: 'white'}]})
+    groceryList.value.removeItem(itemName)
+    saveGroceryList()
+}
+
+function saveGroceryList() {
+    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
 }
 
 </script>
