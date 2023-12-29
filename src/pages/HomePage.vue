@@ -20,12 +20,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import ExampleComponent from 'src/components/ExampleComponent.vue';
 import { useAuthStore } from 'src/stores/authStore';
 import GroceryList from 'src/models/groceryList';
 import Item from 'src/models/item';
-import { isTemplateExpression } from 'typescript';
-import { attachEvent, update } from 'src/firebaseConfig'
+import { attachEvent, updateDb } from 'src/firebaseConfig'
 
 const authStore = useAuthStore()
 const groceryLists = ref<Array<GroceryList>>([])
@@ -43,7 +41,7 @@ function test() {
   var gl = new GroceryList();
   gl.Name = "MyFirstList";
 
-  update(gl);
+  updateDb('/GroceryLists', gl);
 }
 
 </script>

@@ -26,9 +26,8 @@ export function attachEvent(key: string, handler: (a: any) => void) {
   });
 }
 
-export function update(obj: any){
-  // set(groceryListsRef, obj);
-  const groceryListsRef = ref(db, '/GroceryLists');
-  const groceryListRef = push(groceryListsRef);
-  set(groceryListRef, obj);
+export function updateDb(refUrl: string, obj: any) {
+  const dbRef = ref(db, refUrl);  // database reference
+  const refToAddTo = push(dbRef); // reference to push to
+  set(refToAddTo, obj);           // push to database
 }
