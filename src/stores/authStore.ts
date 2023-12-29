@@ -1,7 +1,6 @@
 import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { defineStore } from 'pinia';
 import { auth } from '../firebaseConfig';
-import { LocalStorage } from 'quasar';
 import UserInfo from '../models/userInfo';
 import { getUserInfo, saveUserInfo } from '../userManagement';
 
@@ -18,6 +17,14 @@ export const useAuthStore = defineStore('AuthStore',
     userName: (state) => state.userInfo?.Nickname ?? '',
   },
   actions: {
+    async getPreviouslyLoggedInUser(): Promise<User | null> {
+      return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) resolve(user);
+          else resolve(null);
+        }, reject);
+      });
+    },
     async signIn(email: string, password: string): Promise<void> {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
@@ -44,16 +51,8 @@ export const useAuthStore = defineStore('AuthStore',
       }
     },
     setUser(user: User | null): void {
-      if(user == null) {
-        this.auth = null;
-        this.userInfo = null;
-        LocalStorage.remove('user');
-      }
-      else {
-        this.auth = user;
-        this.userInfo = getUserInfo(user?.email ?? '');
-        LocalStorage.set('user', user);
-      }
+      this.auth = user;
+      this.userInfo = user === null ? null : getUserInfo(user.email ?? '');
     },
   },
 })
