@@ -4,7 +4,6 @@ import { auth } from '../firebaseConfig';
 import { LocalStorage } from 'quasar';
 import UserInfo from '../models/userInfo';
 import { getUserInfo } from '../userManagement';
-import { adjustEmail } from 'src/utils/helpers';
 
 export const useAuthStore = defineStore('AuthStore', 
 {
@@ -15,7 +14,7 @@ export const useAuthStore = defineStore('AuthStore',
   getters: {
     isAuthenticated: (state) => !!state.auth,
     userDataLoaded: (state) => !!state.userInfo?.Email,
-    userEmail: (state) => adjustEmail(state.auth?.email ?? ''),
+    userEmail: (state) => state.auth?.email ?? '',
     userName: (state) => state.userInfo?.Nickname ?? '',
   },
   actions: {
