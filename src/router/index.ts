@@ -12,6 +12,7 @@ import routes from './routes';
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'src/firebaseConfig';
 import { LocalStorage } from 'quasar';
+import { updateUser } from '../userManagement'
 
 export default route(function () {
   const createHistory = process.env.SERVER
@@ -33,6 +34,7 @@ export default route(function () {
     initialized = true;
     const authStore = useAuthStore();
     authStore.setUser(user);
+    updateUser();
     if (authStore.isAuthenticated) {
       Router.push('/');
     }

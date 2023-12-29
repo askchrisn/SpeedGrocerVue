@@ -2,6 +2,7 @@ import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChange
 import { defineStore } from 'pinia';
 import { auth } from '../firebaseConfig';
 import { LocalStorage } from 'quasar';
+import { useUserStore } from './userStore';
 
 export const useAuthStore = defineStore('AuthStore', 
 {
@@ -33,6 +34,8 @@ export const useAuthStore = defineStore('AuthStore',
       try {
         await signOut(auth);
         this.setUser(null);
+        const userStore = useUserStore()
+        userStore.clearUser()
       } catch (error) {
         throw error;
       }
