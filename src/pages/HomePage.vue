@@ -1,12 +1,14 @@
 <template>
   <div class="main">
-    <q-btn to="/login" @click="logout()">Logout</q-btn>
-    <div class="input-container">
-      <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense @keydown.enter.prvent="createNewList()"></q-input>
-      <q-btn class="primary" @click="createNewList()">+</q-btn>
+    <q-btn to="/login" @click="logout()" class="mb1">Logout</q-btn>
+
+    <div class="flex-row mb1">
+      <q-input class="flex-grow" filled v-model="newListName" label="New list name" stack-label dense @keydown.enter.prvent="createNewList()"></q-input>
+      <q-btn color="primary" class="ml1" @click="createNewList()">+</q-btn>
     </div>
+
     <q-virtual-scroll
-      class="dynamic-max-height"
+      class="flex-grow"
       :items="groceryLists"
       separator
       v-slot="{ item, index }"
@@ -69,33 +71,4 @@ function createNewList() {
 
 <style scoped>
 
-.main {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  padding: 2rem;
-}
-
-.input-container {
-  display: flex;
-  align-items: center;
-}
-
-.input {
-  flex: 1; /* This makes the input take up the remaining space */
-  margin-right: 8px; /* Adjust margin as needed */
-}
-
-.test {
-  display: flex;
-  flex-direction: column;
-}
-
-.q-btn {
-  margin: 1rem;
-}
-.dynamic-max-height {
-  flex: 1;
-  overflow-y: auto; /* Add scroll bar if the content exceeds the max height */
-}
 </style>

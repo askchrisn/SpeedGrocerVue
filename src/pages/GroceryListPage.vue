@@ -4,7 +4,7 @@
         <h1>{{ groceryList.Name }}</h1>
         <div class="flex-row mb1">
             <q-input class="flex-grow" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
-            <q-btn class="primary" @click="createNewItem()">+</q-btn>
+            <q-btn color="primary" class="ml1" @click="createNewItem()">+</q-btn>
         </div>
       
         <q-virtual-scroll
@@ -84,17 +84,6 @@ function saveGroceryList() {
 </script>
   
 <style scoped>
-
-.main {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 2rem;
-}
-
-.q-btn {
-    margin-left: 1rem;
-}
 
 h1 {
     margin: 0;
