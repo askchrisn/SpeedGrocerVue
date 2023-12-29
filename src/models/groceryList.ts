@@ -35,7 +35,6 @@ export default class GroceryList {
 
     containsUser(user: string) : boolean {
         for (var email of this.Users) {
-            console.log(email)
             if (user === email) {
                 return true;
             }
