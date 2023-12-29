@@ -9,9 +9,8 @@ import {
 } from 'vue-router';
 import { useAuthStore } from '../stores/authStore';
 import routes from './routes';
-import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'src/firebaseConfig';
-import { LocalStorage } from 'quasar';
 
 export default route(function () {
   const createHistory = process.env.SERVER
@@ -26,27 +25,32 @@ export default route(function () {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  let initialized = false;
-  const wasPreviouslyLoggedIn = LocalStorage.getItem('user') as User != null;
-
   onAuthStateChanged(auth, (user) => {
-    initialized = true;
     const authStore = useAuthStore();
     authStore.setUser(user);
-    if (authStore.isAuthenticated) {
-      Router.push('/');
+
+    if(!authStore.isAuthenticated) {
+      authStore.signOut();
+      Router.push('/login');
     }
   });
 
-  Router.beforeEach((to, from, next) => {
+  Router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore();
 
-    if (!initialized && wasPreviouslyLoggedIn) {
-      next();
+    // Upon initialization, get the user from firebase
+    if(!authStore.isAuthenticated) {
+      var currentUser = await authStore.getPreviouslyLoggedInUser();
+      authStore.setUser(currentUser); 
     }
 
-    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    const requiresAuth = to.meta.requiresAuth;
+    const isAuthenticated = authStore.isAuthenticated;
+
+    if (requiresAuth && !isAuthenticated) {
       next('/login');
+    } else if(isAuthenticated && to.path === '/login') { 
+      next('/');
     } else {
       next();
     }
