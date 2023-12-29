@@ -22,7 +22,9 @@ export default class GroceryList {
     }
 
     addUser(user: string) {
-        this.Users.push(user);
+        if (this.Users.indexOf(user) == -1) {
+            this.Users.push(user);
+        }
     }
 
     removeUser(user: string) {
