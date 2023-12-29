@@ -11,13 +11,13 @@
       separator
       v-slot="{ item, index }"
       >
-        <q-item class="q-my-sm" clickable v-ripple to="/list">
+        <q-item class="q-my-sm" clickable v-ripple @click="groceryListKeyStore.setKey(item[0])" to="/list">
           <q-item-section>
-            <q-item-label>{{ item.Name }}</q-item-label>
+            <q-item-label>{{ item[1].Name }}</q-item-label>
           </q-item-section>
 
           <q-item-section side>
-            <q-item-label caption lines="1">{{ item.Items.length }}</q-item-label>
+            <q-item-label caption lines="1">{{ item[1].Items.length }}</q-item-label>
           </q-item-section>
         </q-item>
     </q-virtual-scroll>
@@ -28,20 +28,23 @@
 import { ref } from 'vue';
 import { useAuthStore } from 'src/stores/authStore';
 import GroceryList from 'src/models/groceryList';
-import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useUserStore } from 'src/stores/userStore';
+import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 
 const authStore = useAuthStore()
 const userStore = useUserStore()
-const groceryLists = ref<Array<GroceryList>>([])
+const groceryListKeyStore = useGroceryListKeyStore()
+
+const groceryLists = ref<Array<[string, GroceryList]>>([])
 const newListName = ref("")
+
 attachEvent("GroceryLists", (snapshot) => {
-  var updatedGroceryLists = []
+  var updatedGroceryLists: Array<[string, GroceryList]> = []
   for (let key in snapshot) {
     var gl = GroceryList.fromObject(snapshot[key])
     if (gl.containsUser(userStore.user.Email)) {
-      updatedGroceryLists.push(gl)
+      updatedGroceryLists.push([key, gl])
     }
   }
 

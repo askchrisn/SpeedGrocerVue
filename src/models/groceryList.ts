@@ -54,6 +54,10 @@ export default class GroceryList {
             gl.Items = []
         }
 
+        if (gl.Users == null) {
+            gl.Users = []
+        }
+
         if (gl.ItemHistory == null) {
             gl.ItemHistory = {}
         }

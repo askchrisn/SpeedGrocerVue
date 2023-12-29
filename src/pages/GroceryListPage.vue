@@ -24,32 +24,33 @@
     </div>
   </template>
   
-  <script setup lang="ts">
-  import { ref } from 'vue';
-  import GroceryList from 'src/models/groceryList';
-  import Item from 'src/models/item';
-  import { attachEvent, updateDb } from 'src/firebaseConfig'
-  import { useUserStore } from 'src/stores/userStore';
-  
-  const userStore = useUserStore()
-  const groceryList = ref<GroceryList>(new GroceryList())
-  const newItemName = ref("")
-  const groceryListKey = "-NZSSKlqmX-Fn3VUaGpG"
-  attachEvent("GroceryLists/" + groceryListKey, (snapshot) => {
+<script setup lang="ts">
+import { ref } from 'vue';
+import GroceryList from 'src/models/groceryList';
+import Item from 'src/models/item';
+import { attachEvent, updateDb } from 'src/firebaseConfig'
+import { useUserStore } from 'src/stores/userStore';
+import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
+
+const userStore = useUserStore()
+const groceryListKeyStore = useGroceryListKeyStore()
+const groceryList = ref<GroceryList>(new GroceryList())
+const newItemName = ref("")
+
+const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
-  });
+});
   
-  function createNewItem() {
-    console.log("hello!")
+function createNewItem() {
     var itemName = newItemName.value.trim()
     if (itemName.length > 0) {
-      groceryList.value.addItem(new Item(itemName, userStore.user.Nickname))
-      newItemName.value = ""
-      // TODO save grocery list
+        groceryList.value.addItem(new Item(itemName, userStore.user.Nickname))
+        newItemName.value = ""
+        // TODO save grocery list
     }
-  }
-  
-  </script>
+}
+
+</script>
   
 <style scoped>
 
