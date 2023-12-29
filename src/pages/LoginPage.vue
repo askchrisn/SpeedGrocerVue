@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <q-input class="input" filled v-model="email" label="Email" stack-label dense></q-input>
-        <q-input class="input" v-model="password" filled :type="isPasswordHidden ? 'password' : 'text'" stack-label label="Password">
+    <div class="flex-column q-ma-lg">
+        <q-input class="q-mb-lg" filled v-model="email" label="Email" stack-label></q-input>
+        <q-input class="q-mb-lg" v-model="password" filled :type="isPasswordHidden ? 'password' : 'text'" stack-label label="Password">
         <template v-slot:append>
           <q-icon
             :name="isPasswordHidden ? 'visibility_off' : 'visibility'"
@@ -10,8 +10,11 @@
           ></q-icon>
         </template>
       </q-input>
-        <q-btn color="primary" @click="login">Login</q-btn>
-        <q-btn color="primary" to="/signup">Sign Up</q-btn>
+        <q-btn class="q-mb-lg" color="primary" @click="login">Login</q-btn>
+        <div class="flex-row horizontal-center">
+            <label>Don't have an account?</label> 
+            <q-btn class="q-ml-sm" outline to="/signup">Sign Up</q-btn>
+        </div>
     </div>
 </template>
 
@@ -39,15 +42,4 @@
 </script>
 
 <style scoped>
-    div {
-        display: flex;
-        flex-direction: column;
-        margin: 2rem;
-    }
-    .input {
-        margin-bottom: 2rem;
-    }
-    .q-btn {
-        margin: 1rem;
-    }
 </style>

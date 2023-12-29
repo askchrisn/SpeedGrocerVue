@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="q-pa-lg">
     <label>HomePage.vue</label>
     <label>{{ authStore.user?.uid }}</label>
     <q-btn to="/login" @click="authStore.signOut()">Logout</q-btn>

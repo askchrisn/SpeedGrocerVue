@@ -1,1 +1,16 @@
 // app global css in SCSS form
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.horizontal-center {
+    justify-content: center;
+}
+
