@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue } from 'firebase/database';
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { LocalStorage } from 'quasar'
+import { getDatabase, ref, onValue, set, push } from 'firebase/database';
+import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
     apiKey: "AIzaSyA6UJqm3877FgHO2QwQavlZN03Z-pE42As",
@@ -14,15 +13,9 @@ const firebaseConfig = {
     measurementId: "G-392VKGXR7P"
   };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-//initialize firebase auth
-const auth = getAuth()
-
-export { app, auth }
-
-const db = getDatabase(app);
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth()
+export const db = getDatabase(app);
 
 export function attachEvent(key: string, handler: (a: any) => void) {
   var dbRef = ref(db, key);
@@ -31,4 +24,11 @@ export function attachEvent(key: string, handler: (a: any) => void) {
           handler(snapshot.val());
       }
   });
+}
+
+export function update(obj: any){
+  // set(groceryListsRef, obj);
+  const groceryListsRef = ref(db, '/GroceryLists');
+  const groceryListRef = push(groceryListsRef);
+  set(groceryListRef, obj);
 }
