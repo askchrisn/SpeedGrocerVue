@@ -9,8 +9,8 @@ export const useAuthStore = defineStore('AuthStore',
     user: null as User | null,
   }),
   getters: {
-    isAuthenticated(): boolean { return !!this.user; },
-    userEmail(): string { return this.user?.email || ''; }
+    isAuthenticated: (state) => !!state.user,
+    userEmail: (state) => state.user?.email,
   },
   actions: {
     async signIn(email: string, password: string): Promise<void> {
