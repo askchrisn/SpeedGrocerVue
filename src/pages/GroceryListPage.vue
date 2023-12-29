@@ -1,14 +1,14 @@
 <template>
     <div class="main">
-        <q-btn to="/users">Manage Users</q-btn>
+        <q-btn class="mb1" to="/users">Manage Users</q-btn>
         <h1>{{ groceryList.Name }}</h1>
-        <div class="input-container">
-            <q-input class="input" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
+        <div class="flex-row mb1">
+            <q-input class="flex-grow" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
             <q-btn class="primary" @click="createNewItem()">+</q-btn>
         </div>
       
         <q-virtual-scroll
-            class="dynamic-max-height"
+            class="flex-grow"
             :items="groceryList.Items"
             separator
             v-slot="{ item, index }"
@@ -77,28 +77,14 @@ function saveGroceryList() {
     height: 100vh;
     padding: 2rem;
 }
-.input-container {
-    display: flex;
-    align-items: center;
-}
-.input {
-    flex: 1; /* This makes the input take up the remaining space */
-    margin-right: 8px; /* Adjust margin as needed */
-}
-.test {
-    display: flex;
-    flex-direction: column;
-}
+
 .q-btn {
-    margin: 1rem;
-}
-.dynamic-max-height {
-    flex: 1;
-    overflow-y: auto; /* Add scroll bar if the content exceeds the max height */
+    margin-left: 1rem;
 }
 
 h1 {
     margin: 0;
+    margin-bottom: 1rem;
     font-size: 2rem;
     font-weight: bolder;
 }
