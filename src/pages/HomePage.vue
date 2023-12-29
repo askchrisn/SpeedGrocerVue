@@ -36,7 +36,9 @@ attachEvent("GroceryLists", (snapshot) => {
   var updatedGroceryLists = []
   for (let key in snapshot) {
     var gl = GroceryList.fromObject(snapshot[key])
-    updatedGroceryLists.push(gl)
+    if (gl.containsUser(userStore.user.Email)) {
+      updatedGroceryLists.push(gl)
+    }
   }
 
   groceryLists.value = updatedGroceryLists

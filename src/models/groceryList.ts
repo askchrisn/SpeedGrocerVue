@@ -1,8 +1,10 @@
 import Item from './item'
+import User from './user'
 
 export default class GroceryList {
     Name: string = "";
     Items: Item[] = [];
+    ItemHistory: { [itemName: string] : number } = {}
     Users: string[] = [];
 
     addItem(item: Item) {
@@ -31,10 +33,30 @@ export default class GroceryList {
         }
     }
 
-    static fromObject(obj: any) {
-        var gl = obj as GroceryList
+    containsUser(user: string) : boolean {
+        for (var email of this.Users) {
+            console.log(email)
+            if (user === email) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    static fromObject(obj: any) : GroceryList {
+        var gl = new GroceryList()
+        gl.Name = obj.Name
+        gl.Items = obj.Items
+        gl.ItemHistory = obj.ItemHistory
+        gl.Users = obj.Users
+
         if (gl.Items == null) {
             gl.Items = []
+        }
+
+        if (gl.ItemHistory == null) {
+            gl.ItemHistory = {}
         }
 
         return gl
