@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="input-container">
-            <q-input class="input" filled v-model="newItemName" label="Add item" stack-label dense></q-input>
+            <q-input class="input" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
             <q-btn class="primary" @click="createNewItem()">+</q-btn>
         </div>
       
@@ -11,7 +11,7 @@
             separator
             v-slot="{ item, index }"
             >
-            <q-item class="q-my-sm" clickable v-ripple>
+            <q-item class="q-my-sm" clickable v-ripple @click="deleteItem(item.ItemName)">
                 <q-item-section>
                     <q-item-label>{{ item.ItemName }}</q-item-label>
                 </q-item-section>
@@ -31,8 +31,10 @@ import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useUserStore } from 'src/stores/userStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
+import { useQuasar } from 'quasar'
 
 const userStore = useUserStore()
+const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const newItemName = ref("")
@@ -48,6 +50,10 @@ function createNewItem() {
         newItemName.value = ""
         updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
     }
+}
+
+function deleteItem(itemName: string) {
+    quasar.notify({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { groceryList.value.removeItem(itemName) }}, {label: 'No', color: 'white'}]})
 }
 
 </script>
