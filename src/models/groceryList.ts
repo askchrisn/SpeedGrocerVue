@@ -8,9 +8,7 @@ export default class GroceryList {
 
     addItem(newItem: Item) {
         var existingItem: Item = null
-        console.log(newItem)
         for (var item of this.Items) {
-            console.log(item)
             if (newItem.ItemName.toLowerCase() === item.ItemName.toLowerCase()) {
                 existingItem = item
                 break
