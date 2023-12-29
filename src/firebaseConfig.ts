@@ -27,7 +27,6 @@ export function attachEvent(key: string, handler: (a: any) => void) {
 }
 
 export function updateDb(refUrl: string, obj: any) {
-  const dbRef = ref(db, refUrl);  // database reference
-  const refToAddTo = push(dbRef); // reference to push to
-  set(refToAddTo, obj);           // push to database
+  const dbRef = push(ref(db, refUrl)); // reference to push to
+  set(dbRef, obj);                     // push to database
 }
