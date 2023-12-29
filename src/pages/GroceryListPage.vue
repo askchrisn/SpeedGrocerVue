@@ -1,6 +1,7 @@
 <template>
     <div class="main">
         <q-btn to="/users">Manage Users</q-btn>
+        <h1>{{ groceryList.Name }}</h1>
         <div class="input-container">
             <q-input class="input" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
             <q-btn class="primary" @click="createNewItem()">+</q-btn>
@@ -108,6 +109,12 @@ function saveGroceryList() {
 .dynamic-max-height {
     flex: 1;
     overflow-y: auto; /* Add scroll bar if the content exceeds the max height */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bolder;
 }
 
 </style>

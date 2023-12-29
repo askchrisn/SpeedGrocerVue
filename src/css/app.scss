@@ -1,4 +1,9 @@
+
 // app global css in SCSS form
+h1, h2, h3, h4 {
+    line-height: 1;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
