@@ -1,10 +1,10 @@
 <template>
   <div class="q-pa-lg">
-    <label>HomePage.vue</label>
-    <label>{{ authStore.user?.uid }}</label>
     <q-btn to="/login" @click="logout()">Logout</q-btn>
-    <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense></q-input>
-    <q-btn class="primary" @click="createNewList()">+</q-btn>
+    <div class="input-container">
+      <q-input class="input" filled v-model="newListName" label="New list name" stack-label dense></q-input>
+      <q-btn class="primary" @click="createNewList()">+</q-btn>
+    </div>
     <q-list bordered>
       <q-item v-for="groceryList in groceryLists" class="q-my-sm" clickable v-ripple to="/list">
         <q-item-section>
@@ -65,6 +65,15 @@ function createNewList() {
 <style scoped>
 .main {
   margin: 2rem;
+}  
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  flex: 1; /* This makes the input take up the remaining space */
+  margin-right: 8px; /* Adjust margin as needed */
 }
 
 .test {
