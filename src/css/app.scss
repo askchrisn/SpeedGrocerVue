@@ -1,11 +1,20 @@
 // app global css in SCSS form
 
+.m1 { margin: 1rem; }
 .ml1 { margin-left: 1rem; }
 .mr1 { margin-right: 1rem; }
 .mb1 { margin-bottom: 1rem; }
 .mt1 { margin-top: 1rem; }
 .mx1 { margin-left: 1rem; margin-right: 1rem; }
 .my1 { margin-top: 1rem; margin-bottom: 1rem; }
+
+.p1 { padding: 1rem; }
+.pl1 { padding-left: 1rem; }
+.pr1 { padding-right: 1rem; }
+.pb1 { padding-bottom: 1rem; }
+.pt1 { padding-top: 1rem; }
+.px1 { padding-left: 1rem; padding-right: 1rem; }
+.py1 { padding-top: 1rem; padding-bottom: 1rem; }
 
 h1, h2, h3, h4 {
     line-height: 1;
@@ -37,4 +46,13 @@ h1, h2, h3, h4 {
     flex-direction: column;
     height: 100vh;
     padding: 2rem;
+}
+
+.foreground {
+    background-color: $foreground;
+}
+
+.test {
+    color: green;
+    background-color: red;
 }

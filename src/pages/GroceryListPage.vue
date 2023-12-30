@@ -23,6 +23,13 @@
                 </q-item-section>
             </q-item>
         </q-virtual-scroll>
+
+        <!-- TEST CODE -->
+        <div class="foreground flex-row p1">
+            <q-select class="flex-grow" filled v-model="model" label="Location" :options="stringOptions" style="width: 250px" behavior="dialog"/>
+            <q-btn color="primary" class="ml1" @click="saveGroceryList()">Start Shopping</q-btn>
+        </div>
+        <!-- END TEST CODE -->
     </div>
 </template>
 
@@ -40,6 +47,13 @@ const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const newItemName = ref("")
+
+// TEST CODE
+let model = ref()
+const stringOptions = [
+  'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+]
+// END TEST CODE
 
 const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
