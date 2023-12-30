@@ -36,8 +36,8 @@
             <q-select class="flex-grow" filled v-model="selectedLocation" label="Location" :options="locationOptions" style="width: 250px" behavior="dialog"/>
             <InputBox v-model="addedLocation" @onAdded="handleAddedLocation" label="Add" title="Add a location"/>
             
-            <q-btn color="primary" class="ml1" @click="saveGroceryList()">Start Shopping</q-btn>
         </div>
+        <q-btn color="primary" class="ml1" @click="saveGroceryList()">Start Shopping</q-btn>
         <!-- END TEST CODE -->
     </div>
 </template>
