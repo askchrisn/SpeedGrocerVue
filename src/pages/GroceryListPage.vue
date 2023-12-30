@@ -31,7 +31,7 @@
         <!-- TEST CODE -->
         <div class="flex-row p1">
             <q-select class="flex-grow" filled v-model="selectedStore" label="Store" :options="storeOptions" style="width: 250px" behavior="dialog"/>
-            <InputBox v-model="addedStore" @onAdded="handleAddedStore" label="Add" title="Add a store"/>
+            <InputBox class="mr1" v-model="addedStore" @onAdded="handleAddedStore" label="Add" title="Add a store"/>
 
             <q-select class="flex-grow" filled v-model="selectedLocation" label="Location" :options="locationOptions" style="width: 250px" behavior="dialog"/>
             <InputBox v-model="addedLocation" @onAdded="handleAddedLocation" label="Add" title="Add a location"/>
