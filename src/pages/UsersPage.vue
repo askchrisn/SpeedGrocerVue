@@ -69,7 +69,7 @@ function addUser() {
             return
         }
 
-        groceryList.addUser(email)
+        groceryList.addUser(userInfo.Email)
         newUserEmail.value = ""
         saveGroceryList()
     }

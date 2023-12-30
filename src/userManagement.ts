@@ -14,9 +14,12 @@ const listener = attachEvent("Users", (snapshot) => {
 
 export function getUserInfo(email: string): UserInfo | null {
     var emailKey = adjustEmail(email);
+    var lowerEmailKey = emailKey.toLowerCase();
 
-    if (emailKey in allUsers) {
-        return allUsers[emailKey] as UserInfo;
+    for (var key in allUsers) {
+        if (key.toLowerCase() === lowerEmailKey) {
+            return allUsers[key] as UserInfo;
+        }
     }
 
     return null;
