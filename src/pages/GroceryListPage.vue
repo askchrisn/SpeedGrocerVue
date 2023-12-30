@@ -1,6 +1,9 @@
 <template>
     <div class="main">
-        <q-btn class="mb1" to="/users">Manage Users</q-btn>
+        <div class="flex-row mb1">
+            <q-btn color="primary" to="/">Back</q-btn>
+            <q-btn class="flex-grow ml1" to="/users">Manage Users</q-btn>
+        </div>
         <h1>{{ groceryList.Name }}</h1>
         <div class="flex-row mb1">
             <q-input class="flex-grow" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
