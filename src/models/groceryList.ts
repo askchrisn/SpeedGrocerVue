@@ -17,16 +17,21 @@ export default class GroceryList {
 
         if (existingItem == null) {
             this.Items.push(newItem)
+            this.updateItemHistory(newItem.ItemName, 1)
         }
         else {
             existingItem.Quantity += newItem.Quantity
         }
     }
 
-    removeItem(itemName: string) {
+    removeItem(itemName: string, decrementItemHistory: bool = false) {
         const index = this.Items.map(function(item) { return item.ItemName; }).indexOf(itemName)
         if (index !== -1) {
-        this.Items.splice(index, 1)
+            this.Items.splice(index, 1)
+
+            if (decrementItemHistory ) {
+                this.updateItemHistory(itemName, -1)
+            }
         }
     }
 
@@ -51,6 +56,41 @@ export default class GroceryList {
         }
 
         return false;
+    }
+
+    hasItem(itemName: string) {
+        for (var item of this.Items) {
+            if (item.ItemName.toLowerCase() === itemName.toLowerCase()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    getItemHistoryByFrequency() {
+        // Create an array of items and their corresponding counts
+        const itemsWithCounts: { name: string; count: number }[] = Object.entries(
+          this.ItemHistory
+        ).map(([name, count]) => ({ name, count }));
+    
+        // Sort the array based on the count in descending order
+        itemsWithCounts.sort((a, b) => b.count - a.count);
+    
+        // Extract and return only the item names in the final list
+        const sortedItemNames: string[] = itemsWithCounts.map((item) => item.name);
+    
+        return sortedItemNames;
+    }
+
+    private updateItemHistory(itemName: string, value: int) {
+        if (!itemName in this.ItemHistory || isNaN(this.ItemHistory[itemName])) {
+            this.ItemHistory[itemName] = 0
+        }
+
+        if (this.ItemHistory[itemName] + value >= 0) {
+            this.ItemHistory[itemName] += value
+        }
     }
 
     static fromObject(obj: any) : GroceryList {
