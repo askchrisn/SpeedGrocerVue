@@ -1,13 +1,16 @@
 <template>
     <div class="main">
-        <q-btn @click="tryLeaveList()">Leave List</q-btn>
-        <div class="input-container">
-            <q-input class="input" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input>
-            <q-btn class="primary" @click="addUser()">+</q-btn>
+        <div class="flex-row mb1">
+            <q-btn color="primary" @click="router.back()">Back</q-btn>
+            <q-btn class="flex-grow ml1" @click="tryLeaveList()">Leave List</q-btn>
+        </div>
+        <div class="flex-row">
+            <q-input class="flex-grow mr1" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input>
+            <q-btn color="primary" @click="addUser()">+</q-btn>
         </div>
       
         <q-virtual-scroll
-            class="dynamic-max-height"
+            class="flex-grow"
             :items="users"
             separator
             v-slot="{ item, index }"
@@ -96,32 +99,6 @@ function saveGroceryList() {
 </script>
   
 <style scoped>
-
-.main {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 2rem;
-}
-.input-container {
-    display: flex;
-    align-items: center;
-}
-.input {
-    flex: 1; /* This makes the input take up the remaining space */
-    margin-right: 8px; /* Adjust margin as needed */
-}
-.test {
-    display: flex;
-    flex-direction: column;
-}
-.q-btn {
-    margin: 1rem;
-}
-.dynamic-max-height {
-    flex: 1;
-    overflow-y: auto; /* Add scroll bar if the content exceeds the max height */
-}
 
 </style>
   
