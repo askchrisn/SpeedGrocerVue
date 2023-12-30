@@ -27,6 +27,7 @@
             </q-item>
         </q-virtual-scroll>
 
+        <q-btn class="primary m1" to="/itemhistory">Item History</q-btn>
         <!-- TEST CODE -->
         <div class="foreground flex-row p1">
             <q-select class="flex-grow" filled v-model="model" label="Location" :options="stringOptions" style="width: 250px" behavior="dialog"/>
