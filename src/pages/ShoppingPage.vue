@@ -3,10 +3,11 @@
         <div class="flex-row mb1">
             <q-btn color="primary" to="/list">Back</q-btn>
         </div>
-        <div class="temp">
+        <div class="lists-container">
             <div class="half flex-column">
                 <q-label class="text-horizontal-center">Aisle 1</q-label>
                 <q-virtual-scroll
+                    class="flex-grow"
                     :items="groceryList.Items"
                     separator
                     v-slot="{ item, index }"
@@ -25,6 +26,7 @@
             <div class="half flex-column">
                 <q-label class="text-horizontal-center">Misc</q-label>
                 <q-virtual-scroll
+                    class="flex-grow"
                     :items="groceryList.Items"
                     separator
                     v-slot="{ item, index }"
@@ -83,20 +85,12 @@ function saveGroceryList() {
   
 <style scoped>
 
-h1 {
-    margin: 0;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    font-weight: bolder;
-}
-.main {
-    overflow: hidden;
-}
 .half {
     height: 50%;
 }
-.temp {
+.lists-container {
     flex-grow: 1;
+    overflow: auto
 }
 
 </style>
