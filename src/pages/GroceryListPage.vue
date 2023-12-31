@@ -16,7 +16,7 @@
             separator
             v-slot="{ item, index }"
             >
-            <q-item class="q-my-sm" clickable v-ripple @click="tryDeleteItem(item.ItemName)">
+            <q-item clickable v-ripple @click="tryDeleteItem(item.ItemName)">
                 <q-item-section>
                     <q-item-label>{{ item.ItemName + (item.Quantity > 1 ? " x " + item.Quantity : "") }}</q-item-label>
                 </q-item-section>

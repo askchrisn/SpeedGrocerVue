@@ -13,7 +13,7 @@
       separator
       v-slot="{ item, index }"
       >
-        <q-item class="q-my-sm" clickable v-ripple @click="groceryListKeyStore.setKey(item[0])" to="/list">
+        <q-item clickable v-ripple @click="groceryListKeyStore.setKey(item[0])" to="/list">
           <q-item-section>
             <q-item-label>{{ item[1].Name }}</q-item-label>
           </q-item-section>

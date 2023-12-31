@@ -11,7 +11,7 @@
             separator
             v-slot="{ item, index }"
             >
-            <q-item class="q-my-sm" :class="{ 'highlighted-item': groceryList.hasItem(item) }" clickable v-ripple @click="clickedItem(item)">
+            <q-item :class="{ 'highlighted-item': groceryList.hasItem(item) }" clickable v-ripple @click="clickedItem(item)">
                 <q-item-section>
                     <q-item-label>{{ item }}</q-item-label>
                 </q-item-section>
