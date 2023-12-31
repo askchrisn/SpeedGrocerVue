@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import GroceryList from 'src/models/groceryList';
 import Store from 'src/models/store';
 import Item from 'src/models/item';
@@ -31,6 +32,7 @@ import { capitalizeAndTrimAllWordsInString } from '../utils/helpers'
 
 const authStore = useAuthStore()
 const quasar = useQuasar()
+const router = useRouter();
 const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 
@@ -100,9 +102,10 @@ function useStore() {
         pushDb("Stores", store)
         Notify.create({ type: 'positive', message: "Saved new store!" })
     }
-    else {
-        // TODO save the store 'key' and navigate to the shopping page
-    }
+
+    // TODO store store key (yes, you read that right)
+
+    router.push('/shopping');
 }
 
 const handleAddedStore = () => {

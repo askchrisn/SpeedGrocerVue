@@ -22,6 +22,10 @@ h1, h2, h3, h4 {
     line-height: 1;
 }
 
+.h50 {
+    height: 50%
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -35,6 +39,10 @@ h1, h2, h3, h4 {
 
 .horizontal-center {
     justify-content: center;
+}
+
+.text-horizontal-center {
+    text-align: center;
 }
 
 .flex-grow {
