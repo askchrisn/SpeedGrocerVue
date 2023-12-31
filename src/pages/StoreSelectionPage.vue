@@ -5,7 +5,7 @@
         </div>
         <div class="flex-grow">
             <div class="flex-row p1">
-                <q-select class="flex-grow" filled v-model="selectedStore" @newValue="console.log('ayy')" label="Store" :options="storeOptions" style="width: 250px" behavior="dialog"/>
+                <q-select class="flex-grow" filled v-model="selectedStore" @update:modelValue="selectedStoreChanged" label="Store" :options="storeOptions" style="width: 250px" behavior="dialog"/>
                 <InputBox class="mr1" v-model="addedStore" @onAdded="handleAddedStore" label="Add" title="Add a store"/>
             </div>
             <div class="flex-row p1">
@@ -49,7 +49,6 @@ const listener = attachEvent("Stores", (snapshot) => {
     var updatedStoreNameLocationMap: {[key: string]: string[]} = {}
     for (let key in snapshot) {
         var store = Store.fromObject(snapshot[key])
-        console.log(store)
         if (!(store.Name in updatedStoreNameLocationMap)) {
             updatedStoreNameLocationMap[store.Name] = []
         }
@@ -62,6 +61,17 @@ const listener = attachEvent("Stores", (snapshot) => {
     storeNameLocationMap.value = updatedStoreNameLocationMap
     storeOptions.value = Object.keys(storeNameLocationMap.value)
 });
+
+function selectedStoreChanged() {
+    if (selectedStore.value in storeNameLocationMap.value) {
+        locationOptions.value = storeNameLocationMap.value[selectedStore.value]
+    }
+    else {
+        locationOptions.value = []
+    }
+
+    selectedLocation.value = ""
+}
 
 const handleAddedStore = () => {
     addedStore.value = capitalizeAndTrimAllWordsInString(addedStore.value);
@@ -79,7 +89,7 @@ const handleAddedLocation = () => {
     addedLocation.value = capitalizeAndTrimAllWordsInString(addedLocation.value);
     var isNew = addedLocation.value.length > 0 && !locationOptions.value.includes(addedLocation.value); 
 
-    if(isNew) {
+    if (isNew) {
         Notify.create({ type: 'positive', message: "Added '" + addedStore.value + "' to stores" })
         locationOptions.value.push(addedLocation.value);
         selectedLocation.value = addedLocation.value;
