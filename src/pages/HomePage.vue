@@ -39,7 +39,7 @@ const groceryListKeyStore = useGroceryListKeyStore()
 const groceryLists = ref<Array<[string, GroceryList]>>([])
 const newListName = ref("")
 
-attachEvent("GroceryLists", (snapshot) => {
+const listener = attachEvent("GroceryLists", (snapshot) => {
   var updatedGroceryLists: Array<[string, GroceryList]> = []
   for (let key in snapshot) {
     var gl = GroceryList.fromObject(snapshot[key])
