@@ -59,7 +59,6 @@ const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const newItemName = ref("")
 
-
 // START OF STORE/LOCATION CODE
 
 const storeOptions = ref([
