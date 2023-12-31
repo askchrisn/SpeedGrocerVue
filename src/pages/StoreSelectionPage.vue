@@ -8,7 +8,7 @@
                 <q-select class="flex-grow" filled v-model="selectedStore" @update:modelValue="selectedStoreChanged" label="Store" :options="storeOptions" style="width: 250px" behavior="dialog"/>
                 <InputBox class="mr1" v-model="addedStore" @onAdded="handleAddedStore" label="Add" title="Add a store"/>
             </div>
-            <div class="flex-row p1">
+            <div v-if="locationOptions.length > 0 || addedStoreName" class="flex-row p1">
                 <q-select class="flex-grow" filled v-model="selectedLocation" label="Location" :options="locationOptions" style="width: 250px" behavior="dialog"/>
                 <InputBox v-model="addedLocation" @onAdded="handleAddedLocation" label="Add" title="Add a location"/>
             </div>
@@ -45,6 +45,8 @@ const addedStore = ref('')
 
 const selectedLocation = ref('')
 const selectedStore = ref('')
+
+const addedStoreName = ref(false)
 
 const listener = attachEvent("Stores", (snapshot) => {
     var updatedStoreNameLocationMap: {[key: string]: string[]} = {}
@@ -96,6 +98,7 @@ function useStore() {
         store.Location = selectedLocation.value
         store.generateAisles()
         pushDb("Stores", store)
+        Notify.create({ type: 'positive', message: "Saved new store!" })
     }
     else {
         // TODO save the store 'key' and navigate to the shopping page
@@ -107,10 +110,12 @@ const handleAddedStore = () => {
     var isNew = addedStore.value.length > 0 && !storeOptions.value.includes(addedStore.value); 
 
     if(isNew) {
+        addedStoreName.value = true
         Notify.create({ type: 'positive', message: "Added '" + addedStore.value + "' to stores" })
         storeOptions.value.push(addedStore.value);
         selectedStore.value = addedStore.value;
         addedStore.value  = '';
+        locationOptions.value = []
     } 
 };
 
@@ -119,7 +124,7 @@ const handleAddedLocation = () => {
     var isNew = addedLocation.value.length > 0 && !locationOptions.value.includes(addedLocation.value); 
 
     if (isNew) {
-        Notify.create({ type: 'positive', message: "Added '" + addedStore.value + "' to stores" })
+        Notify.create({ type: 'positive', message: "Added '" + addedLocation.value + "' to stores" })
         locationOptions.value.push(addedLocation.value);
         selectedLocation.value = addedLocation.value;
         addedLocation.value  = '';
