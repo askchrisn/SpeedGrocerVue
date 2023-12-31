@@ -4,6 +4,7 @@ import LoginPage from '../pages/LoginPage.vue';
 import SignUpPage from 'src/pages/SignUpPage.vue';
 import UsersPage from 'src/pages/UsersPage.vue';
 import ItemHistoryPage from 'src/pages/ItemHistoryPage.vue';
+import StoreSelectionPage from 'src/pages/StoreSelectionPage.vue';
 import ZNotFoundPage from '../pages/ZNotFoundPage.vue';
 import GroceryListPage from '../pages/GroceryListPage.vue';
 
@@ -32,6 +33,10 @@ const routes: RouteRecordRaw[] = [
   { 
     path: '/itemhistory', 
     component: ItemHistoryPage, 
+  },
+  { 
+    path: '/storeselection', 
+    component: StoreSelectionPage, 
   },
   { 
     path: '/:catchAll(.*)*', 

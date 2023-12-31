@@ -27,18 +27,8 @@
             </q-item>
         </q-virtual-scroll>
 
-        <q-btn class="primary m1" to="/itemhistory">Item History</q-btn>
-        <!-- TEST CODE -->
-        <div class="flex-row p1">
-            <q-select class="flex-grow" filled v-model="selectedStore" label="Store" :options="storeOptions" style="width: 250px" behavior="dialog"/>
-            <InputBox class="mr1" v-model="addedStore" @onAdded="handleAddedStore" label="Add" title="Add a store"/>
-
-            <q-select class="flex-grow" filled v-model="selectedLocation" label="Location" :options="locationOptions" style="width: 250px" behavior="dialog"/>
-            <InputBox v-model="addedLocation" @onAdded="handleAddedLocation" label="Add" title="Add a location"/>
-            
-        </div>
-        <q-btn color="primary" class="ml1" @click="saveGroceryList()">Start Shopping</q-btn>
-        <!-- END TEST CODE -->
+        <q-btn class="m1" to="/itemhistory">Item History</q-btn>
+        <q-btn color="primary" class="mx1" to="/storeselection">Start Shopping</q-btn>
     </div>
 </template>
 
@@ -50,57 +40,12 @@ import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { Notify, useQuasar } from 'quasar'
-import InputBox from 'src/components/InputBox.vue'
-import { capitalizeAndTrimAllWordsInString } from '../utils/helpers'
 
 const authStore = useAuthStore()
 const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const newItemName = ref("")
-
-
-// START OF STORE/LOCATION CODE
-
-const storeOptions = ref([
-    'Target', 'Walmart', 'Market Basket', 'Stop & Shop', 'Whole Foods', 'Trader Joe\'s', 'BJ\'s', 'Costco', 'Amazon', 'Other'
-])
-
-const locationOptions = ref([
-    'Danvers', 'Middleton', 'Woburn', 'Lowell'
-])
-
-let addedLocation = ref('')
-let addedStore = ref('')
-
-let selectedLocation = ref('')
-let selectedStore = ref('')
-
-const handleAddedStore = () => {
-    addedStore.value = capitalizeAndTrimAllWordsInString(addedStore.value);
-    var isNew = addedStore.value.length > 0 && !storeOptions.value.includes(addedStore.value); 
-
-    if(isNew) {
-        Notify.create({ type: 'positive', message: "Added '" + addedStore.value + "' to stores" })
-        storeOptions.value.push(addedStore.value);
-        selectedStore.value = addedStore.value;
-        addedStore.value  = '';
-    } 
-};
-
-const handleAddedLocation = () => {    
-    addedLocation.value = capitalizeAndTrimAllWordsInString(addedLocation.value);
-    var isNew = addedLocation.value.length > 0 && !locationOptions.value.includes(addedLocation.value); 
-
-    if(isNew) {
-        Notify.create({ type: 'positive', message: "Added '" + addedStore.value + "' to stores" })
-        locationOptions.value.push(addedLocation.value);
-        selectedLocation.value = addedLocation.value;
-        addedLocation.value  = '';
-    } 
-};
-
-// END OF STORE/LOCATION CODE
 
 const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
