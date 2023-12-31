@@ -15,7 +15,7 @@
             separator
             v-slot="{ item, index }"
             >
-            <q-item class="q-my-sm" clickable v-ripple>
+            <q-item clickable v-ripple>
                 <q-item-section>
                     <q-item-label>{{ item.Nickname }}</q-item-label>
                 </q-item-section>
