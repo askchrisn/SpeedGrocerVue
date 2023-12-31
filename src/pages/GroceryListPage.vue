@@ -9,7 +9,7 @@
             <q-input class="flex-grow" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
             <q-btn color="primary" class="ml1" @click="createNewItem()">+</q-btn>
         </div>
-      
+
         <q-virtual-scroll
             class="flex-grow"
             :items="groceryList.Items"
@@ -50,7 +50,7 @@ const newItemName = ref("")
 const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
 });
-  
+
 function createNewItem() {
     var itemName = newItemName.value.trim()
     if (itemName.length > 0) {
@@ -88,7 +88,7 @@ function saveGroceryList() {
 }
 
 </script>
-  
+
 <style scoped>
 
 h1 {
@@ -99,4 +99,3 @@ h1 {
 }
 
 </style>
-  
