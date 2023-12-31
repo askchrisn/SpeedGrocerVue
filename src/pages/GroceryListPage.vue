@@ -59,7 +59,7 @@ const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const newItemName = ref("")
 
-// START OF STORE/LOCATION ANOTHER TEST
+// START OF STORE/LOCATION
 
 const storeOptions = ref([
     'Target', 'Walmart', 'Market Basket', 'Stop & Shop', 'Whole Foods', 'Trader Joe\'s', 'BJ\'s', 'Costco', 'Amazon', 'Other'
