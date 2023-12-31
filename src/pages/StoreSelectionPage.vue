@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="flex-row mb1">
-            <q-btn color="primary" to="/">Back</q-btn>
+            <q-btn color="primary" to="/list">Back</q-btn>
         </div>
         <div class="flex-grow">
             <div class="flex-row p1">
