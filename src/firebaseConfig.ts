@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set, push, update } from 'firebase/database';
+import { getDatabase, ref, onValue, set, push, update, child, get } from 'firebase/database';
 import { getAuth } from 'firebase/auth'
 import GroceryList from "./models/groceryList";
 
@@ -25,6 +25,17 @@ export function attachEvent(key: string, handler: (a: any) => void) {
           handler(snapshot.val());
       }
   });
+}
+
+export async function getDb(key: string) {
+  var dbRef = ref(db, key);
+  const snapshot = await get(dbRef);
+
+  if (snapshot.exists()) {
+    return snapshot.val();
+  } else {
+    return null;
+  }
 }
 
 export function pushDb(refUrl: string, obj: any) {

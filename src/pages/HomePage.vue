@@ -9,7 +9,7 @@
 
     <q-virtual-scroll
       class="flex-grow"
-      :items="groceryLists"
+      :items="myGroceryLists"
       separator
       v-slot="{ item, index }"
       >
@@ -27,29 +27,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useAuthStore } from 'src/stores/authStore';
 import GroceryList from 'src/models/groceryList';
-import { attachEvent, pushDb } from 'src/firebaseConfig'
+import { pushDb } from 'src/firebaseConfig'
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
+import { getAUsersLists } from 'src/groceryListsManagement';
 
 const authStore = useAuthStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 
-const groceryLists = ref<Array<[string, GroceryList]>>([])
+const myGroceryLists = computed(() => getAUsersLists(authStore.userEmail));
+
 const newListName = ref("")
-
-const listener = attachEvent("GroceryLists", (snapshot) => {
-  var updatedGroceryLists: Array<[string, GroceryList]> = []
-  for (let key in snapshot) {
-    var gl = GroceryList.fromObject(snapshot[key])
-    if (gl.containsUser(authStore.userEmail)) {
-      updatedGroceryLists.push([key, gl])
-    }
-  }
-
-  groceryLists.value = updatedGroceryLists
-});
 
 function logout() {
   authStore.signOut()
