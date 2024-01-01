@@ -63,13 +63,12 @@ const listener1 = attachEvent("Stores", (snapshot) => {
         if (updatedStoreNameLocationMap[store.Name].indexOf(store.Location) == -1) {
             updatedStoreNameLocationMap[store.Name].push(store.Location)
         }
-
-        checkRecentStore()
     }
 
     storeNameLocationMap.value = updatedStoreNameLocationMap
     storeOptions.value = Object.keys(storeNameLocationMap.value)
     storesKeys.value = updatedStores
+    checkRecentStore()
 });
 
 const listener2 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
