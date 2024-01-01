@@ -31,7 +31,7 @@
                     separator
                     v-slot="{ item, index }"
                     >
-                    <q-item clickable v-ripple @click="tryDeleteItem(item.ItemName)">
+                    <q-item clickable v-ripple @click="tryDeleteItemAndRemeberLocation(item.ItemName)">
                         <q-item-section>
                             <q-item-label>{{ item.ItemName + (item.Quantity > 1 ? " x " + item.Quantity : "") }}</q-item-label>
                         </q-item-section>
@@ -44,24 +44,36 @@
             </div>
         </div>
         <q-btn color="primary" class="mx1" @click="findNextAisle(true)">Next Aisle</q-btn>
+        <q-dialog v-model="showCard" persistent>
+            <q-card style="min-width: 350px">
+                <q-card-section>
+                    <div class="text-h6">Where did you find '{{ removedItem }}'?</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                    <q-select class="flex-grow" filled v-model="selectedAisle" label="Aisle" :options="store.Aisles" style="width: 250px" behavior="dialog"/>
+                </q-card-section>
+
+                <q-card-actions align="right" class="text-primary">
+                    <q-btn flat label="Cancel" v-close-popup />
+                    <q-btn flat label="Save" v-close-popup @click="rememberItem"/>
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import GroceryList from 'src/models/groceryList';
 import Store from 'src/models/store';
 import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
-import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useStoreKeyStore } from 'src/stores/storeKeyStore';
-import { Notify, useQuasar } from 'quasar'
+import { usePopupStore } from 'src/stores/popupStore';
 
-const authStore = useAuthStore()
-const quasar = useQuasar()
-const router = useRouter();
+const popupStore = usePopupStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 const storeKeyStore = useStoreKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
@@ -69,6 +81,9 @@ const store = ref<Store>(new Store())
 const aisleItems = ref<Array<Item>>([])
 const miscItems = ref<Array<Item>>([])
 const currentAisle = ref("")
+const selectedAisle = ref("")
+const removedItem = ref("")
+const showCard = ref(false);
 
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
@@ -89,6 +104,20 @@ const listener2 = attachEvent("Stores/" + storeKeyStore.key, (snapshot) => {
         updateLists()
     }
 });
+
+function rememberItem() {
+    if (removedItem.value !== "" && store.value.Aisles.indexOf(selectedAisle.value) != -1) {
+        store.value.rememberItem(removedItem.value, selectedAisle.value)
+        saveStore()
+        popupStore.displayPopup({ type: 'positive', message: "Remembering item '" + removedItem.value + "' is in '" + selectedAisle.value + "'" })
+    }
+    else {
+        popupStore.displayPopup({ type: 'negative', message: "Error encountered when remembering item '" + removedItem.value + "' in '" + selectedAisle.value + "'" })
+    }
+
+    removedItem.value = ""
+    selectedAisle.value = ""
+}
 
 function updateLists() {
     var tempAisleItems: Array<Item> = []
@@ -132,12 +161,27 @@ function findNextAisle(skipCurrent: bool = true) {
 }
 
 function tryDeleteItem(itemName: string) {
-    quasar.notify({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]})
+    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]})
 }
 
 function deleteItem(itemName: string) {
     groceryList.value.removeItem(itemName)
     saveGroceryList()
+}
+
+function tryDeleteItemAndRemeberLocation(itemName: string) {
+    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItemAndRemeberLocation(itemName) }}, {label: 'No', color: 'white'}]})
+}
+
+function deleteItemAndRemeberLocation(itemName: string) {
+    groceryList.value.removeItem(itemName)
+    saveGroceryList()
+    removedItem.value = itemName
+    showCard.value = true
+}
+
+function saveStore() {
+    updateDb("Stores/" + storeKeyStore.key, store.value)
 }
 
 function saveGroceryList() {

@@ -14,8 +14,8 @@ export default class Store {
         return ""
     }
 
-    rememberItem(item: Item, aisle: string) {
-        this.ItemLocations[item.ItemName.toLowerCase()] = aisle
+    rememberItem(itemName: string, aisle: string) {
+        this.ItemLocations[itemName.toLowerCase()] = aisle
     }
 
     generateAisles() {
