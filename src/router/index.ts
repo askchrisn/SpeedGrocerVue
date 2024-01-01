@@ -11,6 +11,7 @@ import { useAuthStore } from '../stores/authStore';
 import routes from './routes';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'src/firebaseConfig';
+import { usePopupStore } from 'src/stores/popupStore';
 
 export default route(function () {
   const createHistory = process.env.SERVER
@@ -46,6 +47,8 @@ export default route(function () {
 
     const requiresAuth = to.meta.requiresAuth;
     const isAuthenticated = authStore.isAuthenticated;
+
+    usePopupStore().removePopup();
 
     if (requiresAuth && !isAuthenticated) {
       next('/login');

@@ -40,10 +40,12 @@ import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { Notify, QNotifyUpdateOptions, useQuasar } from 'quasar'
+import { usePopupStore } from 'src/stores/popupStore';
 
 const authStore = useAuthStore()
 const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
+const popupStore = usePopupStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const newItemName = ref("")
 
@@ -77,8 +79,8 @@ function createNewItem() {
 }
 
 function tryDeleteItem(itemName: string) {
-    removeCurrentlyShowingPopup?.();
-    removeCurrentlyShowingPopup = quasar.notify({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]})
+    popupStore.removePopup();
+    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]});
 }
 
 function deleteItem(itemName: string) {
