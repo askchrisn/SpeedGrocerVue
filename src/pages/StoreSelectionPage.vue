@@ -23,14 +23,13 @@ import { useRouter } from 'vue-router';
 import GroceryList from 'src/models/groceryList';
 import Store from 'src/models/store';
 import Item from 'src/models/item';
-import { attachEvent, pushDb } from 'src/firebaseConfig'
+import { attachEvent, pushDb, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useStoreKeyStore } from 'src/stores/storeKeyStore';
 import { Notify, useQuasar } from 'quasar'
 import InputBox from 'src/components/InputBox.vue'
 import { capitalizeAndTrimAllWordsInString } from '../utils/helpers'
-import { SpawnSyncOptionsWithStringEncoding } from 'child_process';
 
 const authStore = useAuthStore()
 const quasar = useQuasar()
@@ -53,7 +52,7 @@ const selectedStore = ref('')
 
 const addedStoreName = ref(false)
 
-const listener = attachEvent("Stores", (snapshot) => {
+const listener1 = attachEvent("Stores", (snapshot) => {
     var updatedStoreNameLocationMap: {[key: string]: string[]} = {}
     var updatedStores: Array<[string,Store]> = []
 
@@ -67,12 +66,31 @@ const listener = attachEvent("Stores", (snapshot) => {
         if (updatedStoreNameLocationMap[store.Name].indexOf(store.Location) == -1) {
             updatedStoreNameLocationMap[store.Name].push(store.Location)
         }
+
+        checkRecentStore()
     }
 
     storeNameLocationMap.value = updatedStoreNameLocationMap
     storeOptions.value = Object.keys(storeNameLocationMap.value)
     storesKeys.value = updatedStores
 });
+
+const listener2 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
+    groceryList.value = GroceryList.fromObject(snapshot)
+    checkRecentStore()
+});
+
+function checkRecentStore() {
+    if (groceryList.value == null || groceryList.value.RecentStore === "" || selectedStore.value !== "") return
+
+    for (var kvp of storesKeys.value) {
+        if (groceryList.value.RecentStore === kvp[0]) {
+            selectedStore.value = kvp[1].Name
+            selectedStoreChanged()
+            selectedLocation.value = kvp[1].Location
+        }
+    }
+}
 
 function selectedStoreChanged() {
     if (selectedStore.value in storeNameLocationMap.value) {
@@ -113,6 +131,10 @@ function useStore() {
     }
 
     storeKeyStore.setKey(key)
+    if (groceryList.value != null) {
+        groceryList.value.RecentStore = key
+        saveGroceryList()
+    }
 
     router.push('/shopping');
 }
@@ -142,6 +164,10 @@ const handleAddedLocation = () => {
         addedLocation.value  = '';
     } 
 };
+
+function saveGroceryList() {
+    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
+}
 
 </script>
   

@@ -2,6 +2,7 @@ import Item from './item'
 
 export default class GroceryList {
     Name: string = ""
+    RecentStore: string = ""
     Items: Item[] = []
     ItemHistory: { [itemName: string] : number } = {}
     Users: string[] = []
@@ -96,9 +97,18 @@ export default class GroceryList {
     static fromObject(obj: any) : GroceryList {
         var gl = new GroceryList()
         gl.Name = obj.Name
+        gl.RecentStore = obj.RecentStore
         gl.Items = obj.Items
         gl.ItemHistory = obj.ItemHistory
         gl.Users = obj.Users
+
+        if (gl.Name == null) {
+            gl.Name = ""
+        }
+
+        if (gl.RecentStore == null) {
+            gl.RecentStore = ""
+        }
 
         if (gl.Items == null) {
             gl.Items = []
