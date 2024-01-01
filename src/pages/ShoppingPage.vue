@@ -4,7 +4,7 @@
             <q-btn color="primary" to="/list">Back</q-btn>
         </div>
         <div class="lists-container">
-            <div class="half flex-column">
+            <div class="flex-column" :class="{ 'half': miscItems.length > 0 }">
                 <q-label class="text-horizontal-center">{{ currentAisle }}</q-label>
                 <q-virtual-scroll
                     class="flex-grow"
@@ -23,7 +23,7 @@
                     </q-item>
                 </q-virtual-scroll>
             </div>
-            <div class="half flex-column">
+            <div class="half flex-column" v-if="miscItems.length > 0">
                 <q-label class="text-horizontal-center">Misc</q-label>
                 <q-virtual-scroll
                     class="flex-grow"
