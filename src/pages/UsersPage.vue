@@ -61,12 +61,12 @@ const authStore = useAuthStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 const newUserEmail = ref("")
 
-const groceryList = getList(groceryListKeyStore.key)
+const groceryList = getList(groceryListKeyStore.getKey())
 var usersOfList = computed(() => getUsersOnListToDisplay())
 var recommendedUsers = computed(() => getRecommendedsToDisplay())
 
 function getUsersOnListToDisplay() {
-    var people = getAllPeopleOnList(groceryListKeyStore.key)
+    var people = getAllPeopleOnList(groceryListKeyStore.getKey())
     return convertUserEmailsToUserInfos(people)
 }
 
@@ -127,7 +127,7 @@ function leaveList() {
         saveGroceryList()
     }
     else {
-        setDb("GroceryLists/" + groceryListKeyStore.key, null)
+        setDb("GroceryLists/" + groceryListKeyStore.getKey(), null)
     }
 
     groceryListKeyStore.clearKey()
@@ -135,7 +135,7 @@ function leaveList() {
 }
 
 function saveGroceryList() {
-    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList)
+    updateDb("GroceryLists/" + groceryListKeyStore.getKey(), groceryList)
 }
 
 function convertUserEmailsToUserInfos(users: string[]) {

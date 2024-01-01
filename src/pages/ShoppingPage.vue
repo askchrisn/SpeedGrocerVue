@@ -91,7 +91,7 @@ const selectedAisle = ref("")
 const removedItem = ref("")
 const showCard = ref(false);
 
-const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
+const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     var updatedGroceryList = GroceryList.fromObject(snapshot)
     if (router.currentRoute.value.path === "/shopping" && groceryList.value != null && groceryList.value.Name === updatedGroceryList.Name && groceryList.value.Items.length < updatedGroceryList.Items.length) {
         for (var item of updatedGroceryList.Items) {
@@ -107,7 +107,7 @@ const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapsh
     }
 });
 
-const listener2 = attachEvent("Stores/" + storeKeyStore.key, (snapshot) => {
+const listener2 = attachEvent("Stores/" + storeKeyStore.getKey(), (snapshot) => {
     store.value = Store.fromObject(snapshot)
     if (currentAisle.value === "" && store.value.Aisles.length > 0) {
         // Likely first time loading in
@@ -195,11 +195,11 @@ function deleteItemAndRemeberLocation(itemName: string) {
 }
 
 function saveStore() {
-    updateDb("Stores/" + storeKeyStore.key, store.value)
+    updateDb("Stores/" + storeKeyStore.getKey(), store.value)
 }
 
 function saveGroceryList() {
-    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
+    updateDb("GroceryLists/" + groceryListKeyStore.getKey(), groceryList.value)
 }
 
 </script>

@@ -47,7 +47,7 @@ const popupStore = usePopupStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const newItemName = ref("")
 
-const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
+const listener = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
 });
 
@@ -84,7 +84,7 @@ function deleteItem(itemName: string) {
 }
 
 function saveGroceryList() {
-    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
+    updateDb("GroceryLists/" + groceryListKeyStore.getKey(), groceryList.value)
 }
 
 </script>
