@@ -2,6 +2,10 @@
     <div class="main">
         <div class="flex-row mb1">
             <q-btn color="primary" to="/list">Back</q-btn>
+            <div class="flex-column px1">
+                <q-label class="store-name">{{ store.Name }}</q-label>
+                <q-label class="store-location">{{ store.Location }}</q-label>
+            </div>
         </div>
         <div class="lists-container">
             <div class="flex-column" :class="{ 'half': miscItems.length > 0 }" v-if="aisleItems.length > 0">
@@ -208,6 +212,13 @@ function saveGroceryList() {
 .lists-container {
     flex-grow: 1;
     overflow: auto
+}
+.store-name {
+    font-weight: bold;
+}
+.store-location {
+    font-style: italic
+    ;
 }
 
 </style>
