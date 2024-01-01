@@ -73,6 +73,9 @@ const currentAisle = ref("")
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
     updateLists()
+    if (aisleItems.value.length == 0) {
+        findNextAisle()
+    }
 });
 
 const listener2 = attachEvent("Stores/" + storeKeyStore.key, (snapshot) => {
