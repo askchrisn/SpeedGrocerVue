@@ -86,7 +86,15 @@ const removedItem = ref("")
 const showCard = ref(false);
 
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
-    groceryList.value = GroceryList.fromObject(snapshot)
+    var updatedGroceryList = GroceryList.fromObject(snapshot)
+    if (groceryList.value != null && groceryList.value.Name === updatedGroceryList.Name && groceryList.value.Items.length < updatedGroceryList.Items.length) {
+        for (var item of updatedGroceryList.Items) {
+            if (!groceryList.value.hasItem(item.ItemName)) {
+                popupStore.displayPopup({ type: 'positive', message: item.AdderName + " added " + item.ItemName })
+            }
+        }
+    }
+    groceryList.value = updatedGroceryList
     updateLists()
     if (aisleItems.value.length == 0) {
         findNextAisle()
