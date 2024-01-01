@@ -22,18 +22,15 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import GroceryList from 'src/models/groceryList';
 import Store from 'src/models/store';
-import Item from 'src/models/item';
 import { attachEvent, pushDb, updateDb } from 'src/firebaseConfig'
-import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useStoreKeyStore } from 'src/stores/storeKeyStore';
-import { Notify, useQuasar } from 'quasar'
 import InputBox from 'src/components/InputBox.vue'
 import { capitalizeAndTrimAllWordsInString } from '../utils/helpers'
+import { usePopupStore } from 'src/stores/popupStore';
 
-const authStore = useAuthStore()
-const quasar = useQuasar()
 const router = useRouter();
+const popupStore = usePopupStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 const storeKeyStore = useStoreKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
@@ -127,7 +124,7 @@ function useStore() {
         pushDb("Stores", store)
         // TODO, set key with newly created store
 
-        Notify.create({ type: 'positive', message: "Saved new store!" })
+        popupStore.displayPopup({ type: 'positive', message: "Saved new store!" })
     }
 
     storeKeyStore.setKey(key)
@@ -145,7 +142,7 @@ const handleAddedStore = () => {
 
     if(isNew) {
         addedStoreName.value = true
-        Notify.create({ type: 'positive', message: "Added '" + addedStore.value + "' to stores" })
+        popupStore.create({ type: 'positive', message: "Added '" + addedStore.value + "' to stores" })
         storeOptions.value.push(addedStore.value);
         selectedStore.value = addedStore.value;
         addedStore.value  = '';
@@ -158,7 +155,7 @@ const handleAddedLocation = () => {
     var isNew = addedLocation.value.length > 0 && !locationOptions.value.includes(addedLocation.value); 
 
     if (isNew) {
-        Notify.create({ type: 'positive', message: "Added '" + addedLocation.value + "' to stores" })
+        popupStore.displayPopup({ type: 'positive', message: "Added '" + addedLocation.value + "' to stores" })
         locationOptions.value.push(addedLocation.value);
         selectedLocation.value = addedLocation.value;
         addedLocation.value  = '';
