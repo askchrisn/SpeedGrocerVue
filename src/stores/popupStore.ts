@@ -8,6 +8,7 @@ export const usePopupStore = defineStore('popupStore',
   }),
   actions: {
     displayPopup(opts: string | QNotifyCreateOptions) {
+        this.popup();
         this.popup = Notify.create(opts);
     },
     removePopup() {
