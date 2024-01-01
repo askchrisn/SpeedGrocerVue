@@ -5,10 +5,10 @@
         </div>
         <div class="lists-container">
             <div class="half flex-column">
-                <q-label class="text-horizontal-center">Aisle 1</q-label>
+                <q-label class="text-horizontal-center">{{ currentAisle }}</q-label>
                 <q-virtual-scroll
                     class="flex-grow"
-                    :items="groceryList.Items"
+                    :items="aisleItems"
                     separator
                     v-slot="{ item, index }"
                     >
@@ -27,7 +27,7 @@
                 <q-label class="text-horizontal-center">Misc</q-label>
                 <q-virtual-scroll
                     class="flex-grow"
-                    :items="groceryList.Items"
+                    :items="miscItems"
                     separator
                     v-slot="{ item, index }"
                     >
@@ -43,7 +43,7 @@
                 </q-virtual-scroll>
             </div>
         </div>
-        <q-btn color="primary" class="mx1">Next Aisle</q-btn>
+        <q-btn color="primary" class="mx1" @click="findNextAisle(true)">Next Aisle</q-btn>
     </div>
 </template>
 
@@ -56,17 +56,77 @@ import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
+import { useStoreKeyStore } from 'src/stores/storeKeyStore';
 import { Notify, useQuasar } from 'quasar'
 
 const authStore = useAuthStore()
 const quasar = useQuasar()
 const router = useRouter();
 const groceryListKeyStore = useGroceryListKeyStore()
+const storeKeyStore = useStoreKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
+const store = ref<Store>(new Store())
+const aisleItems = ref<Array<Item>>([])
+const miscItems = ref<Array<Item>>([])
+const currentAisle = ref("")
 
-const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
+const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
+    updateLists()
 });
+
+const listener2 = attachEvent("Stores/" + storeKeyStore.key, (snapshot) => {
+    store.value = Store.fromObject(snapshot)
+    if (currentAisle.value === "" && store.value.Aisles.length > 0) {
+        // Likely first time loading in
+        currentAisle.value = store.value.Aisles[0]
+        findNextAisle(false)
+    }
+    else {
+        updateLists()
+    }
+});
+
+function updateLists() {
+    var tempAisleItems: Array<Item> = []
+    var tempMiscItems: Array<Item> = []
+    for (var item of groceryList.value.Items) {
+        var itemAisle = store.value.getAisle(item)
+        if (itemAisle == currentAisle.value) {
+            tempAisleItems.push(item)
+        }
+        else if (itemAisle === "") {
+            tempMiscItems.push(item)
+        }
+    }
+
+    aisleItems.value = tempAisleItems
+    miscItems.value = tempMiscItems
+}
+
+function findNextAisle(skipCurrent: bool = true) {
+    var aisles: Array<string> = []
+    
+    for (var item of groceryList.value.Items) {
+        var aisle = store.value.getAisle(item)
+        if (aisle != "") {
+            aisles.push(aisle)
+        }
+    }
+
+    var startIndex = (store.value.Aisles.indexOf(currentAisle.value) + (skipCurrent ? 1 : 0)) % store.value.Aisles.length
+    var index = startIndex
+    var foundItems = false
+
+    do {
+        var aisle = store.value.Aisles[index]
+        foundItems = aisles.indexOf(aisle) != -1
+        index = (index + 1) % store.value.Aisles.length
+    } while (!foundItems && index != startIndex)
+
+    currentAisle.value = aisle
+    updateLists()
+}
 
 function tryDeleteItem(itemName: string) {
     quasar.notify({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]})

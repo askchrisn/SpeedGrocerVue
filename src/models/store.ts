@@ -1,8 +1,22 @@
+import Item from './item'
+
 export default class Store {
     Name: string = ""
     Location: string = ""
     Aisles: string[] = []
     ItemLocations: { [itemName: string] : string } = {}
+
+    getAisle(item: Item) {
+        if (item.ItemName.toLowerCase() in this.ItemLocations) {
+            return this.ItemLocations[item.ItemName]
+        }
+
+        return ""
+    }
+
+    rememberItem(item: Item, aisle: string) {
+        this.ItemLocations[item.ItemName.toLowerCase()] = aisle
+    }
 
     generateAisles() {
         this.Aisles = [

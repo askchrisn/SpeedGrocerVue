@@ -26,21 +26,24 @@ import Item from 'src/models/item';
 import { attachEvent, pushDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
+import { useStoreKeyStore } from 'src/stores/storeKeyStore';
 import { Notify, useQuasar } from 'quasar'
 import InputBox from 'src/components/InputBox.vue'
 import { capitalizeAndTrimAllWordsInString } from '../utils/helpers'
+import { SpawnSyncOptionsWithStringEncoding } from 'child_process';
 
 const authStore = useAuthStore()
 const quasar = useQuasar()
 const router = useRouter();
 const groceryListKeyStore = useGroceryListKeyStore()
+const storeKeyStore = useStoreKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 
 const storeOptions = ref([])
 const locationOptions = ref([])
 
 const storeNameLocationMap = ref<{ [key: string]: string[] }>({})
-const stores = ref<Array<Store>>([])
+const storesKeys = ref<Array<[string, Store]>>([])
 
 const addedLocation = ref('')
 const addedStore = ref('')
@@ -52,11 +55,11 @@ const addedStoreName = ref(false)
 
 const listener = attachEvent("Stores", (snapshot) => {
     var updatedStoreNameLocationMap: {[key: string]: string[]} = {}
-    var updatedStores: Array<Store> = []
+    var updatedStores: Array<[string,Store]> = []
 
     for (let key in snapshot) {
         var store = Store.fromObject(snapshot[key])
-        updatedStores.push(store)
+        updatedStores.push([key,store])
         if (!(store.Name in updatedStoreNameLocationMap)) {
             updatedStoreNameLocationMap[store.Name] = []
         }
@@ -68,7 +71,7 @@ const listener = attachEvent("Stores", (snapshot) => {
 
     storeNameLocationMap.value = updatedStoreNameLocationMap
     storeOptions.value = Object.keys(storeNameLocationMap.value)
-    stores.value = updatedStores
+    storesKeys.value = updatedStores
 });
 
 function selectedStoreChanged() {
@@ -85,11 +88,14 @@ function selectedStoreChanged() {
 function useStore() {
     if (selectedStore.value.length == 0 || selectedLocation.value.length == 0) return
 
+    var key = ""
     var store: Store = null
 
-    for (var s of stores.value) {
+    for (var sKVP of storesKeys.value) {
+        var s = sKVP[1]
         if (s.Name === selectedStore.value && s.Location == selectedLocation.value) {
             store = s
+            key = sKVP[0]
             break
         }
     }
@@ -99,11 +105,14 @@ function useStore() {
         store.Name = selectedStore.value
         store.Location = selectedLocation.value
         store.generateAisles()
+
         pushDb("Stores", store)
+        // TODO, set key with newly created store
+
         Notify.create({ type: 'positive', message: "Saved new store!" })
     }
 
-    // TODO store store key (yes, you read that right)
+    storeKeyStore.setKey(key)
 
     router.push('/shopping');
 }
