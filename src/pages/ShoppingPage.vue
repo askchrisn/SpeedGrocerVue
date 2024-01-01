@@ -4,7 +4,7 @@
             <q-btn color="primary" to="/list">Back</q-btn>
         </div>
         <div class="lists-container">
-            <div class="flex-column" :class="{ 'half': miscItems.length > 0 }">
+            <div class="flex-column" :class="{ 'half': miscItems.length > 0 }" v-if="aisleItems.length > 0">
                 <q-label class="text-horizontal-center">{{ currentAisle }}</q-label>
                 <q-virtual-scroll
                     class="flex-grow"
@@ -23,7 +23,7 @@
                     </q-item>
                 </q-virtual-scroll>
             </div>
-            <div class="half flex-column" v-if="miscItems.length > 0">
+            <div class="flex-column" :class="{ 'half': aisleItems.length > 0 }" v-if="miscItems.length > 0">
                 <q-label class="text-horizontal-center">Misc</q-label>
                 <q-virtual-scroll
                     class="flex-grow"
@@ -65,6 +65,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import GroceryList from 'src/models/groceryList';
 import Store from 'src/models/store';
 import Item from 'src/models/item';
@@ -73,6 +74,7 @@ import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useStoreKeyStore } from 'src/stores/storeKeyStore';
 import { usePopupStore } from 'src/stores/popupStore';
 
+const router = useRouter();
 const popupStore = usePopupStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 const storeKeyStore = useStoreKeyStore()
@@ -87,7 +89,7 @@ const showCard = ref(false);
 
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
     var updatedGroceryList = GroceryList.fromObject(snapshot)
-    if (groceryList.value != null && groceryList.value.Name === updatedGroceryList.Name && groceryList.value.Items.length < updatedGroceryList.Items.length) {
+    if (router.currentRoute.value.path === "/shopping" && groceryList.value != null && groceryList.value.Name === updatedGroceryList.Name && groceryList.value.Items.length < updatedGroceryList.Items.length) {
         for (var item of updatedGroceryList.Items) {
             if (!groceryList.value.hasItem(item.ItemName)) {
                 popupStore.displayPopup({ type: 'positive', message: item.AdderName + " added " + item.ItemName })
