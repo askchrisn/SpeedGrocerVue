@@ -4,7 +4,13 @@
             <q-btn color="primary" to="/">Back</q-btn>
             <q-btn class="flex-grow ml1" to="/users">Manage Users</q-btn>
         </div>
-        <h1>{{ groceryList.Name }}</h1>
+
+        <div class="flex-row mb1">
+            <h1 v-if="!isEditMode">{{ groceryList.Name }}</h1>
+            <q-input v-if="isEditMode" v-model="groceryList.Name" @keyup.enter="saveEditName"></q-input>
+            <q-btn flat icon="edit" @click="saveEditName"/>
+            </div>
+        
         <div class="flex-row mb1">
             <q-input class="flex-grow" filled v-model="newItemName" label="Add item" stack-label dense @keydown.enter.prvent="createNewItem()"></q-input>
             <q-btn color="primary" class="ml1" @click="createNewItem()">+</q-btn>
@@ -51,6 +57,8 @@ const displayItems = ref<Array<Item>>([])
 const newItemName = ref("")
 const userInfo = ref(new UserInfo())
 const searchEnabled = ref(true)
+
+const isEditMode = ref(false)
 
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
@@ -115,13 +123,17 @@ function saveGroceryList() {
     updateDb("GroceryLists/" + groceryListKeyStore.getKey(), groceryList.value)
 }
 
+function saveEditName() {
+    isEditMode.value = !isEditMode.value
+    saveGroceryList()
+}
+
 </script>
 
 <style scoped>
 
 h1 {
     margin: 0;
-    margin-bottom: 1rem;
     font-size: 2rem;
     font-weight: bolder;
 }
