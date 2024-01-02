@@ -8,7 +8,7 @@ export default class Store {
 
     getAisle(item: Item) {
         if (item.ItemName.toLowerCase() in this.ItemLocations) {
-            return this.ItemLocations[item.ItemName]
+            return this.ItemLocations[item.ItemName.toLowerCase()]
         }
 
         return ""
