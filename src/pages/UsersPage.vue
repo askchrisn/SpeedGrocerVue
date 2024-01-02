@@ -2,10 +2,21 @@
     <div class="main">
         <div class="flex-row mb1">
             <q-btn color="primary" @click="router.back()">Back</q-btn>
-            <q-btn class="flex-grow ml1" @click="tryLeaveList()">Leave List</q-btn>
+            <q-btn class="flex-grow ml1" @click="tryLeaveList()">Leave {{ groceryList.Name }}</q-btn>
         </div>
         <div class="flex-row mb1">
-            <q-input class="flex-grow mr1" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input>
+            <!-- <q-input class="flex-grow mr1" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input> -->
+            <q-select
+                label="Add user by email"
+                filled
+                v-model="newUserEmail"
+                use-input
+                input-debounce="0"
+                @new-value="addUser"
+                @update:model-value="addUser"
+                :options="recommendedUsers"
+                class="flex-grow mr1"
+            />
             <q-btn color="primary" @click="addUser()">+</q-btn>
         </div>
       
@@ -27,8 +38,8 @@
             </q-item>
         </q-virtual-scroll>
 
-        <h4>Users you may have added in the past</h4>
-        <q-virtual-scroll
+        <!-- <h4>Recommended Users</h4> -->
+        <!-- <q-virtual-scroll
             class="flex-grow"
             :items="recommendedUsers"
             separator
@@ -43,7 +54,7 @@
                     <q-item-label caption lines="1">{{ item.Email }}</q-item-label>
                 </q-item-section>
             </q-item>
-        </q-virtual-scroll>
+        </q-virtual-scroll> -->
     </div>
 </template>
 
@@ -67,6 +78,9 @@ const groceryList = getList(groceryListKeyStore.getKey())
 var usersOfList = computed(() => getUsersOnListToDisplay())
 var recommendedUsers = computed(() => getRecommendedsToDisplay())
 
+var recommended = ref();
+recommended.value = getRecommendedsToDisplay();
+
 function getUsersOnListToDisplay() {
     var people = getAllPeopleOnList(groceryListKeyStore.getKey())
     return convertUserEmailsToUserInfos(people)
@@ -86,11 +100,15 @@ function getRecommendedsToDisplay() {
         }
     }
 
-    return convertUserEmailsToUserInfos(usersToRecommend);
+    return usersToRecommend;
+    // return convertUserEmailsToUserInfos(usersToRecommend);
 }
   
-function addUser() {
-    var email = newUserEmail.value.trim()
+function addUser(newValue?: string, done?: any) {
+
+    var email = newValue != null ? newValue : newUserEmail.value.trim()
+    console.log(email);
+    console.log(newUserEmail.value.trim());
 
     if (email.length > 0) {
         var userInfo = getUserInfo(email)
@@ -102,21 +120,13 @@ function addUser() {
         groceryList.addUser(userInfo.Email)
         newUserEmail.value = ""
         saveGroceryList()
-    }
-}
-
-function addRecommendedUser(email: string) {
-    if (email.length > 0) {
-        var userInfo = getUserInfo(email)
-        if (userInfo == null) {
-            usePopupStore().displayPopup({color: 'red', position: 'center', message: "No user found with email '" + email + "'!"})
-            return
-        }
-
-        groceryList.addUser(userInfo.Email)
         newUserEmail.value = ""
-        saveGroceryList()
+
+        if(!!done) done(email);
     }
+
+    newUserEmail.value = ""
+
 }
 
 function tryLeaveList() {
@@ -154,6 +164,12 @@ function convertUserEmailsToUserInfos(users: string[]) {
 </script>
   
 <style scoped>
+    .recommended {
+        max-width: 15rem;
+    }
+    .q-item {
+        margin: 0;
+    }
     h4 {
         font-size: 1.2rem;
     }
