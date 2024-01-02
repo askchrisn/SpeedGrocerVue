@@ -12,7 +12,7 @@
 
         <q-virtual-scroll
             class="flex-grow"
-            :items="groceryList.Items"
+            :items="displayItems"
             separator
             v-slot="{ item, index }"
             >
@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import GroceryList from 'src/models/groceryList';
 import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
@@ -45,11 +45,30 @@ const authStore = useAuthStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 const popupStore = usePopupStore()
 const groceryList = ref<GroceryList>(new GroceryList())
+const displayItems = ref<Array<Item>>([])
 const newItemName = ref("")
+const searchEnabled = ref(true)
 
 const listener = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
+    updateDisplayItems()
 });
+
+watch(() => newItemName.value, (newValue, oldValue) => {
+    updateDisplayItems()
+});
+
+function updateDisplayItems() {
+    var searchValue = newItemName.value.toLowerCase()
+    var tempItems = []
+    for (var item of groceryList.value.Items) {
+        if (!searchEnabled.value || item.ItemName.toLowerCase().indexOf(searchValue) != -1) {
+            tempItems.push(item)
+        }
+    }
+
+    displayItems.value = tempItems
+}
 
 function createNewItem() {
     var itemName = newItemName.value.trim()
