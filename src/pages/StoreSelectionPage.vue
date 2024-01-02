@@ -71,7 +71,7 @@ const listener1 = attachEvent("Stores", (snapshot) => {
     checkRecentStore()
 });
 
-const listener2 = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
+const listener2 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
     checkRecentStore()
 });
@@ -162,7 +162,7 @@ const handleAddedLocation = () => {
 };
 
 function saveGroceryList() {
-    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
+    updateDb("GroceryLists/" + groceryListKeyStore.getKey(), groceryList.value)
 }
 
 </script>

@@ -9,6 +9,19 @@ export function getAUsersLists(email: string)
     return groceryLists.value.filter(([key, gl]) => gl.containsUser(email)); 
 }
 
+export function getList(key: string)
+{ 
+    var list = groceryLists.value.find(([k, gl]) => k === key);
+    if(list === undefined) return new GroceryList();
+    
+    return GroceryList.fromObject(list[1]);  
+}
+
+export function getAllPeopleOnList(listKey: string): string[] {
+    var list = getList(listKey);
+    return list ? list.Users ?? [] : [];
+}
+
 export function getAUsersFriendsHistory(email: string) {    
     var usersLists = getAUsersLists(email);
     let history = usersLists.flatMap(([, list]) => list.Users); // this gets all the users in the lists

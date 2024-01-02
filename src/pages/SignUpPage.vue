@@ -1,5 +1,5 @@
 <template>
-    <div class="test">
+    <div>
         <q-btn color="primary" to="login">Back</q-btn>
         <q-input class="input" filled v-model="email" label="Email" stack-label dense></q-input>
         <q-input class="input" filled v-model="name" label="Name" stack-label dense></q-input>

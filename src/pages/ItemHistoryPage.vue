@@ -42,7 +42,7 @@ const stringOptions = [
 ]
 // END TEST CODE
 
-const listener = attachEvent("GroceryLists/" + groceryListKeyStore.key, (snapshot) => {
+const listener = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
     items.value = groceryList.value.getItemHistoryByFrequency()
 });
@@ -58,7 +58,7 @@ function clickedItem(itemName: string) {
 }
 
 function saveGroceryList() {
-    updateDb("GroceryLists/" + groceryListKeyStore.key, groceryList.value)
+    updateDb("GroceryLists/" + groceryListKeyStore.getKey(), groceryList.value)
 }
 
 </script>
