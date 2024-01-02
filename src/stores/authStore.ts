@@ -1,7 +1,7 @@
 import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { defineStore } from 'pinia';
 import { auth } from '../firebaseConfig';
-import UserInfo from '../models/userInfo';
+import { UserInfo } from '../models/userInfo';
 import { getUserInfo, saveUserInfo } from '../userManagement';
 
 export const useAuthStore = defineStore('AuthStore', 

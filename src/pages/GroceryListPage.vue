@@ -40,6 +40,8 @@ import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { usePopupStore } from 'src/stores/popupStore';
+import { adjustEmail } from 'src/utils/helpers';
+import { UserInfo } from 'src/models/userInfo';
 
 const authStore = useAuthStore()
 const groceryListKeyStore = useGroceryListKeyStore()
@@ -47,10 +49,17 @@ const popupStore = usePopupStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const displayItems = ref<Array<Item>>([])
 const newItemName = ref("")
+const userInfo = ref(new UserInfo())
 const searchEnabled = ref(true)
 
-const listener = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
+const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
+    updateDisplayItems()
+});
+
+const listener2 = attachEvent("Users/" + adjustEmail(authStore.userEmail), (snapshot) => {
+    userInfo.value = UserInfo.fromObject(snapshot)
+    searchEnabled.value = userInfo.value.SmartSearchEnabled
     updateDisplayItems()
 });
 

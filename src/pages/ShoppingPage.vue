@@ -95,8 +95,12 @@ import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useStoreKeyStore } from 'src/stores/storeKeyStore';
 import { usePopupStore } from 'src/stores/popupStore';
+import { adjustEmail } from 'src/utils/helpers';
+import { useAuthStore } from 'src/stores/authStore';
+import { UserInfo, ShoppingViewMode } from 'src/models/userInfo';
 
 const router = useRouter();
+const authStore = useAuthStore()
 const popupStore = usePopupStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 const storeKeyStore = useStoreKeyStore()
@@ -137,6 +141,11 @@ const listener2 = attachEvent("Stores/" + storeKeyStore.getKey(), (snapshot) => 
     else {
         updateLists()
     }
+});
+
+const listener3 = attachEvent("Users/" + adjustEmail(authStore.userEmail), (snapshot) => {
+    var userInfo = UserInfo.fromObject(snapshot)
+    fullView.value = userInfo.ShoppingViewMode == ShoppingViewMode.Full
 });
 
 function rememberItem() {

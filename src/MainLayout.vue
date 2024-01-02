@@ -4,7 +4,7 @@
         <q-header elevated>
             <q-toolbar>
                 <q-toolbar-title> Speed Grocer </q-toolbar-title>
-                <q-btn flat dense round icon="settings" aria-label="Menu" />
+                <q-btn flat dense round icon="settings" aria-label="Menu" to="/settings"/>
             </q-toolbar>
         </q-header>
 
