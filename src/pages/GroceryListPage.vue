@@ -7,7 +7,7 @@
 
         <div class="flex-row mb1">
             <h1 v-if="!isEditMode">{{ groceryList.Name }}</h1>
-            <q-input v-if="isEditMode" v-model="groceryList.Name" @keyup.enter="saveEditName"></q-input>
+            <q-input v-if="isEditMode" v-model="groceryList.Name" filled @keyup.enter="saveEditName"></q-input>
             <q-btn flat icon="edit" @click="saveEditName"/>
             </div>
         
