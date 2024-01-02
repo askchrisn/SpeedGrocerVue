@@ -16,7 +16,7 @@
                     separator
                     v-slot="{ item, index }"
                     >
-                    <q-item clickable v-ripple @click="tryDeleteItem(item.ItemName)">
+                    <q-item clickable v-ripple @click="deleteItem(item.ItemName)">
                         <q-item-section>
                             <q-item-label>{{ item.ItemName + (item.Quantity > 1 ? " x " + item.Quantity : "") }}</q-item-label>
                         </q-item-section>
@@ -129,6 +129,8 @@ function rememberItem() {
         popupStore.displayPopup({ type: 'negative', message: "Error encountered when remembering item '" + removedItem.value + "' in '" + selectedAisle.value + "'" })
     }
 
+    deleteItem(removedItem.value)
+
     removedItem.value = ""
     selectedAisle.value = ""
 }
@@ -174,22 +176,12 @@ function findNextAisle(skipCurrent: bool = true) {
     updateLists()
 }
 
-function tryDeleteItem(itemName: string) {
-    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]})
-}
-
 function deleteItem(itemName: string) {
     groceryList.value.removeItem(itemName)
     saveGroceryList()
 }
 
 function tryDeleteItemAndRemeberLocation(itemName: string) {
-    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItemAndRemeberLocation(itemName) }}, {label: 'No', color: 'white'}]})
-}
-
-function deleteItemAndRemeberLocation(itemName: string) {
-    groceryList.value.removeItem(itemName)
-    saveGroceryList()
     removedItem.value = itemName
     showCard.value = true
 }
@@ -217,8 +209,7 @@ function saveGroceryList() {
     font-weight: bold;
 }
 .store-location {
-    font-style: italic
-    ;
+    font-style: italic;
 }
 
 </style>
