@@ -4,11 +4,12 @@
             <q-btn color="primary" @click="router.back()">Back</q-btn>
             <q-btn class="flex-grow ml1" @click="tryLeaveList()">Leave List</q-btn>
         </div>
-        <div class="flex-row">
+        <div class="flex-row mb1">
             <q-input class="flex-grow mr1" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input>
             <q-btn color="primary" @click="addUser()">+</q-btn>
         </div>
       
+        <h4>Who can see the list</h4>
         <q-virtual-scroll
             class="flex-grow"
             :items="usersOfList"
@@ -26,6 +27,7 @@
             </q-item>
         </q-virtual-scroll>
 
+        <h4>Users you may have added in the past</h4>
         <q-virtual-scroll
             class="flex-grow"
             :items="recommendedUsers"
@@ -152,6 +154,7 @@ function convertUserEmailsToUserInfos(users: string[]) {
 </script>
   
 <style scoped>
-
+    h4 {
+        font-size: 1.2rem;
+    }
 </style>
-  
