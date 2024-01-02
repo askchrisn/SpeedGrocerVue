@@ -5,7 +5,6 @@
             <q-btn class="flex-grow ml1" @click="tryLeaveList()">Leave {{ groceryList.Name }}</q-btn>
         </div>
         <div class="flex-row mb1">
-            <!-- <q-input class="flex-grow mr1" filled v-model="newUserEmail" label="Add user by email" stack-label dense @keydown.enter.prvent="addUser()"></q-input> -->
             <q-select
                 label="Add user by email"
                 filled
@@ -37,24 +36,6 @@
                 </q-item-section>
             </q-item>
         </q-virtual-scroll>
-
-        <!-- <h4>Recommended Users</h4> -->
-        <!-- <q-virtual-scroll
-            class="flex-grow"
-            :items="recommendedUsers"
-            separator
-            v-slot="{ item, index }"
-            >
-            <q-item clickable v-ripple @click="addRecommendedUser(item.Email)">
-                <q-item-section>
-                    <q-item-label>{{ item.Nickname }}</q-item-label>
-                </q-item-section>
-
-                <q-item-section side>
-                    <q-item-label caption lines="1">{{ item.Email }}</q-item-label>
-                </q-item-section>
-            </q-item>
-        </q-virtual-scroll> -->
     </div>
 </template>
 
