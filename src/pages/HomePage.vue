@@ -1,7 +1,5 @@
 <template>
   <div class="main">
-    <q-btn to="/login" @click="logout()" class="mb1">Logout</q-btn>
-
     <div class="flex-row mb1">
       <q-input class="flex-grow" filled v-model="newListName" label="New list name" stack-label dense @keydown.enter.prvent="createNewList()"></q-input>
       <q-btn color="primary" class="ml1" @click="createNewList()">+</q-btn>
@@ -40,10 +38,6 @@ const groceryListKeyStore = useGroceryListKeyStore()
 const myGroceryLists = computed(() => getAUsersLists(authStore.userEmail));
 
 const newListName = ref("")
-
-function logout() {
-  authStore.signOut()
-}
 
 function createNewList() {
   var name = newListName.value.trim()
