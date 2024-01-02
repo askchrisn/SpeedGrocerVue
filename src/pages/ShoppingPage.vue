@@ -7,7 +7,25 @@
                 <q-label class="store-location">{{ store.Location }}</q-label>
             </div>
         </div>
-        <div class="lists-container">
+        <div class="lists-container" v-if="fullView">
+            <q-virtual-scroll
+                    class="flex-grow"
+                    :items="fullViewItems"
+                    separator
+                    v-slot="{ item, index }"
+                    >
+                    <q-item clickable v-ripple @click="item.Aisle === '' ? tryDeleteItemAndRemeberLocation(item.ItemName) : deleteItem(item.ItemName)">
+                        <q-item-section>
+                            <q-item-label>{{ item.ItemName + (item.Quantity > 1 ? " x " + item.Quantity : "") }}</q-item-label>
+                        </q-item-section>
+
+                        <q-item-section side>
+                            <q-item-label caption lines="1">{{ item.Aisle }}</q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </q-virtual-scroll>
+        </div>
+        <div class="lists-container" v-if="!fullView">
             <div class="flex-column" :class="{ 'half': miscItems.length > 0 }" v-if="aisleItems.length > 0">
                 <q-label class="text-horizontal-center">{{ currentAisle }}</q-label>
                 <q-virtual-scroll
@@ -47,7 +65,7 @@
                 </q-virtual-scroll>
             </div>
         </div>
-        <q-btn color="primary" class="mx1" @click="findNextAisle(true)">Next Aisle</q-btn>
+        <q-btn color="primary" class="mx1" @click="findNextAisle(true)" v-if="!fullView">Next Aisle</q-btn>
         <q-dialog v-model="showCard" persistent>
             <q-card style="min-width: 350px">
                 <q-card-section>
@@ -86,10 +104,12 @@ const groceryList = ref<GroceryList>(new GroceryList())
 const store = ref<Store>(new Store())
 const aisleItems = ref<Array<Item>>([])
 const miscItems = ref<Array<Item>>([])
+const fullViewItems = ref<Array<object>>([])
 const currentAisle = ref("")
 const selectedAisle = ref("")
 const removedItem = ref("")
 const showCard = ref(false);
+const fullView = ref(true);
 
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     var updatedGroceryList = GroceryList.fromObject(snapshot)
@@ -138,6 +158,7 @@ function rememberItem() {
 function updateLists() {
     var tempAisleItems: Array<Item> = []
     var tempMiscItems: Array<Item> = []
+    var tempFullViewItems: Array<object> = []
     for (var item of groceryList.value.Items) {
         var itemAisle = store.value.getAisle(item)
         if (itemAisle == currentAisle.value) {
@@ -146,10 +167,25 @@ function updateLists() {
         else if (itemAisle === "") {
             tempMiscItems.push(item)
         }
+
+        var obj = { "ItemName": item.ItemName, "Quantity": item.Quantity, "Aisle": itemAisle }
+        tempFullViewItems.push(obj)
     }
+
+    // Custom sorting function
+    function compareAisles(a: string, b: string) {
+        const aislesOrder = store.value.Aisles;
+        var aIndex = aislesOrder.indexOf(a) < 0 ? aislesOrder.length : aislesOrder.indexOf(a)
+        var bIndex = aislesOrder.indexOf(b) < 0 ? aislesOrder.length : aislesOrder.indexOf(b)
+        return aIndex - bIndex;
+    }
+
+    // Sort tempFullViewItems using the custom sorting function
+    tempFullViewItems.sort((a, b) => compareAisles(a.Aisle, b.Aisle));
 
     aisleItems.value = tempAisleItems
     miscItems.value = tempMiscItems
+    fullViewItems.value = tempFullViewItems
 }
 
 function findNextAisle(skipCurrent: bool = true) {
