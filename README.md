@@ -25,3 +25,10 @@ quasar build
 
 ### Customize the configuration
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+
+### iPhone App Build Documentation
+https://quasar.dev/quasar-cli-vite/developing-capacitor-apps/build-commands
+
+1. Get the capactor CLI
+2. quasar build -m capacitor -T ios --ide
+3. quasar dev -m capacitor -T ios
