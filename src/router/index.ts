@@ -10,7 +10,6 @@ import {
 import { useAuthStore } from '../stores/authStore';
 import routes from './routes';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from 'src/firebaseConfig';
 import { usePopupStore } from 'src/stores/popupStore';
 
 export default route(function () {
@@ -26,37 +25,41 @@ export default route(function () {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  onAuthStateChanged(auth, (user) => {
-    const authStore = useAuthStore();
-    authStore.setUser(user);
+  // onAuthStateChanged(auth, (user) => {
+  //   const authStore = useAuthStore();
+  //   authStore.setUser(user);
 
-    if(!authStore.isAuthenticated) {
-      authStore.signOut();
-      Router.push('/login');
-    }
-  });
+  //   if(!authStore.isAuthenticated) {
+  //     authStore.signOut();
+  //     Router.push('/login');
+  //   }
+  // });
+
+  // Router.beforeEach(async (to, from, next) => {
+  //   const authStore = useAuthStore();
+
+  //   // Upon initialization, get the user from firebase
+  //   if(!authStore.isAuthenticated) {
+  //     var currentUser = await authStore.getPreviouslyLoggedInUser();
+  //     authStore.setUser(currentUser); 
+  //   }
+
+  //   const requiresAuth = to.meta.requiresAuth;
+  //   const isAuthenticated = authStore.isAuthenticated;
+
+  //   usePopupStore().removePopup();
+
+  //   if (requiresAuth && !isAuthenticated) {
+  //     next('/login');
+  //   } else if(isAuthenticated && to.path === '/login') { 
+  //     next('/');
+  //   } else {
+  //     next();
+  //   }
+  // });
 
   Router.beforeEach(async (to, from, next) => {
-    const authStore = useAuthStore();
-
-    // Upon initialization, get the user from firebase
-    if(!authStore.isAuthenticated) {
-      var currentUser = await authStore.getPreviouslyLoggedInUser();
-      authStore.setUser(currentUser); 
-    }
-
-    const requiresAuth = to.meta.requiresAuth;
-    const isAuthenticated = authStore.isAuthenticated;
-
-    usePopupStore().removePopup();
-
-    if (requiresAuth && !isAuthenticated) {
-      next('/login');
-    } else if(isAuthenticated && to.path === '/login') { 
-      next('/');
-    } else {
-      next();
-    }
+    next();
   });
 
   return Router;

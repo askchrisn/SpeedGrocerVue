@@ -1,8 +1,8 @@
 import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { defineStore } from 'pinia';
-import { auth } from '../firebaseConfig';
+import { auths } from 'src/boot/firebaseConnection';
 import { UserInfo } from '../models/userInfo';
-import { getUserInfo, saveUserInfo } from '../userManagement';
+// import { getUserInfo, saveUserInfo } from '../userManagement';
 
 export const useAuthStore = defineStore('AuthStore', 
 {
@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('AuthStore',
   actions: {
     async getPreviouslyLoggedInUser(): Promise<User | null> {
       return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auths, (user) => {
           if (user) resolve(user);
           else resolve(null);
         }, reject);
@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('AuthStore',
     },
     async signIn(email: string, password: string): Promise<void> {
       try {
-        const result = await signInWithEmailAndPassword(auth, email, password);
+        const result = await signInWithEmailAndPassword(auths, email, password);
         this.setUser(result.user);
       } catch (error) {
         throw error;
@@ -35,8 +35,8 @@ export const useAuthStore = defineStore('AuthStore',
     },
     async signUp(email: string, name: string, password: string): Promise<void> {
       try {
-        const result = await createUserWithEmailAndPassword(auth, email, password);
-        saveUserInfo(new UserInfo(name, email))
+        const result = await createUserWithEmailAndPassword(auths, email, password);
+        // saveUserInfo(new UserInfo(name, email))
         this.setUser(result.user);
       } catch (error) {
         throw error;
@@ -44,7 +44,7 @@ export const useAuthStore = defineStore('AuthStore',
     },
     async signOut(): Promise<void> {
       try {
-        await signOut(auth);
+        await signOut(auths);
         this.setUser(null);
       } catch (error) {
         throw error;
@@ -52,7 +52,7 @@ export const useAuthStore = defineStore('AuthStore',
     },
     setUser(user: User | null): void {
       this.auth = user;
-      this.userInfo = user === null ? null : getUserInfo(user.email ?? '');
+      // this.userInfo = user === null ? null : getUserInfo(user.email ?? '');
     },
   },
 })
