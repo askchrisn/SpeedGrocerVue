@@ -47,7 +47,7 @@ import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { usePopupStore } from 'src/stores/popupStore';
 import { adjustEmail } from 'src/utils/helpers';
-import { UserInfo } from 'src/models/userInfo';
+import UserInfo from 'src/models/userInfo';
 
 const authStore = useAuthStore()
 const groceryListKeyStore = useGroceryListKeyStore()

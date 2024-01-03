@@ -44,7 +44,7 @@ import { ref, computed } from 'vue';
 import { updateDb, setDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
-import { UserInfo } from 'src/models/userInfo';
+import UserInfo from 'src/models/userInfo';
 import { getUserInfo } from 'src/userManagement';
 import { useRouter } from 'vue-router';
 import { getAllPeopleOnList, getList, getAUsersLists } from 'src/groceryListsManagement';

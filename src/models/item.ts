@@ -2,10 +2,10 @@ import { isExternalModuleNameRelative } from "typescript";
 
 export default class Item {
     ItemName: string = ""
-    Quantity: int = 1
+    Quantity: number = 1
     AdderName: string = ""
 
-    constructor(itemName: string, adderName: string, quantity: int = 1) {
+    constructor(itemName: string, adderName: string, quantity: number = 1) {
         this.ItemName = itemName
         this.AdderName = adderName
         this.Quantity = quantity

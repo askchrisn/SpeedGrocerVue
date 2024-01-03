@@ -97,7 +97,7 @@ import { useStoreKeyStore } from 'src/stores/storeKeyStore';
 import { usePopupStore } from 'src/stores/popupStore';
 import { adjustEmail } from 'src/utils/helpers';
 import { useAuthStore } from 'src/stores/authStore';
-import { UserInfo, ShoppingViewMode } from 'src/models/userInfo';
+import  UserInfo, { ShoppingViewMode } from 'src/models/userInfo';
 
 const router = useRouter();
 const authStore = useAuthStore()
@@ -197,7 +197,7 @@ function updateLists() {
     fullViewItems.value = tempFullViewItems
 }
 
-function findNextAisle(skipCurrent: bool = true) {
+function findNextAisle(skipCurrent: boolean = true) {
     var aisles: Array<string> = []
     
     for (var item of groceryList.value.Items) {

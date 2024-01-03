@@ -31,7 +31,8 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from 'src/stores/authStore';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { adjustEmail } from "src/utils/helpers"
-import { ShoppingViewMode, UserInfo } from 'src/models/userInfo';
+import { ShoppingViewMode } from 'src/models/userInfo';
+import UserInfo from 'src/models/userInfo';
 import { saveUserInfo } from 'src/userManagement';
 
 const router = useRouter();

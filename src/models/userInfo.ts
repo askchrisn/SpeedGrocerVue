@@ -1,8 +1,8 @@
-export class UserInfo {
+export default class UserInfo {
     Nickname: string = ""
     Email: string = ""
     ShoppingViewMode: ShoppingViewMode = ShoppingViewMode.Full
-    SmartSearchEnabled: bool = true
+    SmartSearchEnabled: boolean = true
     
     constructor(name: string = "", email: string = "") {
         this.Nickname = name;
