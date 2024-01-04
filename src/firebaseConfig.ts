@@ -1,12 +1,5 @@
-import { FirebaseApp, initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set, push, update, child, get, Database } from 'firebase/database';
-import { Auth, getAuth } from 'firebase/auth'
-import GroceryList from "./models/groceryList";
-import { fbapp, fbauth, fbdb } from "src/boot/firebase"; 
-
-export const app = fbapp
-export const auth = fbauth
-export const db = fbdb
+import { ref, onValue, set, push, update, get} from 'firebase/database';
+import { db } from "src/boot/firebase"; 
 
 export function attachEvent(key: string, handler: (a: any) => void) {
   var dbRef = ref(db, key);
