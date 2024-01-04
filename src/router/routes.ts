@@ -24,15 +24,8 @@ const routes: RouteRecordRaw[] = [
       { path: '/storeselection', component: StoreSelectionPage },
       { path: '/shopping', component: ShoppingPage },
       { path: '/settings', component: UserSettingsPage },
-    ],
-  },
-  {
-    path: '',
-    meta: { requiresAuth: false },
-    component: MainLayoutVue,
-    children: [
-      { path: '/login', component: LoginPage, },
-      { path: '/signup', component: SignUpPage, },
+      { path: '/login', component: LoginPage, meta: {requiresAuth: false} },
+      { path: '/signup', component: SignUpPage, meta: {requiresAuth: false} },
     ],
   },
   {

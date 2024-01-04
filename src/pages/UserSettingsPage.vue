@@ -21,7 +21,7 @@
                 <q-toggle v-model="smartSearchEnabled"/>
             </div>
         </div>
-        <q-btn color="primary" to="/login" @click="authStore.signOut">Logout</q-btn>
+        <q-btn color="negative" to="/login" @click="authStore.signOut">Logout</q-btn>
     </div>
   </template>
 
