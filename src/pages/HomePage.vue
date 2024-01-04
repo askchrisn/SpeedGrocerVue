@@ -22,16 +22,19 @@
         </q-item>
     </q-virtual-scroll> -->
     <label>Hello</label>
+    <q-btn @click="test">Click me</q-btn>
+    <label>{{ foo }}</label>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useAuthStore } from 'src/stores/authStore';
-import GroceryList from 'src/models/groceryList';
-import { pushDb } from 'src/firebaseConfig'
-import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
-import { getAUsersLists } from 'src/groceryListsManagement';
+
+import { getCurrentInstance } from 'vue';
+
+async function test() {
+  const app = getCurrentInstance();
+  console.log(app?.appContext.config.globalProperties.$firebaseAuth);
+}
 
 // auth.onAuthStateChanged((user) => {
 //   console.log('STATE CHANGED');
