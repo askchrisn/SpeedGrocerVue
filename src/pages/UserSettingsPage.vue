@@ -20,6 +20,10 @@
                 <label class="flex-grow">Smart search:</label>
                 <q-toggle v-model="smartSearchEnabled"/>
             </div>
+            <div class="flex-row mb1">
+                <label class="flex-grow">Dark Mode:</label>
+                <q-toggle v-model="darkMode"/>
+            </div>
         </div>
         <q-btn color="negative" to="/login" @click="authStore.signOut">Logout</q-btn>
     </div>
@@ -34,6 +38,7 @@ import { adjustEmail } from "src/utils/helpers"
 import { ShoppingViewMode } from 'src/models/userInfo';
 import UserInfo from 'src/models/userInfo';
 import { saveUserInfo } from 'src/userManagement';
+import { Dark } from 'quasar';
 
 const router = useRouter();
 const authStore = useAuthStore()
@@ -41,6 +46,7 @@ const authStore = useAuthStore()
 const userInfo = ref(new UserInfo())
 const shoppingViewMode = ref("")
 const smartSearchEnabled = ref(false)
+const darkMode = ref(Dark.isActive)
 
 const enumValues: string[] = Object.keys(ShoppingViewMode)
   .filter(key => isNaN(Number(ShoppingViewMode[key])))
@@ -55,6 +61,10 @@ const listener = attachEvent("Users/" + adjustEmail(authStore.userEmail), (snaps
 watch(() => smartSearchEnabled.value, (newValue, oldValue) => {
     userInfo.value.SmartSearchEnabled = smartSearchEnabled.value
     saveUserInfo(userInfo.value)
+});
+
+watch(() => darkMode.value, (newValue, oldValue) => {
+    Dark.set(newValue);
 });
 
 function shoppingViewModeChanged() {
