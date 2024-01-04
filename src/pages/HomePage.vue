@@ -29,11 +29,12 @@
 
 <script setup lang="ts">
 
-import { getCurrentInstance } from 'vue';
+import { ref } from 'vue';
+
+let foo = ref(2);
 
 async function test() {
-  const app = getCurrentInstance();
-  console.log(app?.appContext.config.globalProperties.$firebaseAuth);
+  foo.value += 1;
 }
 
 // auth.onAuthStateChanged((user) => {
