@@ -155,3 +155,4 @@ function convertUserEmailsToUserInfos(users: string[]) {
         font-size: 1.2rem;
     }
 </style>
+src/boot/firebaseConfig

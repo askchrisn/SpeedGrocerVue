@@ -177,4 +177,4 @@ h1 {
 }
 
 </style>
-  
+  src/boot/firebaseConfig

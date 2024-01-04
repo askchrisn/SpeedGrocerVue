@@ -10,8 +10,9 @@ import {
 import { useAuthStore } from '../stores/authStore';
 import routes from './routes';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from 'src/firebaseConfig';
+// import { auth } from 'src/firebaseConfig';
 import { usePopupStore } from 'src/stores/popupStore';
+// import { auth } from '../boot/firebase'
 
 export default route(function () {
   const createHistory = process.env.SERVER
@@ -26,37 +27,38 @@ export default route(function () {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  onAuthStateChanged(auth, (user) => {
-    const authStore = useAuthStore();
-    authStore.setUser(user);
+  // onAuthStateChanged(auth, (user) => {
+  //   const authStore = useAuthStore();
+  //   authStore.setUser(user);
 
-    if(!authStore.isAuthenticated) {
-      authStore.signOut();
-      Router.push('/login');
-    }
-  });
+  //   if(!authStore.isAuthenticated) {
+  //     authStore.signOut();
+  //     Router.push('/login');
+  //   }
+  // });
 
   Router.beforeEach(async (to, from, next) => {
-    const authStore = useAuthStore();
+    // const authStore = useAuthStore();
 
-    // Upon initialization, get the user from firebase
-    if(!authStore.isAuthenticated) {
-      var currentUser = await authStore.getPreviouslyLoggedInUser();
-      authStore.setUser(currentUser); 
-    }
+    // // Upon initialization, get the user from firebase
+    // if(!authStore.isAuthenticated) {
+    //   var currentUser = await authStore.getPreviouslyLoggedInUser();
+    //   authStore.setUser(currentUser); 
+    // }
 
-    const requiresAuth = to.meta.requiresAuth;
-    const isAuthenticated = authStore.isAuthenticated;
+    // const requiresAuth = to.meta.requiresAuth;
+    // const isAuthenticated = authStore.isAuthenticated;
 
-    usePopupStore().removePopup();
+    // usePopupStore().removePopup();
 
-    if (requiresAuth && !isAuthenticated) {
-      next('/login');
-    } else if(isAuthenticated && to.path === '/login') { 
-      next('/');
-    } else {
-      next();
-    }
+    // if (requiresAuth && !isAuthenticated) {
+    //   next('/login');
+    // } else if(isAuthenticated && to.path === '/login') { 
+    //   next('/');
+    // } else {
+    //   next();
+    // }
+    next();
   });
 
   return Router;

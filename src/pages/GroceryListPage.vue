@@ -61,11 +61,13 @@ const searchEnabled = ref(true)
 const isEditMode = ref(false)
 
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
+    console.log('dsfafdasdf');
     groceryList.value = GroceryList.fromObject(snapshot)
     updateDisplayItems()
 });
 
 const listener2 = attachEvent("Users/" + adjustEmail(authStore.userEmail), (snapshot) => {
+    console.log('dsfafdasddsfasdfasdff');
     userInfo.value = UserInfo.fromObject(snapshot)
     searchEnabled.value = userInfo.value.SmartSearchEnabled
     updateDisplayItems()
@@ -139,3 +141,4 @@ h1 {
 }
 
 </style>
+src/boot/firebaseConfig

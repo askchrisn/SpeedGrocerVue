@@ -1,8 +1,6 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getDatabase } from 'firebase/database';
-import { boot } from 'quasar/wrappers';
-import { api } from './axios';
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyA6UJqm3877FgHO2QwQavlZN03Z-pE42As",
@@ -15,6 +13,8 @@ export const firebaseConfig = {
     measurementId: "G-392VKGXR7P"
 };
 
-export const fbapp = initializeApp(firebaseConfig);
-export const fbauth = getAuth();
-export const fbdb = getDatabase(fbapp);
+const app = initializeApp(firebaseConfig);
+// const auth = getAuth();
+// const db = getDatabase(app);
+
+export { app };

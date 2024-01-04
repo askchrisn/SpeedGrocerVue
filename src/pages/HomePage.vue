@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="flex-row mb1">
+    <!-- <div class="flex-row mb1">
       <q-input class="flex-grow" filled v-model="newListName" label="New list name" stack-label dense @keydown.enter.prvent="createNewList()"></q-input>
       <q-btn color="primary" class="ml1" @click="createNewList()">+</q-btn>
     </div>
@@ -20,7 +20,8 @@
             <q-item-label caption lines="1">{{ item[1].Items.length }}</q-item-label>
           </q-item-section>
         </q-item>
-    </q-virtual-scroll>
+    </q-virtual-scroll> -->
+    <label>Hello</label>
   </div>
 </template>
 
@@ -32,24 +33,31 @@ import { pushDb } from 'src/firebaseConfig'
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { getAUsersLists } from 'src/groceryListsManagement';
 
-const authStore = useAuthStore()
-const groceryListKeyStore = useGroceryListKeyStore()
+// auth.onAuthStateChanged((user) => {
+//   console.log('STATE CHANGED');
+//   console.log(auth);
+// })
 
-const myGroceryLists = computed(() => getAUsersLists(authStore.userEmail));
+// const authStore = useAuthStore()
+// const groceryListKeyStore = useGroceryListKeyStore()
 
-const newListName = ref("")
+// console.log('authstore user email ' + authStore.userEmail)
 
-function createNewList() {
-  var name = newListName.value.trim()
-  if (name.length > 0) {
-    var gl = new GroceryList();
-    gl.Name = name;
-    gl.Users = [ authStore.userEmail ]
+// const myGroceryLists = computed(() => getAUsersLists(authStore.userEmail));
 
-    pushDb('/GroceryLists', gl);
-    newListName.value = ""
-  }
-}
+// const newListName = ref("")
+
+// function createNewList() {
+//   var name = newListName.value.trim()
+//   if (name.length > 0) {
+//     var gl = new GroceryList();
+//     gl.Name = name;
+//     gl.Users = [ authStore.userEmail ]
+
+//     pushDb('/GroceryLists', gl);
+//     newListName.value = ""
+//   }
+// }
 
 </script>
 

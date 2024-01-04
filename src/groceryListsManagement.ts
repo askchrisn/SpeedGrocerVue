@@ -37,13 +37,13 @@ export function getAUsersFriendsHistory(email: string) {
     return recommended;
 }
 
-const listener = attachEvent("GroceryLists", (snapshot) => {
-    var updatedGroceryLists: Array<[string, GroceryList]> = []
+// const listener = attachEvent("GroceryLists", (snapshot) => {
+//     var updatedGroceryLists: Array<[string, GroceryList]> = []
 
-    for (let key in snapshot) {
-        var gl = GroceryList.fromObject(snapshot[key])
-        updatedGroceryLists.push([key, gl])
-    }
+//     for (let key in snapshot) {
+//         var gl = GroceryList.fromObject(snapshot[key])
+//         updatedGroceryLists.push([key, gl])
+//     }
 
-    groceryLists.value = updatedGroceryLists
-});
+//     groceryLists.value = updatedGroceryLists
+// });

@@ -18,20 +18,20 @@ const routes: RouteRecordRaw[] = [
     component: MainLayoutVue,
     children: [
       { path: '', component: HomePage },
-      { path: '/list', component: GroceryListPage },
-      { path: '/users', component: UsersPage }, 
-      { path: '/itemhistory', component: ItemHistoryPage }, 
-      { path: '/storeselection', component: StoreSelectionPage },
-      { path: '/shopping', component: ShoppingPage },
-      { path: '/settings', component: UserSettingsPage },
+      // { path: '/list', component: GroceryListPage },
+      // { path: '/users', component: UsersPage }, 
+      // { path: '/itemhistory', component: ItemHistoryPage }, 
+      // { path: '/storeselection', component: StoreSelectionPage },
+      // { path: '/shopping', component: ShoppingPage },
+      // { path: '/settings', component: UserSettingsPage },
     ],
   },
   {
     path: '',
     meta: { requiresAuth: false },
     children: [
-      { path: '/login', component: LoginPage, },
-      { path: '/signup', component: SignUpPage, },
+      // { path: '/login', component: LoginPage, },
+      // { path: '/signup', component: SignUpPage, },
     ],
   },
   { 

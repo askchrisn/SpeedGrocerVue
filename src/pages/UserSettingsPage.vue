@@ -67,4 +67,4 @@ function shoppingViewModeChanged() {
 <style scoped>
 
 </style>
-  
+  src/boot/firebaseConfig
