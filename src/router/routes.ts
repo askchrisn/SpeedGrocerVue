@@ -12,15 +12,15 @@ import GroceryListPage from 'src/pages/GroceryListPage.vue';
 import ZNotFoundPage from 'src/pages/ZNotFoundPage.vue';
 
 const routes: RouteRecordRaw[] = [
-  { 
-    path: '/', 
+  {
+    path: '/',
     meta: { requiresAuth: true },
     component: MainLayoutVue,
     children: [
       { path: '', component: HomePage },
       { path: '/list', component: GroceryListPage },
-      { path: '/users', component: UsersPage }, 
-      { path: '/itemhistory', component: ItemHistoryPage }, 
+      { path: '/users', component: UsersPage },
+      { path: '/itemhistory', component: ItemHistoryPage },
       { path: '/storeselection', component: StoreSelectionPage },
       { path: '/shopping', component: ShoppingPage },
       { path: '/settings', component: UserSettingsPage },
@@ -29,14 +29,15 @@ const routes: RouteRecordRaw[] = [
   {
     path: '',
     meta: { requiresAuth: false },
+    component: MainLayoutVue,
     children: [
       { path: '/login', component: LoginPage, },
       { path: '/signup', component: SignUpPage, },
     ],
   },
-  { 
-    path: '/:catchAll(.*)*', 
-    component: ZNotFoundPage, 
+  {
+    path: '/:catchAll(.*)*',
+    component: ZNotFoundPage,
   },
 ];
 

@@ -5,26 +5,26 @@
         </div>
         <div class="flex-grow">
             <div class="flex-row my1 mr1 mu1">
-                <q-label class="flex-grow">Email:</q-label>
-                <q-label>{{ userInfo.Email }}</q-label>
+                <label class="flex-grow">Email:</label>
+                <label>{{ userInfo.Email }}</label>
             </div>
             <div class="flex-row mb1 mr1">
-                <q-label class="flex-grow">Name:</q-label>
-                <q-label>{{ userInfo.Nickname }}</q-label>
+                <label class="flex-grow">Name:</label>
+                <label>{{ userInfo.Nickname }}</label>
             </div>
             <div class="flex-row mb1 mr1">
-                <q-label class="flex-grow">Shopping view mode:</q-label>
+                <label class="flex-grow">Shopping view mode:</label>
                 <q-select class="flex-grow" filled v-model="shoppingViewMode" @update:modelValue="shoppingViewModeChanged" label="Shopping view mode" :options="Object.keys(ShoppingViewMode).filter((item) => {return isNaN(Number(item))})" style="width: 250px" behavior="dialog"/>
             </div>
             <div class="flex-row mb1">
-                <q-label class="flex-grow">Smart search:</q-label>
+                <label class="flex-grow">Smart search:</label>
                 <q-toggle v-model="smartSearchEnabled"/>
             </div>
         </div>
         <q-btn color="primary" to="/login" @click="authStore.signOut">Logout</q-btn>
     </div>
   </template>
-  
+
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
@@ -63,8 +63,7 @@ function shoppingViewModeChanged() {
 }
 
 </script>
-  
+
 <style scoped>
 
 </style>
-  
