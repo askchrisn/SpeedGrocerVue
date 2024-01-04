@@ -46,7 +46,7 @@ const authStore = useAuthStore()
 const userInfo = ref(new UserInfo())
 const shoppingViewMode = ref("")
 const smartSearchEnabled = ref(false)
-const darkMode = ref(Dark.isActive)
+const darkMode = ref(false)
 
 const enumValues: string[] = Object.keys(ShoppingViewMode)
   .filter(key => isNaN(Number(ShoppingViewMode[key])))
@@ -56,16 +56,17 @@ const listener = attachEvent("Users/" + adjustEmail(authStore.userEmail), (snaps
     userInfo.value = UserInfo.fromObject(snapshot)
     smartSearchEnabled.value = userInfo.value.SmartSearchEnabled
     shoppingViewMode.value = userInfo.value.displayShoppingViewMode()
+    darkMode.value = userInfo.value.DarkMode
 });
 
-watch(() => smartSearchEnabled.value, (newValue, oldValue) => {
+watch([
+    () => smartSearchEnabled.value,
+    () => darkMode.value,
+], () => {
     userInfo.value.SmartSearchEnabled = smartSearchEnabled.value
+    userInfo.value.DarkMode = darkMode.value
     saveUserInfo(userInfo.value)
-});
-
-watch(() => darkMode.value, (newValue, oldValue) => {
-    Dark.set(newValue);
-});
+})
 
 function shoppingViewModeChanged() {
     userInfo.value.ShoppingViewMode = ShoppingViewMode[shoppingViewMode.value]
