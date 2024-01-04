@@ -30,11 +30,14 @@
 <script setup lang="ts">
 
 import { ref } from 'vue';
+import { auth } from 'src/boot/firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 let foo = ref(2);
 
 async function test() {
-  foo.value += 1;
+  const result = await signInWithEmailAndPassword(auth, 't@g.com', 'test12');
+  console.log(result);
 }
 
 // auth.onAuthStateChanged((user) => {

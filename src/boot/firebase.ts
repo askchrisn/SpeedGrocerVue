@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getApp, initializeApp } from "firebase/app";
+import { getAuth, indexedDBLocalPersistence, initializeAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { boot } from 'quasar/wrappers'
 
@@ -14,8 +14,10 @@ export const firebaseConfig = {
     measurementId: "G-392VKGXR7P"
 };
 
-export default boot(async ({app}) => {
-    initializeApp(firebaseConfig);
-    const auth = getAuth();
-    console.log('auth');
+export const app = initializeApp(firebaseConfig);
+export const auth = initializeAuth(getApp(), { persistence: indexedDBLocalPersistence });
+
+auth.onAuthStateChanged((user) => {
+  console.log('STATE CHANGED');
+  console.log(auth);
 })
