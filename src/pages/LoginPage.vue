@@ -31,10 +31,10 @@
     const router = useRouter();
     const authStore = useAuthStore();
 
-    const email = ref('');
-    const password = ref('');
+    const email = ref(getStringFromLocalStorage('rememberEmail'));
+    const password = ref(getStringFromLocalStorage('rememberPassword'));
     const isPasswordHidden = ref(true)
-    const rememberPassword = loadRememberSettings();
+    const rememberPassword = ref(!!email.value)
 
     async function login() {
         try {
@@ -46,17 +46,20 @@
         }
     };
 
-    function loadRememberSettings(): Ref<boolean> {
-      var password = LocalStorage.getItem('rememberPassword')
-      return ref(!!password)
-    }
-
     function saveOrForgetPassword() {
       if (rememberPassword.value) {
+          LocalStorage.set('rememberEmail', email.value)
           LocalStorage.set('rememberPassword', password.value)
       } else {
+          LocalStorage.remove('rememberEmail')
           LocalStorage.remove('rememberPassword')
       }
+    }
+
+    function getStringFromLocalStorage(key: string): string {
+      var value = LocalStorage.getItem(key)?.toString()
+      console.log(value)
+      return value ? value : ''
     }
     
 </script>
