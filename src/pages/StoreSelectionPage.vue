@@ -3,11 +3,11 @@
         <div class="flex-grow">
             <div class="flex-row p1">
                 <q-select class="flex-grow" filled v-model="selectedStore" @update:modelValue="selectedStoreChanged" label="Store" :options="storeOptions" style="width: 250px" behavior="dialog"/>
-                <InputBox class="mr1" v-model="addedStore" @onAdded="handleAddedStore" label="Add" title="Add a store"/>
+                <InputPopupBox class="mr1" v-model="addedStore" @onAdded="handleAddedStore" label="Add" title="Add a store"/>
             </div>
             <div v-if="locationOptions.length > 0 || addedStoreName" class="flex-row p1">
                 <q-select class="flex-grow" filled v-model="selectedLocation" label="Location" :options="locationOptions" style="width: 250px" behavior="dialog"/>
-                <InputBox v-model="addedLocation" @onAdded="handleAddedLocation" label="Add" title="Add a location"/>
+                <InputPopupBox v-model="addedLocation" @onAdded="handleAddedLocation" label="Add" title="Add a location"/>
             </div>
         </div>
         <q-btn color="primary" class="ml1" @click="useStore">Continue</q-btn>
@@ -22,9 +22,9 @@ import Store from 'src/models/store';
 import { attachEvent, pushDb, updateDb } from 'src/firebaseConfig'
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
 import { useStoreKeyStore } from 'src/stores/storeKeyStore';
-import InputBox from 'src/components/InputBox.vue'
 import { capitalizeAndTrimAllWordsInString } from '../utils/helpers'
 import { usePopupStore } from 'src/stores/popupStore';
+import InputPopupBox from 'src/components/InputPopupBox.vue';
 
 const router = useRouter();
 const popupStore = usePopupStore()
