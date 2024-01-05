@@ -10,7 +10,7 @@ import {
 import { useAuthStore } from '../stores/authStore';
 import routes from './routes';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from 'src/firebaseConfig';
+import { auth } from 'src/boot/firebase';
 import { usePopupStore } from 'src/stores/popupStore';
 
 export default route(function () {

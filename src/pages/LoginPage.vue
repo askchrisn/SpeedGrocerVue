@@ -1,5 +1,6 @@
 <template>
-    <div class="flex-column q-ma-lg">
+    <div class="main">
+      <div class="flex-column flex-grow h-center">
         <q-input class="q-mb-lg" filled v-model="email" label="Email" stack-label></q-input>
         <q-input class="q-mb-lg" v-model="password" filled :type="isPasswordHidden ? 'password' : 'text'" stack-label label="Password">
         <template v-slot:append>
@@ -9,12 +10,13 @@
             @click="isPasswordHidden = !isPasswordHidden"
           ></q-icon>
         </template>
-      </q-input>
+        </q-input>
         <q-btn class="q-mb-lg" color="primary" @click="login">Login</q-btn>
-        <div class="flex-row horizontal-center">
-            <label>Don't have an account?</label> 
+        <div class="flex-row h-center">
+            <label>Don't have an account?</label>
             <q-btn class="q-ml-sm" outline to="/signup">Sign Up</q-btn>
         </div>
+      </div>
     </div>
 </template>
 
@@ -23,7 +25,7 @@
     import { useRouter } from 'vue-router';
     import { useAuthStore } from 'src/stores/authStore';
     import { Notify } from 'quasar'
-    
+
     const router = useRouter();
     const authStore = useAuthStore();
 

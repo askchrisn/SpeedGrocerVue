@@ -1,8 +1,9 @@
 import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { defineStore } from 'pinia';
-import { auth } from '../firebaseConfig';
+import { auth } from '../boot/firebase';
 import UserInfo from '../models/userInfo';
 import { getUserInfo, saveUserInfo } from '../userManagement';
+import { Dark } from 'quasar'
 
 export const useAuthStore = defineStore('AuthStore', 
 {
@@ -53,6 +54,7 @@ export const useAuthStore = defineStore('AuthStore',
     setUser(user: User | null): void {
       this.auth = user;
       this.userInfo = user === null ? null : getUserInfo(user.email ?? '');
+      Dark.set(this.userInfo?.DarkMode ?? false);
     },
   },
 })

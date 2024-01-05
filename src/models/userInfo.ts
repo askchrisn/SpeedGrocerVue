@@ -3,6 +3,7 @@ export default class UserInfo {
     Email: string = ""
     ShoppingViewMode: ShoppingViewMode = ShoppingViewMode.Full
     SmartSearchEnabled: boolean = true
+    DarkMode: boolean = false
     
     constructor(name: string = "", email: string = "") {
         this.Nickname = name;
@@ -19,6 +20,7 @@ export default class UserInfo {
         userInfo.Email = obj.Email
         userInfo.ShoppingViewMode = obj.ShoppingViewMode
         userInfo.SmartSearchEnabled = obj.SmartSearchEnabled
+        userInfo.DarkMode = obj.DarkMode
 
         if (userInfo.ShoppingViewMode == null) {
             userInfo.ShoppingViewMode = ShoppingViewMode.Full
@@ -26,6 +28,10 @@ export default class UserInfo {
 
         if (userInfo.SmartSearchEnabled == null) {
             userInfo.SmartSearchEnabled = true
+        }
+
+        if (userInfo.DarkMode == null) {
+            userInfo.DarkMode = false
         }
 
         return userInfo

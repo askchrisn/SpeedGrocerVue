@@ -3,8 +3,8 @@
         <div class="flex-row mb1">
             <q-btn color="primary" to="/list">Back</q-btn>
             <div class="flex-column px1">
-                <q-label class="store-name">{{ store.Name }}</q-label>
-                <q-label class="store-location">{{ store.Location }}</q-label>
+                <label class="store-name">{{ store.Name }}</label>
+                <label class="store-location">{{ store.Location }}</label>
             </div>
         </div>
         <div class="lists-container" v-if="fullView">
@@ -27,7 +27,7 @@
         </div>
         <div class="lists-container" v-if="!fullView">
             <div class="flex-column" :class="{ 'half': miscItems.length > 0 }" v-if="aisleItems.length > 0">
-                <q-label class="text-horizontal-center">{{ currentAisle }}</q-label>
+                <label class="text-horizontal-center">{{ currentAisle }}</label>
                 <q-virtual-scroll
                     class="flex-grow"
                     :items="aisleItems"
@@ -46,7 +46,7 @@
                 </q-virtual-scroll>
             </div>
             <div class="flex-column" :class="{ 'half': aisleItems.length > 0 }" v-if="miscItems.length > 0">
-                <q-label class="text-horizontal-center">Misc</q-label>
+                <label class="text-horizontal-center">Misc</label>
                 <q-virtual-scroll
                     class="flex-grow"
                     :items="miscItems"
@@ -199,7 +199,7 @@ function updateLists() {
 
 function findNextAisle(skipCurrent: boolean = true) {
     var aisles: Array<string> = []
-    
+
     for (var item of groceryList.value.Items) {
         var aisle = store.value.getAisle(item)
         if (aisle != "") {
@@ -240,7 +240,7 @@ function saveGroceryList() {
 }
 
 </script>
-  
+
 <style scoped>
 
 .half {
@@ -258,4 +258,3 @@ function saveGroceryList() {
 }
 
 </style>
-  

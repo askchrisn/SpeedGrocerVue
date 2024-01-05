@@ -1,8 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { Capacitor } from '@capacitor/core'
+import { getApp, initializeApp } from 'firebase/app';
+import { initializeAuth, getAuth, indexedDBLocalPersistence } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import { boot } from 'quasar/wrappers';
-import { api } from './axios';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyA6UJqm3877FgHO2QwQavlZN03Z-pE42As",
@@ -15,6 +14,15 @@ export const firebaseConfig = {
     measurementId: "G-392VKGXR7P"
 };
 
-export const fbapp = initializeApp(firebaseConfig);
-export const fbauth = getAuth();
-export const fbdb = getDatabase(fbapp);
+export const app = initializeApp(firebaseConfig);
+export const auth = initAuthentication();
+export const db = getDatabase(app);
+
+function initAuthentication() {
+    if(Capacitor.isNativePlatform()) {
+        return initializeAuth(getApp(), { persistence: indexedDBLocalPersistence });
+    }
+    else {
+        return getAuth();
+    }
+}
