@@ -1,9 +1,6 @@
 <template>
     <div class="main">
-        <div class="flex-row mb1">
-            <q-btn color="primary" to="/">Back</q-btn>
-            <q-btn class="flex-grow ml1" to="/users">Manage Users</q-btn>
-        </div>
+        <q-btn class="mb1" to="/users">Manage Users</q-btn>
 
         <div class="flex-row mb1">
             <h1 v-if="!isEditMode">{{ groceryList.Name }}</h1>

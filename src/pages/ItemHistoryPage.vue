@@ -1,8 +1,5 @@
 <template>
     <div class="main">
-        <div class="flex-row mb1">
-            <q-btn color="primary" to="/list">Back</q-btn>
-        </div>
         <h1>{{ groceryList.Name }}</h1>
       
         <q-virtual-scroll
@@ -27,20 +24,11 @@ import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
-import { useQuasar } from 'quasar'
 
 const authStore = useAuthStore()
-const quasar = useQuasar()
 const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const items = ref<Array<string>>([])
-
-// TEST CODE
-let model = ref()
-const stringOptions = [
-  'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
-]
-// END TEST CODE
 
 const listener = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)

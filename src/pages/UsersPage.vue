@@ -1,9 +1,6 @@
 <template>
     <div class="main">
-        <div class="flex-row mb1">
-            <q-btn color="primary" @click="router.back()">Back</q-btn>
-            <q-btn class="flex-grow ml1" @click="tryLeaveList()">Leave {{ groceryList.Name }}</q-btn>
-        </div>
+        <q-btn class="mb1" @click="tryLeaveList()">Leave {{ groceryList.Name }}</q-btn>
         <div class="flex-row mb1">
             <q-select
                 label="Add user by email"

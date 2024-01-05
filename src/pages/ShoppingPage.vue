@@ -1,7 +1,6 @@
 <template>
     <div class="main">
         <div class="flex-row mb1">
-            <q-btn color="primary" to="/list">Back</q-btn>
             <div class="flex-column px1">
                 <label class="store-name">{{ store.Name }}</label>
                 <label class="store-location">{{ store.Location }}</label>

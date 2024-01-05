@@ -1,8 +1,5 @@
 <template>
     <div class="main">
-        <div class="flex-row mb1">
-            <q-btn color="primary" to="/list">Back</q-btn>
-        </div>
         <div class="flex-grow">
             <div class="flex-row p1">
                 <q-select class="flex-grow" filled v-model="selectedStore" @update:modelValue="selectedStoreChanged" label="Store" :options="storeOptions" style="width: 250px" behavior="dialog"/>

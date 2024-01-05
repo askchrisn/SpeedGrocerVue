@@ -1,8 +1,5 @@
 <template>
     <div class="main">
-        <div class="flex-row mb1">
-            <q-btn color="primary" @click="router.back()">Back</q-btn>
-        </div>
         <div class="flex-grow">
             <div class="flex-row my1 mr1 mu1">
                 <label class="flex-grow">Email:</label>

@@ -14,17 +14,17 @@ import ZNotFoundPage from 'src/pages/ZNotFoundPage.vue';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, hasBack: true },
     component: MainLayoutVue,
     children: [
-      { path: '', component: HomePage },
+      { path: '', component: HomePage, meta: {hasBack: false} },
       { path: '/list', component: GroceryListPage },
       { path: '/users', component: UsersPage },
       { path: '/itemhistory', component: ItemHistoryPage },
       { path: '/storeselection', component: StoreSelectionPage },
       { path: '/shopping', component: ShoppingPage },
       { path: '/settings', component: UserSettingsPage },
-      { path: '/login', component: LoginPage, meta: {requiresAuth: false} },
+      { path: '/login', component: LoginPage, meta: {requiresAuth: false, hasBack: false} },
       { path: '/signup', component: SignUpPage, meta: {requiresAuth: false} },
     ],
   },
