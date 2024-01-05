@@ -5,6 +5,7 @@
                 <label class="store-name">{{ store.Name }}</label>
                 <label class="store-location">{{ store.Location }}</label>
             </div>
+            <q-btn color="primary" class="mla" @click="updateLists()">{{ sortedBy }}</q-btn>
         </div>
         <div class="lists-container" v-if="fullView">
             <q-virtual-scroll
@@ -113,6 +114,7 @@ const selectedAisle = ref("")
 const removedItem = ref("")
 const showCard = ref(false);
 const fullView = ref(true);
+const sortedBy = ref("Sorted by Aisle");
 
 const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     var updatedGroceryList = GroceryList.fromObject(snapshot)
@@ -189,7 +191,14 @@ function updateLists() {
     }
 
     // Sort tempFullViewItems using the custom sorting function
-    tempFullViewItems.sort((a, b) => compareAisles(a.Aisle, b.Aisle));
+    if(sortedBy.value === 'Sorted by Aisle') {
+        sortedBy.value = 'Sorted by Name';
+        tempFullViewItems.sort((a, b) => a.ItemName.localeCompare(b.ItemName));
+    }
+    else {
+        sortedBy.value = 'Sorted by Aisle';
+        tempFullViewItems.sort((a, b) => compareAisles(a.Aisle, b.Aisle));
+    }
 
     aisleItems.value = tempAisleItems
     miscItems.value = tempMiscItems
