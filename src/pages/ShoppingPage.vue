@@ -5,7 +5,7 @@
                 <label class="store-name">{{ store.Name }}</label>
                 <label class="store-location">{{ store.Location }}</label>
             </div>
-            <q-btn color="primary" class="mla" @click="updateLists()">{{ sortedBy }}</q-btn>
+            <q-btn color="primary" class="mla" @click="sort">{{ sortedBy }}</q-btn>
         </div>
         <div class="lists-container" v-if="fullView">
             <q-virtual-scroll
@@ -192,12 +192,10 @@ function updateLists() {
 
     // Sort tempFullViewItems using the custom sorting function
     if(sortedBy.value === 'Sorted by Aisle') {
-        sortedBy.value = 'Sorted by Name';
-        tempFullViewItems.sort((a, b) => a.ItemName.localeCompare(b.ItemName));
+        tempFullViewItems.sort((a, b) => compareAisles(a.Aisle, b.Aisle));
     }
     else {
-        sortedBy.value = 'Sorted by Aisle';
-        tempFullViewItems.sort((a, b) => compareAisles(a.Aisle, b.Aisle));
+        tempFullViewItems.sort((a, b) => a.ItemName.localeCompare(b.ItemName));
     }
 
     aisleItems.value = tempAisleItems
@@ -245,6 +243,16 @@ function saveStore() {
 
 function saveGroceryList() {
     updateDb("GroceryLists/" + groceryListKeyStore.getKey(), groceryList.value)
+}
+
+function sort() {
+    if(sortedBy.value === 'Sorted by Aisle') {
+        sortedBy.value = 'Sorted by Name';
+    }
+    else {
+        sortedBy.value = 'Sorted by Aisle';
+    }
+    updateLists();
 }
 
 </script>
