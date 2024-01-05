@@ -58,7 +58,6 @@
 
     function getStringFromLocalStorage(key: string): string {
       var value = LocalStorage.getItem(key)?.toString()
-      console.log(value)
       return value ? value : ''
     }
     
