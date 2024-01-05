@@ -1,6 +1,7 @@
 import { Capacitor } from '@capacitor/core'
 import { getApp, initializeApp } from 'firebase/app';
 import { initializeAuth, getAuth, indexedDBLocalPersistence } from 'firebase/auth';
+import { getAnalytics } from 'firebase/analytics'
 import { getDatabase } from 'firebase/database';
 
 export const firebaseConfig = {
@@ -17,6 +18,7 @@ export const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = initAuthentication();
 export const db = getDatabase(app);
+export const analytics = getAnalytics(app);
 
 function initAuthentication() {
     if(Capacitor.isNativePlatform()) {
