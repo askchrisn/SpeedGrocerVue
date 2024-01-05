@@ -1,0 +1,832 @@
+{
+  "GroceryLists": {
+    "-NWx3F5_6FsZdidTvnmb": {
+      "ItemHistory": {
+        "bulgogi rice": 1
+      },
+      "Name": "Trader Joe’s",
+      "Users": [
+        "almyers329@gmail.com",
+        "conno1234@gmail.com"
+      ]
+    },
+    "-NZSSKlqmX-Fn3VUaGpG": {
+      "ItemHistory": {
+        "Chicken breast": 1,
+        "Cold cuts": 1,
+        "Cream cheese": 1,
+        "Eggs": 1,
+        "Heavy cream": 1,
+        "Hot cocoa": 0,
+        "Italian sausage": 1,
+        "Lasagna noodles": 1,
+        "Milk": 1,
+        "Parmesan": 1,
+        "Peanut butter cookie mix": 1,
+        "Ricotta": 1,
+        "Scallions": 1,
+        "Shallots": 1,
+        "Shredded mozzarella": 1,
+        "Spinach": 1,
+        "Sub rolls": 1,
+        "american cheese": 1,
+        "asparagus": 1,
+        "avocados": 1,
+        "bacon bits": 1,
+        "bell peppers": 1,
+        "black beans": 1,
+        "blue butter": 3,
+        "bread": 2,
+        "breakfast sausages": 1,
+        "broccoli": 3,
+        "cheese": 2,
+        "chicken": 5,
+        "chicken breast": 1,
+        "chicken breasts": 1,
+        "chicken tenders": 1,
+        "chips": 1,
+        "chives": 1,
+        "cilantro": 1,
+        "coffee": 1,
+        "coffee creamer": 4,
+        "cold cuts": 1,
+        "cookies": 1,
+        "cooking spray": 1,
+        "cream cheese": 5,
+        "deli meats": 2,
+        "dessert": 1,
+        "dijon mustard": 1,
+        "eggs": 6,
+        "garlic": 3,
+        "garlic clove": 2,
+        "greek yogurt": 1,
+        "green beans": 1,
+        "green bell peppers": 1,
+        "green pepper": 1,
+        "ground sausage": 1,
+        "ground turkey": 2,
+        "hot chocolate": 1,
+        "ice": 1,
+        "im in aisle 6": 1,
+        "israeli couscous": 1,
+        "italian sausage": 1,
+        "lemon": 2,
+        "lime": 1,
+        "mayo": 1,
+        "mexican shredded cheese": 1,
+        "mezzi rigatoni pasta": 1,
+        "milk": 1,
+        "mozzarella cheese": 3,
+        "onion": 1,
+        "orange pepper": 1,
+        "panko bread crumbs": 1,
+        "panko breadcrumbs": 1,
+        "parmesan cheese": 3,
+        "pasta": 2,
+        "peppers": 1,
+        "pistachios": 1,
+        "pizza dough": 1,
+        "plain greek yogurt": 2,
+        "plain yogurt": 1,
+        "plum tomato": 1,
+        "plum tomatoes": 2,
+        "plum tomotoes": 1,
+        "popcorn": 1,
+        "popsicle": 1,
+        "potatoes": 2,
+        "pretzel mms": 1,
+        "protein bars": 1,
+        "ranch": 2,
+        "red onion": 2,
+        "red pepper": 2,
+        "red sauce": 1,
+        "rice": 1,
+        "rigatoni pasta": 1,
+        "rosemary": 1,
+        "s": 1,
+        "sage": 1,
+        "salted butter": 1,
+        "sauce": 1,
+        "sausage": 1,
+        "sausages": 1,
+        "scallions": 1,
+        "seltzer": 1,
+        "seltzers": 2,
+        "shallots": 1,
+        "shredded mozzarella": 1,
+        "sjsjcjx": 1,
+        "sour cream": 4,
+        "spaghetti": 2,
+        "steak": 1,
+        "sub rolls": 3,
+        "sweet onion": 5,
+        "sweet onions": 1,
+        "test": 1,
+        "thyme": 1,
+        "tomato sauce": 1,
+        "unsalted butter": 1,
+        "worcestershire sauce": 1,
+        "yeast": 1,
+        "yellow onion": 1,
+        "yellow pepper": 1,
+        "yogurt": 1
+      },
+      "Items": [
+        {
+          "AdderName": "Connor",
+          "ItemName": "Peanut butter cookie mix",
+          "Quantity": 1
+        }
+      ],
+      "Name": "Home",
+      "RecentStore": "-NmxfPqsQk4ap1HI_i0U",
+      "Users": [
+        "conno1234@gmail.com",
+        "almyers329@gmail.com"
+      ]
+    },
+    "-Nd3JVQX8iUNJF47ZyXd": {
+      "ItemHistory": {
+        "tets": 2
+      },
+      "Name": "Target",
+      "Users": [
+        "conno1234@gmail.com",
+        "almyers329@gmail.com"
+      ]
+    },
+    "-Nmqpr-PxZTsrzxbZf0D": {
+      "ItemHistory": {
+        "Bacon": 1,
+        "Cheerios": 1,
+        "Eggs": 1,
+        "Lime": 1,
+        "Pepper": 0,
+        "Sauce 3": 1,
+        "Zucchini": 0,
+        "a": 1,
+        "apples": 3,
+        "b": 0,
+        "bread": 1,
+        "brocolli": 1,
+        "bs": 0,
+        "carrots": 1,
+        "chicken": 1,
+        "cinnamon": 1,
+        "cookies": 2,
+        "dddd": 1,
+        "dddddddddd": 1,
+        "dfgs": 1,
+        "dh": 0,
+        "drt": 0,
+        "dtg": 0,
+        "dth": 0,
+        "dyj": 0,
+        "eggs": 5,
+        "f": 0,
+        "fg": 1,
+        "fgj": 0,
+        "fh": 0,
+        "fsf": 0,
+        "fwe": 0,
+        "g": 0,
+        "gdf": 1,
+        "gf": 0,
+        "gfv": 0,
+        "h": 0,
+        "hj": 0,
+        "hrt": 0,
+        "hth": 0,
+        "i": 0,
+        "jng": 0,
+        "js": 0,
+        "jtyn": 0,
+        "k": 0,
+        "le": 1,
+        "lettuce": 1,
+        "milk": 2,
+        "nc": 0,
+        "onions": 1,
+        "orange juice": 1,
+        "oranges": 1,
+        "paprika": 1,
+        "pasta": 1,
+        "pepper": 7,
+        "pizzza dough": 1,
+        "plum tomatoes": 1,
+        "potato": 0,
+        "potatoes": 1,
+        "r": 0,
+        "ranch": 1,
+        "re": 0,
+        "rgesdh": 0,
+        "rhndfgb": 0,
+        "rice": 1,
+        "rj": 0,
+        "rs": 0,
+        "rt": 0,
+        "rthsrthtg": 0,
+        "rwe": 0,
+        "s": 0,
+        "salt": 3,
+        "sauce": 1,
+        "sd": 1,
+        "sdrth": 0,
+        "sf": 0,
+        "sghrtfj": 0,
+        "sj": 0,
+        "sr": 0,
+        "srtghszdgfz": 0,
+        "srthrts": 0,
+        "srthsdrth": 0,
+        "sugar": 3,
+        "sy": 0,
+        "th": 0,
+        "thre": 0,
+        "ths": 0,
+        "tomato": 10,
+        "ut": 0,
+        "vb": 0,
+        "xcv": 0,
+        "xdrth": 0,
+        "xs": 0,
+        "ydfjyujk": 0,
+        "yit": 0,
+        "yogurt": 1,
+        "yrt": 0
+      },
+      "Items": [
+        {
+          "AdderName": "Connor",
+          "ItemName": "plum tomatoes",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Connor",
+          "ItemName": "pasta",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Connor",
+          "ItemName": "orange juice",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Chris",
+          "ItemName": "cookies",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Connor",
+          "ItemName": "milk",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Connor",
+          "ItemName": "le",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Chris",
+          "ItemName": "Sauce 3",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Connor",
+          "ItemName": "Lime",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Connor",
+          "ItemName": "Eggs",
+          "Quantity": 1
+        }
+      ],
+      "Name": "Test",
+      "RecentStore": "-Nmy0CGRKtRitvsc_wsD",
+      "Users": [
+        "conno1234@gmail.com",
+        "su@g.com",
+        "t@g.com",
+        "almyers329@gmail.com",
+        "c@c.com"
+      ]
+    },
+    "-Nn5Y8FO0SeynSk0iSq6": {
+      "ItemHistory": {
+        "pepper": 1,
+        "sugar": 1
+      },
+      "Items": [
+        {
+          "AdderName": "Connor",
+          "ItemName": "pepper",
+          "Quantity": 1
+        }
+      ],
+      "Name": "test2",
+      "RecentStore": "-Nmy0CGRKtRitvsc_wsD",
+      "Users": [
+        "almyers329@gmail.com"
+      ]
+    },
+    "-Nn5kZ56n0RDQcNVGceK": {
+      "ItemHistory": {
+        "Icecream": 1,
+        "Testicles": 1,
+        "ayy": 1
+      },
+      "Items": [
+        {
+          "AdderName": "Chris",
+          "ItemName": "Icecream",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Connor",
+          "ItemName": "ayy",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Amanda",
+          "ItemName": "Testicles",
+          "Quantity": 1
+        }
+      ],
+      "Name": "Chrissie and Connie Go Shopping and also Mandy and Beeg D",
+      "RecentStore": "-Nmy0CGRKtRitvsc_wsD",
+      "Users": [
+        "conno1234@gmail.com",
+        "dmaz10295@gmail.com",
+        "su@g.com",
+        "t@g.com",
+        "almyers329@gmail.com"
+      ]
+    },
+    "-NnAw2s4fikiMNy8AlGt": {
+      "ItemHistory": {
+        "Icecream": 1
+      },
+      "Items": [
+        {
+          "AdderName": "Chris",
+          "ItemName": "Icecream",
+          "Quantity": 1
+        }
+      ],
+      "Name": "Dickcheese",
+      "RecentStore": "",
+      "Users": [
+        "su@g.com",
+        "t@g.com",
+        "j&j@gmail.com"
+      ]
+    },
+    "-NnB6sevxgFqbwumvSuF": {
+      "ItemHistory": {
+        "Asparagus": 1,
+        "Bagels": 1,
+        "Bananas": 1,
+        "Bell": 1,
+        "Bell pepper": 1,
+        "Black beans (can)": 1,
+        "Bread": 1,
+        "Canned Corn": 1,
+        "Canned Peas": 1,
+        "Cheddar soup (can)": 1,
+        "Cherry tomato": 1,
+        "Cherry tomatoes": 1,
+        "Chicken breast": 1,
+        "Chicken tenders": 1,
+        "Chips": 1,
+        "Cookies": 1,
+        "Cucumber": 2,
+        "Deli cheese": 1,
+        "Deli turkey breast": 1,
+        "Diced tomatoes": 1,
+        "Dish soap": 1,
+        "Eggs": 3,
+        "Feta cheese": 1,
+        "Filet -  Choice": 1,
+        "Frozen burrito": 1,
+        "Frozen peas": 1,
+        "Goldfish": 1,
+        "Grapes": 1,
+        "Ground Turkey": 1,
+        "Ground beef": 1,
+        "Hashbrowns": 1,
+        "Heavy cream": 1,
+        "Mandarin Oranges": 1,
+        "Mexican cheese": 1,
+        "Milk": 4,
+        "Mustard": 1,
+        "Nonfat Greek yogurt": 1,
+        "Olive oil spray": 1,
+        "Olives": 1,
+        "Onions": 1,
+        "Paper towel": 1,
+        "Paper towels": 1,
+        "Parmesan cheese": 1,
+        "Pasta": 1,
+        "Peanut Butter": 1,
+        "Peas and corn (can)": 1,
+        "Pepito Tortillas": 1,
+        "Ramen (in cup)": 1,
+        "Ranch dressing": 1,
+        "Rice Crispys Cereal": 1,
+        "Romaine Lettuce": 4,
+        "Salsa": 1,
+        "Soft Taco Shells": 1,
+        "Something": 2,
+        "Soy sauce": 1,
+        "Sugar": 1,
+        "Taco": 1,
+        "Teriyaki sauce": 1,
+        "Tissues": 1,
+        "Tomato Sauce": 1,
+        "Toothpaste": 1,
+        "Waffles": 1,
+        "Wraps": 4,
+        "Yogurt": 1,
+        "taco mix": 1
+      },
+      "Items": [
+        {
+          "AdderName": "Chris",
+          "ItemName": "Soft Taco Shells",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Chris",
+          "ItemName": "Something",
+          "Quantity": 1
+        },
+        {
+          "AdderName": "Chris",
+          "ItemName": "Mandarin Oranges",
+          "Quantity": 1
+        }
+      ],
+      "Name": "Grocery Store",
+      "RecentStore": "-NnLy4ygamc3ERL-xnHB",
+      "Users": [
+        "dmaz10295@gmail.com",
+        "t@g.com",
+        "c@c.com"
+      ]
+    },
+    "-NnBB1lsU3TWUOH-bYCh": {
+      "ItemHistory": {
+        "icecream": 1
+      },
+      "Items": [
+        {
+          "AdderName": "Chris",
+          "ItemName": "icecream",
+          "Quantity": 1
+        }
+      ],
+      "Name": "TestList2",
+      "RecentStore": "",
+      "Users": [
+        "t@g.com",
+        "almyers329@gmail.com"
+      ]
+    },
+    "-NnKtNDrBfCOLntEpUyG": {
+      "Name": "Temp",
+      "RecentStore": "",
+      "Users": [
+        "conno1234@gmail.com"
+      ]
+    },
+    "-NnLQkaz5QefPcWZyne6": {
+      "ItemHistory": {
+        "Condoms": 1
+      },
+      "Items": [
+        {
+          "AdderName": "Jose ",
+          "ItemName": "Condoms",
+          "Quantity": 1
+        }
+      ],
+      "Name": "Grocery list",
+      "RecentStore": "",
+      "Users": [
+        "j&j@gmail.com"
+      ]
+    }
+  },
+  "Stores": {
+    "-NmxfPqsQk4ap1HI_i0U": {
+      "Aisles": [
+        "Dairy",
+        "Deli",
+        "Meat",
+        "Produce",
+        "Bakery",
+        "Aisle 1",
+        "Aisle 2",
+        "Aisle 3",
+        "Aisle 4",
+        "Aisle 5",
+        "Aisle 6",
+        "Aisle 7",
+        "Aisle 8",
+        "Aisle 9",
+        "Aisle 10",
+        "Aisle 11",
+        "Aisle 12",
+        "Aisle 13",
+        "Aisle 14",
+        "Aisle 15",
+        "Aisle 16",
+        "Aisle 17",
+        "Aisle 18",
+        "Aisle 19",
+        "Aisle 20",
+        "Checkout"
+      ],
+      "ItemLocations": {
+        "cold cuts": "Deli",
+        "cream cheese": "Aisle 1",
+        "eggs": "Dairy",
+        "italian sausage": "Meat",
+        "lasagna noodles": "Aisle 4",
+        "milk": "Aisle 1",
+        "parmesan": "Dairy",
+        "ricotta": "Dairy",
+        "scallions": "Produce",
+        "shallots": "Produce",
+        "shredded mozzarella": "Dairy",
+        "spinach": "Produce",
+        "sub rolls": "Deli"
+      },
+      "Location": "30 General Way, Reading, MA",
+      "Name": "Market Basket"
+    },
+    "-Nmxf_bWpzXhcRcsSFNP": {
+      "Aisles": [
+        "Dairy",
+        "Deli",
+        "Meat",
+        "Produce",
+        "Bakery",
+        "Aisle 1",
+        "Aisle 2",
+        "Aisle 3",
+        "Aisle 4",
+        "Aisle 5",
+        "Aisle 6",
+        "Aisle 7",
+        "Aisle 8",
+        "Aisle 9",
+        "Aisle 10",
+        "Aisle 11",
+        "Aisle 12",
+        "Aisle 13",
+        "Aisle 14",
+        "Aisle 15",
+        "Aisle 16",
+        "Aisle 17",
+        "Aisle 18",
+        "Aisle 19",
+        "Aisle 20",
+        "Checkout"
+      ],
+      "Location": "310 Mishawum Rd, Woburn, MA",
+      "Name": "Market Basket"
+    },
+    "-Nmy0CGRKtRitvsc_wsD": {
+      "Aisles": [
+        "Dairy",
+        "Deli",
+        "Meat",
+        "Produce",
+        "Bakery",
+        "Aisle 1",
+        "Aisle 2",
+        "Aisle 3",
+        "Aisle 4",
+        "Aisle 5",
+        "Aisle 6",
+        "Aisle 7",
+        "Aisle 8",
+        "Aisle 9",
+        "Aisle 10",
+        "Aisle 11",
+        "Aisle 12",
+        "Aisle 13",
+        "Aisle 14",
+        "Aisle 15",
+        "Aisle 16",
+        "Aisle 17",
+        "Aisle 18",
+        "Aisle 19",
+        "Aisle 20",
+        "Checkout"
+      ],
+      "ItemLocations": {
+        "apples": "Produce",
+        "bacon": "Dairy",
+        "butter": "Dairy",
+        "cinnamon": "Aisle 5",
+        "cinnamon rolls": "Dairy",
+        "cream": "Dairy",
+        "eggs": "Dairy",
+        "lettuce": "Produce",
+        "milk": "Dairy",
+        "oranges": "Produce",
+        "pasta": "Aisle 7",
+        "pepper": "Aisle 5",
+        "pizzza dough": "Deli",
+        "salt": "Aisle 5",
+        "shredded cheese": "Dairy",
+        "sugar": "Aisle 5",
+        "tomato": "Produce",
+        "yogurt": "Dairy"
+      },
+      "Location": "Test",
+      "Name": "Market Basket"
+    },
+    "-Nn5q-gzNpaOB_owpeLI": {
+      "Aisles": [
+        "Dairy",
+        "Deli",
+        "Meat",
+        "Produce",
+        "Bakery",
+        "Aisle 1",
+        "Aisle 2",
+        "Aisle 3",
+        "Aisle 4",
+        "Aisle 5",
+        "Aisle 6",
+        "Aisle 7",
+        "Aisle 8",
+        "Aisle 9",
+        "Aisle 10",
+        "Aisle 11",
+        "Aisle 12",
+        "Aisle 13",
+        "Aisle 14",
+        "Aisle 15",
+        "Aisle 16",
+        "Aisle 17",
+        "Aisle 18",
+        "Aisle 19",
+        "Aisle 20",
+        "Checkout"
+      ],
+      "ItemLocations": {
+        "cucumber": "Aisle 3",
+        "eggs": "Dairy",
+        "milk": "Dairy",
+        "romaine lettuce": "Produce",
+        "wraps": "Aisle 3"
+      },
+      "Location": "Middleton",
+      "Name": "Market Basket"
+    },
+    "-NnLy4ygamc3ERL-xnHB": {
+      "Aisles": [
+        "Dairy",
+        "Deli",
+        "Meat",
+        "Produce",
+        "Bakery",
+        "Aisle 1",
+        "Aisle 2",
+        "Aisle 3",
+        "Aisle 4",
+        "Aisle 5",
+        "Aisle 6",
+        "Aisle 7",
+        "Aisle 8",
+        "Aisle 9",
+        "Aisle 10",
+        "Aisle 11",
+        "Aisle 12",
+        "Aisle 13",
+        "Aisle 14",
+        "Aisle 15",
+        "Aisle 16",
+        "Aisle 17",
+        "Aisle 18",
+        "Aisle 19",
+        "Aisle 20",
+        "Checkout"
+      ],
+      "ItemLocations": {
+        "asparagus": "Produce",
+        "bagels": "Aisle 18",
+        "bananas": "Produce",
+        "bell pepper": "Produce",
+        "black beans (can)": "Aisle 7",
+        "canned corn": "Aisle 7",
+        "canned peas": "Aisle 7",
+        "cheddar soup (can)": "Aisle 9",
+        "cherry tomatoes": "Produce",
+        "chicken breast": "Meat",
+        "chicken tenders": "Meat",
+        "chips": "Aisle 3",
+        "cookies": "Aisle 18",
+        "cucumber": "Produce",
+        "deli cheese": "Deli",
+        "deli turkey breast": "Deli",
+        "diced tomatoes": "Aisle 5",
+        "eggs": "Aisle 2",
+        "feta cheese": "Deli",
+        "filet -  choice": "Meat",
+        "frozen burrito": "Aisle 19",
+        "frozen peas": "Aisle 20",
+        "goldfish": "Aisle 17",
+        "grapes": "Produce",
+        "ground beef": "Meat",
+        "ground turkey": "Meat",
+        "hashbrowns": "Meat",
+        "heavy cream": "Dairy",
+        "mexican cheese": "Dairy",
+        "milk": "Dairy",
+        "mustard": "Aisle 3",
+        "nonfat greek yogurt": "Dairy",
+        "olive oil spray": "Aisle 3",
+        "onions": "Produce",
+        "paper towel": "Aisle 13",
+        "paper towels": "Aisle 13",
+        "parmesan cheese": "Aisle 5",
+        "pasta": "Aisle 5",
+        "peanut butter": "Aisle 9",
+        "peas and corn (can)": "Aisle 7",
+        "pepito tortillas": "Aisle 3",
+        "ramen (in cup)": "Aisle 9",
+        "ranch dressing": "Aisle 3",
+        "rice crispys cereal": "Aisle 4",
+        "romaine lettuce": "Produce",
+        "salsa": "Aisle 3",
+        "soy sauce": "Aisle 3",
+        "sugar": "Aisle 8",
+        "taco mix": "Aisle 3",
+        "teriyaki sauce": "Aisle 3",
+        "tissues": "Aisle 11",
+        "tomato sauce": "Aisle 5",
+        "toothpaste": "Aisle 11",
+        "waffles": "Aisle 19",
+        "yogurt": "Dairy"
+      },
+      "Location": "Revere",
+      "Name": "Market Basket"
+    }
+  },
+  "Users": {
+    "almyers329AgmailDcom": {
+      "DarkMode": true,
+      "Email": "almyers329@gmail.com",
+      "Nickname": "Amanda",
+      "ShoppingViewMode": 0,
+      "SmartSearchEnabled": true
+    },
+    "cAcDcom": {
+      "Email": "c@c.com",
+      "Nickname": "testuser"
+    },
+    "conno1234AgmailDcom": {
+      "DarkMode": false,
+      "Email": "conno1234@gmail.com",
+      "Nickname": "Connor",
+      "ShoppingViewMode": 0,
+      "SmartSearchEnabled": true
+    },
+    "dadawdadawAgDcom": {
+      "Email": "dadawdadaw@g.com",
+      "Nickname": "dawdawd"
+    },
+    "demazinaAgmailDcom": {
+      "Email": "Demazina@gmail.com",
+      "Nickname": "D"
+    },
+    "dmaz10295AgmailDcom": {
+      "Email": "dmaz10295@gmail.com",
+      "Nickname": "Deanna"
+    },
+    "j&jAgmailDcom": {
+      "DarkMode": true,
+      "Email": "j&j@gmail.com",
+      "Nickname": "Jose ",
+      "ShoppingViewMode": 0,
+      "SmartSearchEnabled": true
+    },
+    "suAgDcom": {
+      "Email": "su@g.com",
+      "Nickname": "Chris"
+    },
+    "tAgDcom": {
+      "DarkMode": true,
+      "Email": "t@g.com",
+      "Nickname": "Chris",
+      "ShoppingViewMode": 0,
+      "SmartSearchEnabled": true
+    }
+  }
+}
