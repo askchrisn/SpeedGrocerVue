@@ -108,7 +108,7 @@ function createNewItem() {
 }
 
 function tryDeleteItem(itemName: string) {
-    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]});
+    popupStore.displayConfirmPopup(`Delete '${itemName}'?`, deleteItem(itemName));
 }
 
 function deleteItem(itemName: string) {
