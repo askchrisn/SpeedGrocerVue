@@ -5,7 +5,7 @@
                 <label class="store-name">{{ store.Name }}</label>
                 <label class="store-location">{{ store.Location }}</label>
             </div>
-            <q-btn color="primary" class="mla" @click="sort">{{ sortedBy }}</q-btn>
+            <q-btn v-if="fullView" color="primary" class="mla" @click="sort">{{ sortedBy }}</q-btn>
         </div>
         <div class="lists-container" v-if="fullView">
             <q-virtual-scroll

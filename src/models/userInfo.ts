@@ -4,6 +4,7 @@ export default class UserInfo {
     ShoppingViewMode: ShoppingViewMode = ShoppingViewMode.Full
     SmartSearchEnabled: boolean = true
     DarkMode: boolean = false
+
     
     constructor(name: string = "", email: string = "") {
         this.Nickname = name;
@@ -40,5 +41,5 @@ export default class UserInfo {
 
 export enum ShoppingViewMode {
     Full,
-    Half
+    Split
 }
