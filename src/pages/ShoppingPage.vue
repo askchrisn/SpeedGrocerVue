@@ -78,7 +78,8 @@
 
                 <q-card-actions align="right" class="text-primary">
                     <q-btn flat label="Cancel" v-close-popup />
-                    <q-btn flat label="Save" v-close-popup @click="rememberItem"/>
+                    <q-btn flat label="Not Now" v-close-popup @click="deleteItem(removedItem)"/>
+                    <q-btn v-if="selectedAisle != ''" flat label="Save" v-close-popup @click="rememberItem"/>
                 </q-card-actions>
             </q-card>
         </q-dialog>
@@ -162,7 +163,6 @@ function rememberItem() {
     deleteItem(removedItem.value)
 
     removedItem.value = ""
-    selectedAisle.value = ""
 }
 
 function updateLists() {
@@ -234,6 +234,7 @@ function deleteItem(itemName: string) {
 
 function tryDeleteItemAndRemeberLocation(itemName: string) {
     removedItem.value = itemName
+    selectedAisle.value = ""
     showCard.value = true
 }
 
