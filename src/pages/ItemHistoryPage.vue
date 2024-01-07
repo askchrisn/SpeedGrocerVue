@@ -23,16 +23,23 @@ import GroceryList from 'src/models/groceryList';
 import Item from 'src/models/item';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { useAuthStore } from 'src/stores/authStore';
+import { adjustEmail } from 'src/utils/helpers';
 import { useGroceryListKeyStore } from 'src/stores/groceryListKeyStore';
+import UserInfo from 'src/models/userInfo';
 
 const authStore = useAuthStore()
 const groceryListKeyStore = useGroceryListKeyStore()
 const groceryList = ref<GroceryList>(new GroceryList())
 const items = ref<Array<string>>([])
+const userInfo = ref(new UserInfo())
 
-const listener = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
+const listener1 = attachEvent("GroceryLists/" + groceryListKeyStore.getKey(), (snapshot) => {
     groceryList.value = GroceryList.fromObject(snapshot)
     items.value = groceryList.value.getItemHistoryByFrequency()
+});
+
+const listener2 = attachEvent("Users/" + adjustEmail(authStore.userEmail), (snapshot) => {
+    userInfo.value = UserInfo.fromObject(snapshot)
 });
 
 function clickedItem(itemName: string) {
@@ -40,6 +47,10 @@ function clickedItem(itemName: string) {
         groceryList.value.removeItem(itemName, true)
     }
     else {
+        if (userInfo.value.AutoCapitalize) {
+            itemName = itemName.replace(/\b\w/g, (match) => match.toUpperCase());
+        }
+
         groceryList.value.addItem(new Item(itemName, authStore.userName))
     }
     saveGroceryList()

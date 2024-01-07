@@ -101,6 +101,10 @@ function createNewItem() {
             }
         }
 
+        if (userInfo.value.AutoCapitalize) {
+            itemName = itemName.replace(/\b\w/g, (match) => match.toUpperCase());
+        }
+
         groceryList.value.addItem(new Item(itemName, authStore.userName, quantity))
         newItemName.value = ""
         saveGroceryList()
@@ -108,7 +112,8 @@ function createNewItem() {
 }
 
 function tryDeleteItem(itemName: string) {
-    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]});}
+    popupStore.displayPopup({color: 'blue', position: 'center', message: "Delete '" + itemName + "'", actions: [{label: 'Yes', color: 'white', handler: () => { deleteItem(itemName) }}, {label: 'No', color: 'white'}]});
+}
 
 function deleteItem(itemName: string) {
     groceryList.value.removeItem(itemName)
