@@ -85,8 +85,6 @@ function getRecommendedsToDisplay() {
 function addUser(newValue?: string, done?: any) {
 
     var email = newValue != null ? newValue : newUserEmail.value.trim()
-    console.log(email);
-    console.log(newUserEmail.value.trim());
 
     if (email.length > 0) {
         var userInfo = getUserInfo(email)
