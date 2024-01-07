@@ -4,7 +4,7 @@ export default class UserInfo {
     ShoppingViewMode: ShoppingViewMode = ShoppingViewMode.Full
     SmartSearchEnabled: boolean = true
     DarkMode: boolean = false
-
+    AutoCapitalize: boolean = true
     
     constructor(name: string = "", email: string = "") {
         this.Nickname = name;
@@ -22,17 +22,10 @@ export default class UserInfo {
         userInfo.ShoppingViewMode = obj.ShoppingViewMode
         userInfo.SmartSearchEnabled = obj.SmartSearchEnabled
         userInfo.DarkMode = obj.DarkMode
+        userInfo.AutoCapitalize = obj.AutoCapitalize
 
         if (userInfo.ShoppingViewMode == null) {
             userInfo.ShoppingViewMode = ShoppingViewMode.Full
-        }
-
-        if (userInfo.SmartSearchEnabled == null) {
-            userInfo.SmartSearchEnabled = true
-        }
-
-        if (userInfo.DarkMode == null) {
-            userInfo.DarkMode = false
         }
 
         return userInfo

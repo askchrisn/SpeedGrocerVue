@@ -21,6 +21,10 @@
                 <label class="flex-grow">Dark Mode:</label>
                 <q-toggle v-model="darkMode"/>
             </div>
+            <div class="flex-row mb1">
+                <label class="flex-grow">Auto Capitalize:</label>
+                <q-toggle v-model="autoCapitalize"/>
+            </div>
         </div>
         <q-btn color="negative" to="/login" @click="authStore.signOut">Logout</q-btn>
     </div>
@@ -44,6 +48,7 @@ const userInfo = ref(new UserInfo())
 const shoppingViewMode = ref("")
 const smartSearchEnabled = ref(false)
 const darkMode = ref(false)
+const autoCapitalize = ref(false)
 
 const enumValues: string[] = Object.keys(ShoppingViewMode)
   .filter(key => isNaN(Number(ShoppingViewMode[key])))
@@ -54,14 +59,17 @@ const listener = attachEvent("Users/" + adjustEmail(authStore.userEmail), (snaps
     smartSearchEnabled.value = userInfo.value.SmartSearchEnabled
     shoppingViewMode.value = userInfo.value.displayShoppingViewMode()
     darkMode.value = userInfo.value.DarkMode
+    autoCapitalize.value = userInfo.value.AutoCapitalize
 });
 
 watch([
     () => smartSearchEnabled.value,
     () => darkMode.value,
+    () => autoCapitalize.value,
 ], () => {
     userInfo.value.SmartSearchEnabled = smartSearchEnabled.value
     userInfo.value.DarkMode = darkMode.value
+    userInfo.value.AutoCapitalize = autoCapitalize.value
     saveUserInfo(userInfo.value)
 })
 
