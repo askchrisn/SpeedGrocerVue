@@ -26,7 +26,7 @@
                 <q-toggle v-model="autoCapitalize"/>
             </div>
         </div>
-        <q-btn color="negative" to="/login" @click="authStore.signOut">Logout</q-btn>
+        <q-btn color="negative" @click="promptLogOut">Logout</q-btn>
     </div>
   </template>
 
@@ -34,6 +34,7 @@
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from 'src/stores/authStore';
+import { usePopupStore } from 'src/stores/popupStore';
 import { attachEvent, updateDb } from 'src/firebaseConfig'
 import { adjustEmail } from "src/utils/helpers"
 import { ShoppingViewMode } from 'src/models/userInfo';
@@ -43,6 +44,7 @@ import { Dark } from 'quasar';
 
 const router = useRouter();
 const authStore = useAuthStore()
+const popupStore = usePopupStore()
 
 const userInfo = ref(new UserInfo())
 const shoppingViewMode = ref("")
@@ -76,6 +78,15 @@ watch([
 function shoppingViewModeChanged() {
     userInfo.value.ShoppingViewMode = ShoppingViewMode[shoppingViewMode.value]
     saveUserInfo(userInfo.value)
+}
+
+function promptLogOut(itemName: string) {
+    popupStore.displayPopup({color: 'red', position: 'center', message: "Are you sure you want to logout?", actions: [{label: 'Yes', color: 'white', handler: () => { logout() }}, {label: 'No', color: 'white'}]});
+}
+
+function logout() {
+    authStore.signOut()
+    router.replace('/login')
 }
 
 </script>
